@@ -72,7 +72,7 @@
     }
   </style>
 
-  <link rel="stylesheet" href="assets/css/reader.css?v=iransans_v3">
+  <link rel="stylesheet" href="assets/css/reader.css?v=iransans_v5">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%3E%3Ctext y=%2222%22 font-size=%2220%22>📖</text></svg>">
 </head>
 <body data-theme="cream">
@@ -85,7 +85,7 @@
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
           <polyline points="9 18 15 12 9 6"></polyline>
         </svg>
-        <span>صفحه اصلی</span>
+        <span class="btn-text">صفحه اصلی</span>
       </a>
 
       <div class="book-meta-info">
@@ -118,7 +118,8 @@
       <!-- Ambient Zen Music Studio Pill -->
       <button class="ambient-pill-btn" id="openAudioStudioBtn" title="نوای آرامش مراقبه و خوانش صوتی کتاب">
         <span class="ambient-dot" id="headerAmbientDot"></span>
-        <span id="headerAmbientLabel">نوای آرامش 🎧</span>
+        <span id="headerAmbientLabel" class="btn-text">نوای آرامش 🎧</span>
+        <span class="header-icon-mobile" style="display:none;">🎧</span>
       </button>
 
       <!-- Search in 30 Pages -->
@@ -133,13 +134,13 @@
           <line x1="3" y1="6" x2="21" y2="6"></line>
           <line x1="3" y1="18" x2="21" y2="18"></line>
         </svg>
-        <span>فهرست و نشانک‌ها</span>
+        <span class="btn-text">فهرست و نشانک‌ها</span>
       </button>
 
       <!-- Spiritual Oracle & AI Companion -->
       <button class="header-action-btn active" id="openOracleDrawerBtn" title="کاوشگر خرد و استخاره روزانه">
         <span>🔮</span>
-        <span>الهام روز</span>
+        <span class="btn-text">الهام روز</span>
       </button>
     </div>
   </header>
@@ -151,19 +152,19 @@
       <div class="width-control-group">
         <button class="width-btn active" id="btnScrollMode" title="مطالعه اسکرولی پیوسته و روان به سمت پایین">
           <span>📜</span>
-          <span>اسکرول پیوسته</span>
+          <span class="subbar-btn-text">اسکرول پیوسته</span>
         </button>
         <button class="width-btn" id="btnPaginatedMode" title="مطالعه برگه به برگه (ورق‌زن)">
           <span>📖</span>
-          <span>ورق‌زن صفحه‌ای</span>
+          <span class="subbar-btn-text">ورق‌زن صفحه‌ای</span>
         </button>
       </div>
 
-      <span style="color: var(--border-color);">|</span>
+      <span class="subbar-sep" style="color: var(--border-color);">|</span>
 
       <!-- Font Sizer (A- / A+) -->
       <div class="font-sizer-control" title="تنظیم آنی اندازه قلم (ایران‌سنس)">
-        <span style="font-size: 0.72rem; color: var(--ink-muted); margin-left: 2px;">قلم:</span>
+        <span class="font-sizer-label" style="font-size: 0.72rem; color: var(--ink-muted); margin-left: 2px;">قلم:</span>
         <button class="font-size-step-btn" id="btnFontDecr" title="کوچک‌تر کردن قلم">A−</button>
         <span class="font-size-value-badge" id="fontSizeBadge">18px</span>
         <button class="font-size-step-btn" id="btnFontIncr" title="بزرگ‌تر کردن قلم">A+</button>
@@ -236,29 +237,29 @@
 
     <!-- Quick Thumb Buttons -->
     <div class="mobile-quick-actions">
-      <button class="m-action-btn" id="mZenAudioTrigger">
+      <button class="m-action-btn" id="mZenAudioTrigger" title="نوای آرامش مراقبه">
         <span class="m-action-icon">🧘</span>
-        <span>نوای آرامش</span>
+        <span>آرامش</span>
       </button>
 
-      <button class="m-action-btn" id="mNarrationTrigger">
+      <button class="m-action-btn" id="mNarrationTrigger" title="خوانش صوتی گوینده">
         <span class="m-action-icon">🔊</span>
-        <span>خوانش صوتی</span>
+        <span>خوانش</span>
       </button>
 
-      <button class="m-action-btn" id="mOracleTrigger">
+      <button class="m-action-btn" id="mOracleTrigger" title="الهام روز و استخاره">
         <span class="m-action-icon">🔮</span>
-        <span>الهام روز</span>
+        <span>الهام</span>
       </button>
 
-      <button class="m-action-btn" id="mWidthTrigger">
+      <button class="m-action-btn" id="mWidthTrigger" title="تنظیم عرض صفحه">
         <span class="m-action-icon">↔️</span>
-        <span>عرض صفحه</span>
+        <span>عرض</span>
       </button>
 
-      <button class="m-action-btn" id="mFontTrigger">
+      <button class="m-action-btn" id="mFontTrigger" title="تنظیم اندازه قلم">
         <span class="m-action-icon">A±</span>
-        <span>اندازه قلم</span>
+        <span>قلم</span>
       </button>
     </div>
   </div>
@@ -446,7 +447,7 @@
   </div>
 
   <!-- Load 30 Pages Structured Dataset -->
-  <script src="assets/js/book-pages-data.js?v=pages_v3"></script>
+  <script src="assets/js/book-pages-data.js?v=pages_v4"></script>
 
   <!-- ================= ADVANCED READER JAVASCRIPT ================= -->
   <script>
@@ -864,14 +865,24 @@
           const pNum = pData.pageIndex;
           const isBookmarked = bookmarks.includes(pNum);
 
-          const paragraphsHtml = (pData.paragraphs || []).map((p, idx) => {
-            if (idx === 0 && p.length > 5 && !p.startsWith('<')) {
-              const firstLetter = p.charAt(0);
-              const rest = p.slice(1);
-              return `<p><span class="drop-cap">${firstLetter}</span>${rest}</p>`;
-            }
-            return `<p>${p}</p>`;
-          }).join('');
+          let paragraphsHtml = '';
+          if (pData.type === 'toc') {
+            paragraphsHtml = (pData.paragraphs || []).map(p => {
+              const parts = p.split(/\s*\.{2,}\s*/);
+              if (parts.length === 2) {
+                return `
+                  <div class="toc-dotted-row">
+                    <span class="toc-dotted-title">${parts[0]}</span>
+                    <span class="toc-dotted-leader"></span>
+                    <span class="toc-dotted-num">${parts[1]}</span>
+                  </div>
+                `;
+              }
+              return `<p>${p}</p>`;
+            }).join('');
+          } else {
+            paragraphsHtml = (pData.paragraphs || []).map(p => `<p>${p}</p>`).join('');
+          }
 
           const calloutHtml = pData.callout ? `
             <div class="book-callout-quote">
