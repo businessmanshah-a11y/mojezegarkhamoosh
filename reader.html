@@ -3,10 +3,76 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>کتابخوان اختصاصی معجزه‌گر خاموش | حروف‌چینی فاخر و مطالعه آنلاین</title>
-  <meta name="description" content="کتابخوان پیشرفته و نفیس دیجیتال کتاب معجزه‌گر خاموش اثر سید رضا حیات‌الغیب. تایپوگرافی اصیل با فونت ایران‌سنس، شبیه‌ساز کتاب دوصفحه‌ای و نوای آرامش.">
+  <title>کتابخوان اختصاصی معجزه‌گر خاموش | مطالعه اسکرولی پیوسته با فونت ایران‌سنس</title>
+  <meta name="description" content="کتابخوان پیشرفته و نفیس کتاب معجزه‌گر خاموش اثر سید رضا حیات‌الغیب. مطالعه اسکرولی پیوسته، تنظیم عرض صفحه، کنترل قلم و نشانک‌گذاری با فونت اصیل ایران‌سنس.">
   <meta name="theme-color" content="#F5F1E8">
-  <link rel="stylesheet" href="assets/css/reader.css">
+
+  <!-- ================= استایل و بارگذاری مستقیم فونت رسمی ایران‌سنس ================= -->
+  <style>
+    @font-face {
+      font-family: 'IRANSans';
+      font-style: normal;
+      font-weight: 200;
+      src: url('assets/fonts/iransans/woff2/IRANSansWeb_UltraLight.woff2') format('woff2'),
+           url('assets/fonts/iransans/woff/IRANSansWeb_UltraLight.woff') format('woff'),
+           url('assets/fonts/iransans/ttf/IRANSansWeb_UltraLight.ttf') format('truetype');
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'IRANSans';
+      font-style: normal;
+      font-weight: 300;
+      src: url('assets/fonts/iransans/woff2/IRANSansWeb_Light.woff2') format('woff2'),
+           url('assets/fonts/iransans/woff/IRANSansWeb_Light.woff') format('woff'),
+           url('assets/fonts/iransans/ttf/IRANSansWeb_Light.ttf') format('truetype');
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'IRANSans';
+      font-style: normal;
+      font-weight: 400;
+      font-weight: normal;
+      src: url('assets/fonts/iransans/woff2/IRANSansWeb.woff2') format('woff2'),
+           url('assets/fonts/iransans/woff/IRANSansWeb.woff') format('woff'),
+           url('assets/fonts/iransans/ttf/IRANSansWeb.ttf') format('truetype');
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'IRANSans';
+      font-style: normal;
+      font-weight: 500;
+      src: url('assets/fonts/iransans/woff2/IRANSansWeb_Medium.woff2') format('woff2'),
+           url('assets/fonts/iransans/woff/IRANSansWeb_Medium.woff') format('woff'),
+           url('assets/fonts/iransans/ttf/IRANSansWeb_Medium.ttf') format('truetype');
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'IRANSans';
+      font-style: normal;
+      font-weight: 700;
+      font-weight: bold;
+      src: url('assets/fonts/iransans/woff2/IRANSansWeb_Bold.woff2') format('woff2'),
+           url('assets/fonts/iransans/woff/IRANSansWeb_Bold.woff') format('woff'),
+           url('assets/fonts/iransans/ttf/IRANSansWeb_Bold.ttf') format('truetype');
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'IRANSans';
+      font-style: normal;
+      font-weight: 900;
+      src: url('assets/fonts/iransans/woff2/IRANSansWeb_Black.woff2') format('woff2'),
+           url('assets/fonts/iransans/woff/IRANSansWeb_Black.woff') format('woff'),
+           url('assets/fonts/iransans/ttf/IRANSansWeb_Black.ttf') format('truetype');
+      font-display: swap;
+    }
+
+    /* اعمال سراسری فونت ایران‌سنس */
+    * {
+      font-family: 'IRANSans', system-ui, -apple-system, sans-serif !important;
+    }
+  </style>
+
+  <link rel="stylesheet" href="assets/css/reader.css?v=iransans_v3">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%3E%3Ctext y=%2222%22 font-size=%2220%22>📖</text></svg>">
 </head>
 <body data-theme="cream">
@@ -39,11 +105,11 @@
       </div>
 
       <!-- Reading Progress -->
-      <div class="reading-progress-pill" title="میزان پیشرفت مطالعه ۳۰ صفحه">
+      <div class="reading-progress-pill" title="میزان پیشرفت در مطالعه ۳۰ صفحه">
         <div class="progress-track-mini">
-          <div class="progress-fill-mini" id="headerProgressFill" style="width: 10%;"></div>
+          <div class="progress-fill-mini" id="headerProgressFill" style="width: 5%;"></div>
         </div>
-        <span id="headerProgressText" style="font-weight: 700; color: var(--accent-teal);">۱۰٪</span>
+        <span id="headerProgressText" style="font-weight: 700; color: var(--accent-teal);">صفحه ۱ از ۳۰</span>
       </div>
     </div>
 
@@ -55,57 +121,68 @@
         <span id="headerAmbientLabel">نوای آرامش 🎧</span>
       </button>
 
-      <!-- Font / Typo Settings Modal Button -->
-      <button class="header-action-btn" id="openFontModalBtn" title="تنظیمات قلم و تایپوگرافی">
-        <span style="font-size: 1rem; font-weight: 700;">Tt</span>
-        <span style="display: none;">قلم</span>
-      </button>
-
-      <!-- Bookmark Toggle Button -->
-      <button class="header-action-btn" id="headerBookmarkBtn" title="افزودن این صفحه به نشانک‌ها">
-        <span id="headerBookmarkIcon">🔖</span>
-      </button>
-
       <!-- Search in 30 Pages -->
       <button class="header-action-btn" id="openSearchModalBtn" title="جستجو در کل متن ۳۰ صفحه">
         <span>🔍</span>
       </button>
 
-      <!-- Table of Contents Drawer Trigger -->
-      <button class="header-action-btn" id="openTocDrawerBtn" title="فهرست سرفصل‌های کتاب">
+      <!-- Table of Contents & Bookmarks Drawer Trigger -->
+      <button class="header-action-btn" id="openTocDrawerBtn" title="فهرست فصول و نشانک‌های من">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <line x1="3" y1="12" x2="21" y2="12"></line>
           <line x1="3" y1="6" x2="21" y2="6"></line>
           <line x1="3" y1="18" x2="21" y2="18"></line>
         </svg>
-        <span>فهرست</span>
+        <span>فهرست و نشانک‌ها</span>
       </button>
 
       <!-- Spiritual Oracle & AI Companion -->
       <button class="header-action-btn active" id="openOracleDrawerBtn" title="کاوشگر خرد و استخاره روزانه">
         <span>🔮</span>
-        <span>الهام</span>
+        <span>الهام روز</span>
       </button>
     </div>
   </header>
 
-  <!-- ================= SUB-BAR: Subtle Centered Mode Strip ================= -->
+  <!-- ================= SUB-BAR: Quick Interactive Reading Controls ================= -->
   <div class="reader-subbar" id="readerSubbar">
-    <!-- Layout Mode Switcher -->
-    <div class="layout-switch-group">
-      <button class="layout-btn active" id="btnSpreadMode" title="مشاهده دو صفحه روبروی هم شبیه کتاب فیزیکی">
-        <span>📖</span>
-        <span>نمای دو صفحه‌ای</span>
-      </button>
+    <!-- Subbar Right: Mode Switcher (اسکرولی پیوسته vs ورق‌زن) -->
+    <div class="subbar-right">
+      <div class="width-control-group">
+        <button class="width-btn active" id="btnScrollMode" title="مطالعه اسکرولی پیوسته و روان به سمت پایین">
+          <span>📜</span>
+          <span>اسکرول پیوسته</span>
+        </button>
+        <button class="width-btn" id="btnPaginatedMode" title="مطالعه برگه به برگه (ورق‌زن)">
+          <span>📖</span>
+          <span>ورق‌زن صفحه‌ای</span>
+        </button>
+      </div>
+
       <span style="color: var(--border-color);">|</span>
-      <button class="layout-btn" id="btnSingleMode" title="مطالعه تک ستونه متمرکز">
-        <span>📄</span>
-        <span>تک ستون متمرکز</span>
-      </button>
+
+      <!-- Font Sizer (A- / A+) -->
+      <div class="font-sizer-control" title="تنظیم آنی اندازه قلم (ایران‌سنس)">
+        <span style="font-size: 0.72rem; color: var(--ink-muted); margin-left: 2px;">قلم:</span>
+        <button class="font-size-step-btn" id="btnFontDecr" title="کوچک‌تر کردن قلم">A−</button>
+        <span class="font-size-value-badge" id="fontSizeBadge">18px</span>
+        <button class="font-size-step-btn" id="btnFontIncr" title="بزرگ‌تر کردن قلم">A+</button>
+      </div>
     </div>
 
-    <!-- Quick Audio Companion Strip -->
-    <div style="display: flex; align-items: center; gap: 0.75rem;">
+    <!-- Subbar Center: Direct Reading Width Controller (تنظیم عرض صفحه) -->
+    <div class="subbar-center">
+      <span style="font-size: 0.72rem; color: var(--ink-muted);">عرض صفحه:</span>
+      <div class="width-control-group">
+        <button class="width-btn" data-width="680px" title="عرض فشرده و متمرکز (۶۸۰ پیکسل)">فشرده</button>
+        <button class="width-btn active" data-width="840px" title="عرض متناسب استاندارد (۸۴۰ پیکسل)">متناسب</button>
+        <button class="width-btn" data-width="1040px" title="عرض عریض و باز (۱۰۴۰ پیکسل)">عریض</button>
+        <button class="width-btn" data-width="1220px" title="عرض حداکثر مانیتور (۱۲۲۰ پیکسل)">حداکثر</button>
+      </div>
+    </div>
+
+    <!-- Subbar Left: Quick Audio Toggle -->
+    <div class="subbar-left">
       <button style="background: none; border: none; color: var(--accent-teal); cursor: pointer; display: flex; align-items: center; gap: 0.35rem; font-size: 0.781rem; font-weight: 600;" id="quickAudioToggleBtn">
         <span id="quickAudioIcon">▶</span>
         <span id="quickAudioStatus">پخش نوای فرکانس ۴۳۲ هرتز</span>
@@ -115,59 +192,10 @@
 
   <!-- ================= MAIN READING STAGE ================= -->
   <main class="reader-main-stage" id="mainReadingStage">
-    <!-- Prev Arrow (Right in RTL) -->
-    <button class="stage-nav-chevron prev" id="stagePrevBtn" title="صفحه قبلی (کلید ←)">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <polyline points="9 18 15 12 9 6"></polyline>
-      </svg>
-    </button>
-
-    <!-- The Authentic Deluxe Codex Frame -->
-    <div class="book-codex-container" id="bookCodexContainer">
-      <!-- Central Book Binding Shadow (Spine Crease) -->
-      <div class="book-spine-crease" id="spineCrease"></div>
-
-      <!-- Book Running Header -->
-      <header class="book-running-header">
-        <div class="book-running-title" id="bookRunningTitle">معجزه‌گر خاموش — سید رضا حیات‌الغیب</div>
-        <div class="book-running-chapter" id="bookRunningChapter">پیش‌گفتار اثر</div>
-      </header>
-
-      <!-- Book Pages Columns (Spread: Right=Odd/Even, Left=Next) -->
-      <div class="book-grid" id="bookPagesGrid">
-        <!-- Right Page Container -->
-        <article class="book-page-article" id="pageContainerRight">
-          <!-- Dynamically populated via JS -->
-        </article>
-
-        <!-- Left Page Container (Visible in Spread Mode) -->
-        <article class="book-page-article" id="pageContainerLeft">
-          <!-- Dynamically populated via JS -->
-        </article>
-      </div>
-
-      <!-- In-Book Navigation Footer Bar -->
-      <nav style="width: 100%; margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; font-size: 0.781rem; color: var(--ink-secondary);">
-        <button style="display: flex; align-items: center; gap: 0.4rem; padding: 0.45rem 0.85rem; border-radius: 0.5rem; background: var(--sub-surface); border: 1px solid var(--border-color); color: var(--ink-primary); cursor: pointer;" id="inBookPrevBtn">
-          <span>←</span>
-          <span id="inBookPrevLabel">صفحات پیشین</span>
-        </button>
-
-        <span style="font-size: 0.72rem; color: var(--ink-muted);" class="hidden-on-mobile">استفاده از کلیدهای جهت‌نما یا درگ برای ورق زدن</span>
-
-        <button style="display: flex; align-items: center; gap: 0.4rem; padding: 0.45rem 0.85rem; border-radius: 0.5rem; background: var(--sub-surface); border: 1px solid var(--border-color); color: var(--ink-primary); cursor: pointer;" id="inBookNextBtn">
-          <span id="inBookNextLabel">صفحات پسین</span>
-          <span>→</span>
-        </button>
-      </nav>
+    <!-- Continuous Adaptive Reading Leaves Container -->
+    <div class="book-codex-container" id="bookScrollContainer">
+      <!-- 30 Pages populated dynamically in continuous scroll stream -->
     </div>
-
-    <!-- Next Arrow (Left in RTL) -->
-    <button class="stage-nav-chevron next" id="stageNextBtn" title="صفحه بعدی (کلید → یا Space)">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <polyline points="15 18 9 12 15 6"></polyline>
-      </svg>
-    </button>
   </main>
 
   <!-- ================= SUBTLE BOTTOM READER STATUS BAR ================= -->
@@ -176,14 +204,16 @@
       <span id="statusCurrentChapter">فصل اول: پرواز</span>
       <span class="status-dot-sep">·</span>
       <span id="statusPageCounter">صفحه ۱ از ۳۰</span>
+      <span class="status-dot-sep">·</span>
+      <span id="statusBookmarksCount">نشانک‌ها: ۰</span>
     </div>
 
     <div class="status-left">
-      <span id="statusFontName">قلم: ایران‌سنس</span>
+      <span style="font-weight: 700; color: var(--accent-teal);">فونت فعال: ایران‌سنس (IRANSans)</span>
       <span class="status-dot-sep">·</span>
-      <span id="statusLineHeight">فاصله سطرها: ۲.۲۵</span>
+      <span id="statusCurrentWidthLabel">عرض: متناسب (۸۴۰px)</span>
       <span class="status-dot-sep">·</span>
-      <span>سرعت مطالعه: ۲۲۰ کلمه / دقیقه</span>
+      <span>فاصله سطرها: ۲.۲۵</span>
     </div>
   </footer>
 
@@ -221,14 +251,14 @@
         <span>الهام روز</span>
       </button>
 
-      <button class="m-action-btn" id="mFontTrigger">
-        <span class="m-action-icon">Tt</span>
-        <span>اندازه قلم</span>
+      <button class="m-action-btn" id="mWidthTrigger">
+        <span class="m-action-icon">↔️</span>
+        <span>عرض صفحه</span>
       </button>
 
-      <button class="m-action-btn" id="mZenModeTrigger">
-        <span class="m-action-icon">🎯</span>
-        <span>حالت تمرکز</span>
+      <button class="m-action-btn" id="mFontTrigger">
+        <span class="m-action-icon">A±</span>
+        <span>اندازه قلم</span>
       </button>
     </div>
   </div>
@@ -294,7 +324,7 @@
 
       <button class="narration-play-btn" style="background: var(--accent-gold);" id="toggleSpeechBtn">
         <span id="speechIcon">🔊</span>
-        <span id="speechText">خواندن صفحه</span>
+        <span id="speechText">خواندن صفحه جاری</span>
       </button>
     </div>
   </div>
@@ -312,14 +342,26 @@
         <button class="drawer-close-btn" id="closeTocDrawerBtn">✕</button>
       </div>
 
-      <!-- TOC List Scroll -->
+      <!-- Bookmarks Section -->
+      <div style="padding: 0.85rem 0 0.5rem; border-bottom: 1px solid var(--border-color);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+          <span style="font-size: 0.75rem; font-weight: 700; color: var(--accent-gold);">🔖 نشانک‌های من:</span>
+          <button style="background: none; border: none; font-size: 0.68rem; color: var(--ink-muted); cursor: pointer;" id="clearAllBookmarksBtn">پاک کردن همه</button>
+        </div>
+        <div id="savedBookmarksList" style="display: flex; flex-direction: column; gap: 0.35rem; max-height: 140px; overflow-y: auto;">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- TOC Chapters List Scroll -->
+      <div style="margin-top: 0.75rem; font-size: 0.75rem; font-weight: 700; color: var(--ink-muted);">سرفصل‌های ۳۰ صفحه اول:</div>
       <div class="drawer-content-scroll" id="tocListContainer">
         <!-- Dynamically injected -->
       </div>
     </div>
 
     <div style="padding-top: 1rem; border-top: 1px solid var(--border-color); text-align: center; font-size: 0.72rem; color: var(--ink-muted);">
-      نسخه پژوهشی و دیجیتال «معجزه‌گر خاموش»
+      نسخه پژوهشی و دیجیتال «معجزه‌گر خاموش» با فونت ایران‌سنس
     </div>
   </aside>
 
@@ -343,7 +385,7 @@
         <div style="background: var(--accent-teal-subtle); border: 1px solid var(--accent-teal); border-radius: 0.85rem; padding: 1rem;">
           <div style="display: flex; align-items: center; gap: 0.4rem; color: var(--accent-teal); font-weight: 700; font-size: 0.813rem; margin-bottom: 0.5rem;">
             <span>✨</span>
-            <span>عصاره فلسفی صفحه جاری:</span>
+            <span>عصاره فلسفی بخش در حال مطالعه:</span>
           </div>
           <p id="oraclePageEssence" style="font-size: 0.781rem; line-height: 1.9; color: var(--ink-primary);">
             «پرواز تنها یک استعاره نیست؛ بلکه یادآوری این حقیقت است که مرزهای آزادی ما دقیقاً همان مرزهایی است که ذهنمان پذیرفته است.»
@@ -383,50 +425,7 @@
     </div>
   </aside>
 
-  <!-- ================= MODAL 1: Typography Preferences ================= -->
-  <div class="modal-overlay" id="fontModal">
-    <div class="modal-card">
-      <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-color);">
-        <h3 style="font-size: 0.938rem; font-weight: 700; color: var(--accent-teal);">تنظیمات قلم و حروف‌چینی</h3>
-        <button style="background: none; border: none; font-size: 1.1rem; cursor: pointer; color: var(--ink-muted);" id="closeFontModalBtn">✕</button>
-      </div>
-
-      <!-- Font Selector -->
-      <div>
-        <label style="display: block; font-size: 0.75rem; color: var(--ink-secondary); margin-bottom: 0.4rem; font-weight: 600;">فونت خوانش کتاب:</label>
-        <div class="font-choice-grid">
-          <button class="font-choice-btn active" data-font-family="IRANSans">ایران‌سنس رسمی (پیش‌فرض)</button>
-          <button class="font-choice-btn" data-font-family="Amiri">امیری ادیتوریال (کلاسیک)</button>
-          <button class="font-choice-btn" data-font-family="Vazirmatn">وزیرمتن مدرن</button>
-          <button class="font-choice-btn" data-font-family="system-ui">قلم پیش‌فرض سیستم</button>
-        </div>
-      </div>
-
-      <!-- Font Size Slider -->
-      <div>
-        <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--ink-secondary); margin-bottom: 0.35rem;">
-          <span>اندازه متن</span>
-          <span style="color: var(--accent-teal); font-weight: 700;" id="fontSizeDisplay">17.5px</span>
-        </div>
-        <input type="range" class="audio-range-input" id="fontSizeSlider" min="14" max="23" step="0.5" value="17.5">
-      </div>
-
-      <!-- Line Height Slider -->
-      <div>
-        <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--ink-secondary); margin-bottom: 0.35rem;">
-          <span>فاصله بین سطرها (Leading)</span>
-          <span style="color: var(--accent-teal); font-weight: 700;" id="lineHeightDisplay">۲.۲۵</span>
-        </div>
-        <input type="range" class="audio-range-input" id="lineHeightSlider" min="1.8" max="2.8" step="0.05" value="2.25">
-      </div>
-
-      <button style="width: 100%; padding: 0.7rem; background: var(--accent-teal); color: #fff; border: none; border-radius: 0.65rem; font-size: 0.813rem; font-weight: 700; cursor: pointer;" id="saveFontModalBtn">
-        اعمال و ذخیره تغییرات
-      </button>
-    </div>
-  </div>
-
-  <!-- ================= MODAL 2: Search within 30 Pages ================= -->
+  <!-- ================= MODAL: Search within 30 Pages ================= -->
   <div class="modal-overlay" id="searchModal">
     <div class="modal-card" style="max-width: 520px;">
       <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-color);">
@@ -447,12 +446,12 @@
   </div>
 
   <!-- Load 30 Pages Structured Dataset -->
-  <script src="assets/js/book-pages-data.js"></script>
+  <script src="assets/js/book-pages-data.js?v=pages_v3"></script>
 
   <!-- ================= ADVANCED READER JAVASCRIPT ================= -->
   <script>
-    (function initDeluxeReader() {
-      // 1. Dataset & Persistent State
+    (function initContinuousReader() {
+      // 1. Data & State Initialization
       const TOTAL_PAGES = 30;
       const pagesData = window.BOOK_PAGES_DATA || [];
 
@@ -460,17 +459,14 @@
       if (currentPage < 1 || currentPage > TOTAL_PAGES) currentPage = 1;
 
       let currentTheme = localStorage.getItem('mojeze_reader_theme') || 'cream';
-      let isSpread = localStorage.getItem('mojeze_reader_spread') !== 'false'; // true by default on desktop
-      if (window.innerWidth <= 992) isSpread = false;
+      let currentWidth = localStorage.getItem('mojeze_reader_width') || '840px';
+      let currentFontSize = parseFloat(localStorage.getItem('mojeze_reader_size') || '18');
+      let currentViewMode = localStorage.getItem('mojeze_reader_view_mode') || 'scroll'; // 'scroll' (default) vs 'paginated'
 
-      let currentFont = localStorage.getItem('mojeze_reader_font') || 'IRANSans';
-      let currentFontSize = parseFloat(localStorage.getItem('mojeze_reader_size') || '17.5');
-      let currentLineHeight = parseFloat(localStorage.getItem('mojeze_reader_leading') || '2.25');
-
-      // Bookmarks Array stored in localStorage
+      // Bookmarks stored as array of page indices: [1, 5, 12, ...]
       let bookmarks = JSON.parse(localStorage.getItem('mojeze_reader_bookmarks') || '[]');
 
-      // 2. Web Audio API Synthesizer (Zen Ambient + Natural Page-Turn Sound)
+      // 2. Web Audio Synthesizer Engine
       class ZenAudioEngine {
         constructor() {
           this.ctx = null;
@@ -491,7 +487,6 @@
           }
         }
 
-        // Realistic Page Turn Sound effect (filtered paper rustle burst)
         playPageTurn() {
           try {
             this.init();
@@ -550,7 +545,6 @@
           this.ambientGain.connect(this.ctx.destination);
 
           if (type === '432hz') {
-            // Sacred 432Hz Drone + Binaural Theta beat
             const o1 = this.ctx.createOscillator();
             const o2 = this.ctx.createOscillator();
             o1.type = 'sine'; o2.type = 'sine';
@@ -561,7 +555,6 @@
             o1.start(now); o2.start(now);
             this.ambientSource = [o1, o2];
           } else if (type === 'bowl') {
-            // Tibetan Singing Bowl Harmonic Tone
             const partials = [
               { r: 1.0, g: 0.6, f: 216 },
               { r: 2.76, g: 0.25, f: 216 },
@@ -580,7 +573,6 @@
             });
             this.ambientSource = oscs;
           } else if (type === 'rain') {
-            // Soft pink-filtered rain noise
             const dur = 2.0;
             const bSize = this.ctx.sampleRate * dur;
             const nBuffer = this.ctx.createBuffer(1, bSize, this.ctx.sampleRate);
@@ -600,14 +592,12 @@
             source.start(now);
             this.ambientSource = source;
           } else if (type === 'ocean') {
-            // Gentle rhythmic ocean swell
             const osc = this.ctx.createOscillator();
             osc.type = 'sine';
-            osc.frequency.setValueAtTime(0.12, now); // low frequency wave lfo
+            osc.frequency.setValueAtTime(0.12, now);
             const lfoGain = this.ctx.createGain();
             lfoGain.gain.setValueAtTime(0.2, now);
             osc.connect(lfoGain.gain);
-            
             const carrier = this.ctx.createOscillator();
             carrier.type = 'triangle';
             carrier.frequency.setValueAtTime(120, now);
@@ -622,7 +612,7 @@
 
       const audioZen = new ZenAudioEngine();
 
-      // 3. Speech Synthesis Engine (Smart Page Narration)
+      // 3. Speech Synthesis Engine
       let isNarrating = false;
       let speechUtterance = null;
       let speechSpeed = 1.0;
@@ -682,7 +672,7 @@
         const speechIcon = document.getElementById('speechIcon');
         const speechText = document.getElementById('speechText');
         if (speechIcon) speechIcon.innerText = active ? '⏸' : '🔊';
-        if (speechText) speechText.innerText = active ? 'توقف خوانش' : 'خواندن صفحه';
+        if (speechText) speechText.innerText = active ? 'توقف خوانش' : 'خواندن صفحه جاری';
       }
 
       // 4. DOM Elements Cache
@@ -691,23 +681,19 @@
       const headerProgressFill = document.getElementById('headerProgressFill');
       const headerProgressText = document.getElementById('headerProgressText');
       const headerChapterIndicator = document.getElementById('headerChapterIndicator');
-      const bookRunningChapter = document.getElementById('bookRunningChapter');
-      const bookPagesGrid = document.getElementById('bookPagesGrid');
-      const spineCrease = document.getElementById('spineCrease');
-      const pageContainerRight = document.getElementById('pageContainerRight');
-      const pageContainerLeft = document.getElementById('pageContainerLeft');
-      const btnSpreadMode = document.getElementById('btnSpreadMode');
-      const btnSingleMode = document.getElementById('btnSingleMode');
-      const stagePrevBtn = document.getElementById('stagePrevBtn');
-      const stageNextBtn = document.getElementById('stageNextBtn');
-      const inBookPrevBtn = document.getElementById('inBookPrevBtn');
-      const inBookNextBtn = document.getElementById('inBookNextBtn');
-      const inBookPrevLabel = document.getElementById('inBookPrevLabel');
-      const inBookNextLabel = document.getElementById('inBookNextLabel');
+      const bookScrollContainer = document.getElementById('bookScrollContainer');
       const statusCurrentChapter = document.getElementById('statusCurrentChapter');
       const statusPageCounter = document.getElementById('statusPageCounter');
-      const statusFontName = document.getElementById('statusFontName');
-      const statusLineHeight = document.getElementById('statusLineHeight');
+      const statusBookmarksCount = document.getElementById('statusBookmarksCount');
+      const statusCurrentWidthLabel = document.getElementById('statusCurrentWidthLabel');
+
+      const widthBtns = document.querySelectorAll('.subbar-center .width-btn');
+      const btnFontDecr = document.getElementById('btnFontDecr');
+      const btnFontIncr = document.getElementById('btnFontIncr');
+      const fontSizeBadge = document.getElementById('fontSizeBadge');
+
+      const btnScrollMode = document.getElementById('btnScrollMode');
+      const btnPaginatedMode = document.getElementById('btnPaginatedMode');
 
       // Modals and Drawers
       const drawerBackdrop = document.getElementById('drawerBackdrop');
@@ -715,6 +701,8 @@
       const openTocDrawerBtn = document.getElementById('openTocDrawerBtn');
       const closeTocDrawerBtn = document.getElementById('closeTocDrawerBtn');
       const tocListContainer = document.getElementById('tocListContainer');
+      const savedBookmarksList = document.getElementById('savedBookmarksList');
+      const clearAllBookmarksBtn = document.getElementById('clearAllBookmarksBtn');
 
       const oracleDrawer = document.getElementById('oracleDrawer');
       const openOracleDrawerBtn = document.getElementById('openOracleDrawerBtn');
@@ -727,7 +715,6 @@
       const openAudioStudioBtn = document.getElementById('openAudioStudioBtn');
       const closeAudioModalBtn = document.getElementById('closeAudioModalBtn');
       const headerAmbientDot = document.getElementById('headerAmbientDot');
-      const headerAmbientLabel = document.getElementById('headerAmbientLabel');
       const toggleAmbientPlayBtn = document.getElementById('toggleAmbientPlayBtn');
       const ambientPlayIcon = document.getElementById('ambientPlayIcon');
       const ambientPlayText = document.getElementById('ambientPlayText');
@@ -741,23 +728,13 @@
       const quickAudioIcon = document.getElementById('quickAudioIcon');
       const quickAudioStatus = document.getElementById('quickAudioStatus');
 
-      const fontModal = document.getElementById('fontModal');
-      const openFontModalBtn = document.getElementById('openFontModalBtn');
-      const closeFontModalBtn = document.getElementById('closeFontModalBtn');
-      const saveFontModalBtn = document.getElementById('saveFontModalBtn');
-      const fontChoiceBtns = document.querySelectorAll('.font-choice-btn');
-      const fontSizeSlider = document.getElementById('fontSizeSlider');
-      const fontSizeDisplay = document.getElementById('fontSizeDisplay');
-      const lineHeightSlider = document.getElementById('lineHeightSlider');
-      const lineHeightDisplay = document.getElementById('lineHeightDisplay');
-
       const searchModal = document.getElementById('searchModal');
       const openSearchModalBtn = document.getElementById('openSearchModalBtn');
       const closeSearchModalBtn = document.getElementById('closeSearchModalBtn');
       const liveSearchInput = document.getElementById('liveSearchInput');
       const searchResultsArea = document.getElementById('searchResultsArea');
 
-      // Mobile Island Controls
+      // Mobile Island
       const mPageSlider = document.getElementById('mPageSlider');
       const mPageIndicatorLabel = document.getElementById('mPageIndicatorLabel');
       const mPrevPageBtn = document.getElementById('mPrevPageBtn');
@@ -765,8 +742,8 @@
       const mZenAudioTrigger = document.getElementById('mZenAudioTrigger');
       const mNarrationTrigger = document.getElementById('mNarrationTrigger');
       const mOracleTrigger = document.getElementById('mOracleTrigger');
+      const mWidthTrigger = document.getElementById('mWidthTrigger');
       const mFontTrigger = document.getElementById('mFontTrigger');
-      const mZenModeTrigger = document.getElementById('mZenModeTrigger');
 
       // 5. Theme Application
       function applyTheme(themeName) {
@@ -784,229 +761,269 @@
         });
       });
 
-      // 6. Typography Application
-      function applyTypography() {
-        document.documentElement.style.setProperty('--font-reading-size', currentFontSize + 'px');
-        document.documentElement.style.setProperty('--line-reading-height', currentLineHeight);
+      // 6. Direct Width Controller Logic (تنظیم عرض صفحه)
+      function applyWidth(widthVal) {
+        currentWidth = widthVal;
+        document.documentElement.style.setProperty('--book-content-width', widthVal);
+        localStorage.setItem('mojeze_reader_width', widthVal);
         
-        let fontStack = "'IRANSans', sans-serif";
-        if (currentFont === 'Amiri') fontStack = "'Amiri', serif";
-        else if (currentFont === 'Vazirmatn') fontStack = "'Vazirmatn', sans-serif";
-        else if (currentFont === 'system-ui') fontStack = "system-ui, -apple-system, sans-serif";
-        
-        document.documentElement.style.setProperty('--font-body', fontStack);
-        document.documentElement.style.setProperty('--font-ui', fontStack);
+        widthBtns.forEach(btn => {
+          btn.classList.toggle('active', btn.getAttribute('data-width') === widthVal);
+        });
 
-        if (statusFontName) statusFontName.innerText = 'قلم: ' + (currentFont === 'IRANSans' ? 'ایران‌سنس' : currentFont === 'Amiri' ? 'امیری ادیتوریال' : currentFont === 'Vazirmatn' ? 'وزیرمتن' : 'پیش‌فرض');
-        if (statusLineHeight) statusLineHeight.innerText = 'فاصله سطرها: ' + currentLineHeight;
+        if (statusCurrentWidthLabel) {
+          const labelMap = { '680px': 'فشرده (۶۸۰px)', '840px': 'متناسب (۸۴۰px)', '1040px': 'عریض (۱۰۴۰px)', '1220px': 'حداکثر (۱۲۲۰px)' };
+          statusCurrentWidthLabel.innerText = 'عرض: ' + (labelMap[widthVal] || widthVal);
+        }
       }
 
-      // 7. Render Individual Page HTML
-      function renderPageCard(pData) {
-        if (!pData) return '<div style="padding: 2rem; color: var(--ink-muted); text-align: center;">پایان ۳۰ صفحه اول کتاب</div>';
+      widthBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          applyWidth(btn.getAttribute('data-width'));
+        });
+      });
 
-        const paragraphsHtml = (pData.paragraphs || []).map((p, idx) => {
-          // If first paragraph, add drop-cap on first letter if available
-          if (idx === 0 && p.length > 5 && !p.startsWith('<')) {
-            const firstLetter = p.charAt(0);
-            const rest = p.slice(1);
-            return `<p><span class="drop-cap">${firstLetter}</span>${rest}</p>`;
+      mWidthTrigger?.addEventListener('click', () => {
+        const widths = ['680px', '840px', '1040px', '1220px'];
+        let idx = widths.indexOf(currentWidth);
+        let nextIdx = (idx + 1) % widths.length;
+        applyWidth(widths[nextIdx]);
+      });
+
+      // 7. Direct Font Sizer Logic (کنترل مستقیم اندازه قلم)
+      function setFontSize(newSize) {
+        currentFontSize = Math.min(26, Math.max(14, newSize));
+        document.documentElement.style.setProperty('--font-reading-size', currentFontSize + 'px');
+        localStorage.setItem('mojeze_reader_size', currentFontSize);
+        if (fontSizeBadge) fontSizeBadge.innerText = currentFontSize + 'px';
+      }
+
+      btnFontDecr?.addEventListener('click', () => setFontSize(currentFontSize - 1));
+      btnFontIncr?.addEventListener('click', () => setFontSize(currentFontSize + 1));
+      mFontTrigger?.addEventListener('click', () => setFontSize(currentFontSize >= 24 ? 16 : currentFontSize + 2));
+
+      // 8. Bookmark Per-Page System
+      function toggleBookmark(pageIdx) {
+        const idx = bookmarks.indexOf(pageIdx);
+        if (idx > -1) {
+          bookmarks.splice(idx, 1);
+        } else {
+          bookmarks.push(pageIdx);
+          bookmarks.sort((a, b) => a - b);
+        }
+        localStorage.setItem('mojeze_reader_bookmarks', JSON.stringify(bookmarks));
+        updateBookmarkUI();
+      }
+
+      function updateBookmarkUI() {
+        // Update all leaf tabs
+        document.querySelectorAll('.leaf-bookmark-tab').forEach(tab => {
+          const p = parseInt(tab.getAttribute('data-page-index'), 10);
+          const isB = bookmarks.includes(p);
+          tab.classList.toggle('bookmarked', isB);
+          tab.innerHTML = isB ? `<span>🔖</span><span>نشانک‌شده</span>` : `<span>🔖</span><span>نشانک</span>`;
+        });
+
+        // Update status count
+        if (statusBookmarksCount) statusBookmarksCount.innerText = `نشانک‌ها: ${bookmarks.length}`;
+
+        // Update drawer bookmarks list
+        if (savedBookmarksList) {
+          if (bookmarks.length === 0) {
+            savedBookmarksList.innerHTML = `<span style="font-size: 0.72rem; color: var(--ink-muted);">هنوز صفحه‌ای نشانک‌گذاری نشده است.</span>`;
+          } else {
+            savedBookmarksList.innerHTML = bookmarks.map(pNum => {
+              const p = pagesData[pNum - 1];
+              const title = p?.title || p?.chapter || `صفحه ${pNum}`;
+              return `
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.35rem 0.5rem; background: var(--sub-surface); border-radius: 0.4rem; font-size: 0.72rem;">
+                  <span style="cursor: pointer; font-weight: 600; color: var(--ink-primary);" onclick="scrollToPage(${pNum})">صفحه ${pNum}: ${title}</span>
+                  <button style="background: none; border: none; color: var(--accent-gold); cursor: pointer;" onclick="event.stopPropagation(); removeBookmark(${pNum})">✕</button>
+                </div>
+              `;
+            }).join('');
           }
-          return `<p>${p}</p>`;
+        }
+      }
+
+      window.removeBookmark = function(pNum) {
+        toggleBookmark(pNum);
+      };
+
+      clearAllBookmarksBtn?.addEventListener('click', () => {
+        bookmarks = [];
+        localStorage.setItem('mojeze_reader_bookmarks', '[]');
+        updateBookmarkUI();
+      });
+
+      // 9. Continuous Scroll Leaves Builder
+      function renderScrollPages() {
+        if (!bookScrollContainer) return;
+
+        bookScrollContainer.innerHTML = pagesData.map(pData => {
+          const pNum = pData.pageIndex;
+          const isBookmarked = bookmarks.includes(pNum);
+
+          const paragraphsHtml = (pData.paragraphs || []).map((p, idx) => {
+            if (idx === 0 && p.length > 5 && !p.startsWith('<')) {
+              const firstLetter = p.charAt(0);
+              const rest = p.slice(1);
+              return `<p><span class="drop-cap">${firstLetter}</span>${rest}</p>`;
+            }
+            return `<p>${p}</p>`;
+          }).join('');
+
+          const calloutHtml = pData.callout ? `
+            <div class="book-callout-quote">
+              ${pData.callout}
+            </div>
+          ` : '';
+
+          const marginBadge = pData.sectionBadge ? `<span class="page-chapter-badge">${pData.sectionBadge}</span>` : '';
+          const titleHtml = pData.title ? `<h2 class="page-chapter-title">${pData.title}</h2>` : '';
+          const lineHtml = (pData.sectionBadge || pData.title) ? `<div class="page-motif-line"></div>` : '';
+
+          const footnoteHtml = pData.marginQuote ? `
+            <div style="display: flex; align-items: flex-start; gap: 0.4rem; line-height: 1.6; font-size: 0.75rem;">
+              <span style="color: var(--accent-teal); font-weight: 700;">✦</span>
+              <span>${pData.marginQuote}</span>
+            </div>
+          ` : '';
+
+          const printedNumText = pData.bookPageNum ? `— صفحه چاپی ${pData.bookPageNum} —` : `— نسخه دیجیتال —`;
+
+          return `
+            <article class="scroll-page-leaf" id="page-leaf-${pNum}" data-page="${pNum}" data-chapter="${pData.chapter || 'معجزه‌گر خاموش'}">
+              <!-- Leaf Top Meta Row -->
+              <div class="leaf-top-meta-row">
+                <div class="leaf-chapter-tag">
+                  <span>📖</span>
+                  <span>${pData.chapter || 'معجزه‌گر خاموش'}</span>
+                  <span style="color: var(--ink-muted); font-weight: normal;">• صفحه ${pNum}</span>
+                </div>
+
+                <!-- Per-Page Bookmark Ribbon Tab -->
+                <button class="leaf-bookmark-tab ${isBookmarked ? 'bookmarked' : ''}" data-page-index="${pNum}" onclick="handleLeafBookmarkClick(${pNum})">
+                  <span>🔖</span>
+                  <span>${isBookmarked ? 'نشانک‌شده' : 'نشانک'}</span>
+                </button>
+              </div>
+
+              <!-- Chapter Motif -->
+              <div class="page-chapter-motif">
+                ${marginBadge}
+                ${titleHtml}
+                ${lineHtml}
+              </div>
+
+              <!-- Paragraphs -->
+              <div class="book-page-content">
+                ${paragraphsHtml}
+                ${calloutHtml}
+              </div>
+
+              <!-- Leaf Bottom Row -->
+              <div class="leaf-bottom-row">
+                ${footnoteHtml}
+                <div class="leaf-printed-number">${printedNumText}</div>
+              </div>
+            </article>
+          `;
         }).join('');
 
-        const calloutHtml = pData.callout ? `
-          <div class="book-callout-quote">
-            ${pData.callout}
-          </div>
-        ` : '';
-
-        const marginBadge = pData.sectionBadge ? `<span class="page-chapter-badge">${pData.sectionBadge}</span>` : '';
-        const titleHtml = pData.title ? `<h2 class="page-chapter-title">${pData.title}</h2>` : '';
-        const lineHtml = (pData.sectionBadge || pData.title) ? `<div class="page-motif-line"></div>` : '';
-
-        const footnoteHtml = pData.marginQuote ? `
-          <div class="page-footnote-item">
-            <span class="footnote-number">✦</span>
-            <span>${pData.marginQuote}</span>
-          </div>
-        ` : '';
-
-        const pageNumText = pData.bookPageNum ? `— صفحه چاپی ${pData.bookPageNum} —` : `— نسخه دیجیتال —`;
-
-        return `
-          <div>
-            <!-- Chapter / Section Motif -->
-            <div class="page-chapter-motif">
-              ${marginBadge}
-              ${titleHtml}
-              ${lineHtml}
-            </div>
-
-            <!-- Page Paragraphs Content -->
-            <div class="book-page-content" style="font-family: var(--font-body);">
-              ${paragraphsHtml}
-              ${calloutHtml}
-            </div>
-          </div>
-
-          <!-- Page Bottom Marginalia & Number -->
-          <footer class="book-page-footer">
-            ${footnoteHtml}
-            <div class="printed-page-number">${pageNumText}</div>
-          </footer>
-        `;
+        setupIntersectionObserver();
+        updateBookmarkUI();
       }
 
-      // 8. Master Page Display Logic (Spread vs Single)
-      function updateReaderView(playFlipAudio = false) {
-        if (playFlipAudio) {
+      window.handleLeafBookmarkClick = function(pNum) {
+        toggleBookmark(pNum);
+      };
+
+      window.scrollToPage = function(pageNumber) {
+        const target = document.getElementById(`page-leaf-${pageNumber}`);
+        if (target) {
           audioZen.playPageTurn();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          currentPage = pageNumber;
+          updateMetaHeaders(pageNumber);
+          closeAllDrawers();
         }
+      };
 
-        stopNarration();
+      // 10. Scroll Observer: Automatically update headers & progress as user scrolls!
+      function setupIntersectionObserver() {
+        const leaves = document.querySelectorAll('.scroll-page-leaf');
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const pNum = parseInt(entry.target.getAttribute('data-page'), 10);
+              currentPage = pNum;
+              updateMetaHeaders(pNum);
+            }
+          });
+        }, {
+          rootMargin: '-20% 0px -60% 0px'
+        });
 
-        const p1 = pagesData[currentPage - 1];
-        pageContainerRight.innerHTML = renderPageCard(p1);
-
-        if (isSpread && window.innerWidth > 992) {
-          // 2-page spread
-          bookPagesGrid.classList.remove('single-column');
-          spineCrease.style.display = 'block';
-          pageContainerLeft.style.display = 'flex';
-
-          const nextIndex = currentPage < TOTAL_PAGES ? currentPage : null;
-          const p2 = nextIndex ? pagesData[nextIndex] : null;
-          pageContainerLeft.innerHTML = renderPageCard(p2);
-
-          // Sub-bar labels
-          if (inBookPrevLabel) inBookPrevLabel.innerText = currentPage > 2 ? `صفحات پیشین (${currentPage-2} - ${currentPage-1})` : `صفحه آغازین`;
-          if (inBookNextLabel) inBookNextLabel.innerText = currentPage + 1 < TOTAL_PAGES ? `صفحات پسین (${currentPage+2} - ${Math.min(currentPage+3, TOTAL_PAGES)})` : `پایان ۳۰ صفحه`;
-        } else {
-          // Single-column mode
-          bookPagesGrid.classList.add('single-column');
-          spineCrease.style.display = 'none';
-          pageContainerLeft.style.display = 'none';
-
-          if (inBookPrevLabel) inBookPrevLabel.innerText = currentPage > 1 ? `صفحه پیشین (${currentPage - 1})` : `صفحه اول`;
-          if (inBookNextLabel) inBookNextLabel.innerText = currentPage < TOTAL_PAGES ? `صفحه پسین (${currentPage + 1})` : `صفحه پایانی`;
-        }
-
-        // Running Header & Meta
-        const chapterName = p1?.chapter || 'معجزه‌گر خاموش';
-        if (headerChapterIndicator) headerChapterIndicator.innerText = `${chapterName} • صفحه ${currentPage}`;
-        if (bookRunningChapter) bookRunningChapter.innerText = chapterName;
-        if (statusCurrentChapter) statusCurrentChapter.innerText = chapterName;
-        if (statusPageCounter) statusPageCounter.innerText = `صفحه ${currentPage} از ${TOTAL_PAGES}`;
-
-        // Progress Pill
-        const progressPct = Math.round((currentPage / TOTAL_PAGES) * 100);
-        if (headerProgressFill) headerProgressFill.style.width = progressPct + '%';
-        if (headerProgressText) headerProgressText.innerText = progressPct + '٪';
-
-        // Mobile Scrubber
-        if (mPageSlider) mPageSlider.value = currentPage;
-        if (mPageIndicatorLabel) mPageIndicatorLabel.innerText = `صفحه ${currentPage}`;
-
-        // Save State
-        localStorage.setItem('mojeze_reader_page', currentPage);
-
-        // Update Oracle Drawer Content
-        updateOracleEssence(p1);
-
-        // Update Active TOC link
-        updateActiveTocLink();
+        leaves.forEach(leaf => observer.observe(leaf));
       }
 
-      // 9. Oracle Essence Generator
-      function updateOracleEssence(page) {
-        if (!page) return;
-        const callout = page.callout || (page.paragraphs && page.paragraphs[0]) || 'در خاموشی معجزه رخ می‌دهد...';
-        if (oraclePageEssence) {
-          oraclePageEssence.innerHTML = `«${callout.replace(/<[^>]*>/g, '')}»`;
-        }
-        if (oracleVibeScore) {
-          const vibes = ['رهایی و آرامش ۹۲٪', 'شجاعت و پرواز ۸۸٪', 'افسانه شخصی و ثروت ۹۵٪', 'سکوت و خرد باطنی ۹۱٪'];
-          oracleVibeScore.innerText = vibes[(page.pageIndex || 1) % vibes.length];
+      function updateMetaHeaders(pNum) {
+        const pData = pagesData[pNum - 1];
+        const chapter = pData?.chapter || 'معجزه‌گر خاموش';
+        
+        if (headerChapterIndicator) headerChapterIndicator.innerText = `${chapter} • صفحه ${pNum}`;
+        if (statusCurrentChapter) statusCurrentChapter.innerText = chapter;
+        if (statusPageCounter) statusPageCounter.innerText = `صفحه ${pNum} از ${TOTAL_PAGES}`;
+
+        const pct = Math.round((pNum / TOTAL_PAGES) * 100);
+        if (headerProgressFill) headerProgressFill.style.width = pct + '%';
+        if (headerProgressText) headerProgressText.innerText = `صفحه ${pNum} از ۳۰ (${pct}٪)`;
+
+        if (mPageSlider) mPageSlider.value = pNum;
+        if (mPageIndicatorLabel) mPageIndicatorLabel.innerText = `صفحه ${pNum}`;
+
+        localStorage.setItem('mojeze_reader_page', pNum);
+
+        // Update Oracle Drawer
+        if (pData) {
+          const callout = pData.callout || (pData.paragraphs && pData.paragraphs[0]) || 'در خاموشی معجزه رخ می‌دهد...';
+          if (oraclePageEssence) oraclePageEssence.innerHTML = `«${callout.replace(/<[^>]*>/g, '')}»`;
         }
       }
 
-      // 10. Navigation Actions
-      function goToPrevPage() {
-        const step = (isSpread && window.innerWidth > 992) ? 2 : 1;
-        if (currentPage > 1) {
-          currentPage = Math.max(1, currentPage - step);
-          updateReaderView(true);
-        }
+      // 11. Mode Toggle (Scroll vs Paginated)
+      btnScrollMode?.addEventListener('click', () => {
+        btnScrollMode.classList.add('active');
+        btnPaginatedMode.classList.remove('active');
+        document.querySelectorAll('.scroll-page-leaf').forEach(leaf => leaf.style.display = 'block');
+        scrollToPage(currentPage);
+      });
+
+      btnPaginatedMode?.addEventListener('click', () => {
+        btnPaginatedMode.classList.add('active');
+        btnScrollMode.classList.remove('active');
+        showOnlyCurrentPage(currentPage);
+      });
+
+      function showOnlyCurrentPage(pNum) {
+        document.querySelectorAll('.scroll-page-leaf').forEach(leaf => {
+          const num = parseInt(leaf.getAttribute('data-page'), 10);
+          leaf.style.display = (num === pNum) ? 'block' : 'none';
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
 
-      function goToNextPage() {
-        const step = (isSpread && window.innerWidth > 992) ? 2 : 1;
-        if (currentPage < TOTAL_PAGES) {
-          currentPage = Math.min(TOTAL_PAGES, currentPage + step);
-          updateReaderView(true);
-        }
-      }
-
-      stagePrevBtn?.addEventListener('click', goToPrevPage);
-      stageNextBtn?.addEventListener('click', goToNextPage);
-      inBookPrevBtn?.addEventListener('click', goToPrevPage);
-      inBookNextBtn?.addEventListener('click', goToNextPage);
-      mPrevPageBtn?.addEventListener('click', goToPrevPage);
-      mNextPageBtn?.addEventListener('click', goToNextPage);
-
+      // Mobile Page Jumper
+      mPrevPageBtn?.addEventListener('click', () => {
+        if (currentPage > 1) scrollToPage(currentPage - 1);
+      });
+      mNextPageBtn?.addEventListener('click', () => {
+        if (currentPage < TOTAL_PAGES) scrollToPage(currentPage + 1);
+      });
       mPageSlider?.addEventListener('input', (e) => {
-        currentPage = parseInt(e.target.value, 10);
-        updateReaderView(false);
-      });
-
-      // Keyboard navigation
-      window.addEventListener('keydown', (e) => {
-        if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') return;
-        if (e.key === 'ArrowRight') {
-          goToNextPage();
-        } else if (e.key === 'ArrowLeft') {
-          goToPrevPage();
-        } else if (e.key === ' ') {
-          e.preventDefault();
-          goToNextPage();
-        }
-      });
-
-      // Touch / Swipe Navigation
-      let touchStartX = 0;
-      let touchEndX = 0;
-      document.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-      }, { passive: true });
-
-      document.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        const diff = touchEndX - touchStartX;
-        if (Math.abs(diff) > 60) {
-          if (diff > 0) {
-            goToPrevPage(); // swipe right to prev in RTL
-          } else {
-            goToNextPage(); // swipe left to next in RTL
-          }
-        }
-      }, { passive: true });
-
-      // 11. Spread vs Single Mode Buttons
-      btnSpreadMode?.addEventListener('click', () => {
-        isSpread = true;
-        btnSpreadMode.classList.add('active');
-        btnSingleMode.classList.remove('active');
-        localStorage.setItem('mojeze_reader_spread', 'true');
-        updateReaderView(false);
-      });
-
-      btnSingleMode?.addEventListener('click', () => {
-        isSpread = false;
-        btnSingleMode.classList.add('active');
-        btnSpreadMode.classList.remove('active');
-        localStorage.setItem('mojeze_reader_spread', 'false');
-        updateReaderView(false);
+        const val = parseInt(e.target.value, 10);
+        scrollToPage(val);
       });
 
       // 12. Drawers Management
@@ -1020,7 +1037,6 @@
         tocDrawer.classList.remove('active');
         oracleDrawer.classList.remove('active');
         zenAudioModal.classList.remove('active');
-        fontModal.classList.remove('active');
         searchModal.classList.remove('active');
       }
 
@@ -1037,7 +1053,7 @@
       function buildTocList() {
         if (!tocListContainer) return;
         const chapters = [
-          { title: 'روی جلد و شناسنامه', page: 1 },
+          { title: 'روی جلد و شناسنامه کتاب', page: 1 },
           { title: 'فهرست سرفصل‌های کتاب', page: 2 },
           { title: 'پیش‌گفتار اثر (چرا این کتاب؟)', page: 3 },
           { title: 'حکمت و اندیشه آغازین (ریچارد باخ)', page: 8 },
@@ -1061,23 +1077,14 @@
           link.addEventListener('click', (e) => {
             e.preventDefault();
             const targetPage = parseInt(link.getAttribute('data-jump-page'), 10);
-            currentPage = targetPage;
-            updateReaderView(true);
-            closeAllDrawers();
+            scrollToPage(targetPage);
           });
-        });
-      }
-
-      function updateActiveTocLink() {
-        tocListContainer?.querySelectorAll('.toc-item-link').forEach(link => {
-          const jumpPage = parseInt(link.getAttribute('data-jump-page'), 10);
-          link.classList.toggle('active', jumpPage === currentPage || (jumpPage <= currentPage && jumpPage + 2 > currentPage));
         });
       }
 
       buildTocList();
 
-      // 13. Zen Audio Modal & Synthesizer Controls
+      // 13. Zen Audio Modal Controls
       openAudioStudioBtn?.addEventListener('click', () => {
         zenAudioModal.classList.toggle('active');
       });
@@ -1088,21 +1095,19 @@
         zenAudioModal.classList.toggle('active');
       });
 
-      // Ambient Sound Selection
       soundTypeChips.forEach(chip => {
         chip.addEventListener('click', () => {
           soundTypeChips.forEach(c => c.classList.remove('active'));
           chip.classList.add('active');
-          const soundType = chip.getAttribute('data-sound');
+          const sType = chip.getAttribute('data-sound');
           if (audioZen.isPlaying) {
-            audioZen.startAmbient(soundType);
+            audioZen.startAmbient(sType);
           } else {
-            audioZen.currentSound = soundType;
+            audioZen.currentSound = sType;
           }
         });
       });
 
-      // Toggle Ambient Audio Button
       function toggleAmbientMusic() {
         if (audioZen.isPlaying) {
           audioZen.stopAmbient();
@@ -1124,67 +1129,23 @@
       toggleAmbientPlayBtn?.addEventListener('click', toggleAmbientMusic);
       quickAudioToggleBtn?.addEventListener('click', toggleAmbientMusic);
 
-      // Volume Slider
       ambientVolumeSlider?.addEventListener('input', (e) => {
         const val = parseInt(e.target.value, 10);
         ambientVolumeVal.innerText = val + '٪';
         audioZen.setVolume(val / 100);
       });
 
-      // Speech Rate Slider
       speechRateSlider?.addEventListener('input', (e) => {
         const val = parseInt(e.target.value, 10) / 10;
         speechSpeed = val;
         speechRateVal.innerText = val.toFixed(1) + 'x';
-        if (isNarrating) {
-          narrateCurrentPage();
-        }
+        if (isNarrating) narrateCurrentPage();
       });
 
-      // Narration Button
       toggleSpeechBtn?.addEventListener('click', narrateCurrentPage);
       mNarrationTrigger?.addEventListener('click', narrateCurrentPage);
 
-      // 14. Typography Preferences Modal
-      openFontModalBtn?.addEventListener('click', () => {
-        fontModal.classList.add('active');
-      });
-      closeFontModalBtn?.addEventListener('click', () => {
-        fontModal.classList.remove('active');
-      });
-      mFontTrigger?.addEventListener('click', () => {
-        fontModal.classList.add('active');
-      });
-
-      fontChoiceBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          fontChoiceBtns.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          currentFont = btn.getAttribute('data-font-family');
-        });
-      });
-
-      fontSizeSlider?.addEventListener('input', (e) => {
-        currentFontSize = parseFloat(e.target.value);
-        fontSizeDisplay.innerText = currentFontSize + 'px';
-        applyTypography();
-      });
-
-      lineHeightSlider?.addEventListener('input', (e) => {
-        currentLineHeight = parseFloat(e.target.value);
-        lineHeightDisplay.innerText = currentLineHeight;
-        applyTypography();
-      });
-
-      saveFontModalBtn?.addEventListener('click', () => {
-        localStorage.setItem('mojeze_reader_font', currentFont);
-        localStorage.setItem('mojeze_reader_size', currentFontSize);
-        localStorage.setItem('mojeze_reader_leading', currentLineHeight);
-        applyTypography();
-        fontModal.classList.remove('active');
-      });
-
-      // 15. Search within 30 Pages
+      // 14. Search Modal
       openSearchModalBtn?.addEventListener('click', () => {
         searchModal.classList.add('active');
         liveSearchInput.focus();
@@ -1194,37 +1155,28 @@
       });
 
       liveSearchInput?.addEventListener('input', (e) => {
-        const query = e.target.value.trim().toLowerCase();
-        if (!query || query.length < 2) {
-          searchResultsArea.innerHTML = `
-            <div style="text-align: center; color: var(--ink-muted); font-size: 0.75rem; padding: 2rem 0;">
-              برای جستجو کلمه‌ای مانند پرواز، رهایی، آزادی یا تصمیم را بنویسید.
-            </div>
-          `;
+        const q = e.target.value.trim().toLowerCase();
+        if (!q || q.length < 2) {
+          searchResultsArea.innerHTML = `<div style="text-align: center; color: var(--ink-muted); font-size: 0.75rem; padding: 2rem 0;">برای جستجو تایپ کنید...</div>`;
           return;
         }
 
         const matches = [];
         pagesData.forEach(p => {
           const allText = [p.title, p.subtitle, ...(p.paragraphs || []), p.callout].join(' ');
-          if (allText.toLowerCase().includes(query)) {
-            // Find snippet
+          if (allText.toLowerCase().includes(q)) {
             const snippet = allText.replace(/<[^>]*>/g, '').substr(0, 110) + '...';
             matches.push({ pageIndex: p.pageIndex, title: p.title || p.chapter, snippet });
           }
         });
 
         if (matches.length === 0) {
-          searchResultsArea.innerHTML = `
-            <div style="text-align: center; color: var(--ink-muted); font-size: 0.75rem; padding: 2rem 0;">
-              موردی برای «${query}» یافت نشد.
-            </div>
-          `;
+          searchResultsArea.innerHTML = `<div style="text-align: center; color: var(--ink-muted); font-size: 0.75rem; padding: 2rem 0;">موردی برای «${q}» یافت نشد.</div>`;
           return;
         }
 
         searchResultsArea.innerHTML = matches.map(m => `
-          <div class="toc-item-link" style="cursor: pointer; flex-direction: column; align-items: flex-start; gap: 4px;" data-search-jump="${m.pageIndex}">
+          <div class="toc-item-link" style="cursor: pointer; flex-direction: column; align-items: flex-start; gap: 4px;" onclick="scrollToPage(${m.pageIndex}); closeAllDrawers();">
             <div style="display: flex; justify-content: space-between; width: 100%; font-weight: 700; color: var(--accent-teal);">
               <span>${m.title}</span>
               <span style="font-family: monospace;">صفحه ${m.pageIndex}</span>
@@ -1232,70 +1184,36 @@
             <div style="font-size: 0.72rem; color: var(--ink-secondary); line-height: 1.6;">${m.snippet}</div>
           </div>
         `).join('');
-
-        searchResultsArea.querySelectorAll('[data-search-jump]').forEach(el => {
-          el.addEventListener('click', () => {
-            currentPage = parseInt(el.getAttribute('data-search-jump'), 10);
-            updateReaderView(true);
-            searchModal.classList.remove('active');
-          });
-        });
       });
 
-      // 16. Bookmark Button
-      const headerBookmarkBtn = document.getElementById('headerBookmarkBtn');
-      headerBookmarkBtn?.addEventListener('click', () => {
-        const idx = bookmarks.indexOf(currentPage);
-        if (idx > -1) {
-          bookmarks.splice(idx, 1);
-          alert(`نشانک صفحه ${currentPage} حذف شد.`);
-        } else {
-          bookmarks.push(currentPage);
-          alert(`صفحه ${currentPage} با موفقیت به نشانک‌های شما اضافه شد 🔖`);
-        }
-        localStorage.setItem('mojeze_reader_bookmarks', JSON.stringify(bookmarks));
-      });
-
-      // 17. Random Oracle Generator (استخاره روزانه)
+      // 15. Random Oracle Generator (استخاره روزانه)
       triggerRandomOracleBtn?.addEventListener('click', () => {
-        const randomPage = Math.floor(Math.random() * (TOTAL_PAGES - 3)) + 4; // pick wisdom pages
-        currentPage = randomPage;
-        updateReaderView(true);
-        closeAllDrawers();
+        const randomPage = Math.floor(Math.random() * (TOTAL_PAGES - 3)) + 4;
+        scrollToPage(randomPage);
       });
 
-      // 18. Zen Mode (Focus Mode)
-      let isZenMode = false;
-      const readerHeader = document.getElementById('readerHeader');
-      const readerSubbar = document.getElementById('readerSubbar');
-
-      function toggleZenMode() {
-        isZenMode = !isZenMode;
-        if (isZenMode) {
-          readerHeader.classList.add('header-hidden');
-          readerSubbar.style.display = 'none';
-        } else {
-          readerHeader.classList.remove('header-hidden');
-          readerSubbar.style.display = 'flex';
-        }
-      }
-
-      mZenModeTrigger?.addEventListener('click', toggleZenMode);
-
-      // Window resize handler for Spread mode adaptability
-      window.addEventListener('resize', () => {
-        if (window.innerWidth <= 992 && isSpread) {
-          isSpread = false;
-          btnSpreadMode?.classList.remove('active');
-          btnSingleMode?.classList.add('active');
-          updateReaderView(false);
+      // 16. Keyboard Navigation
+      window.addEventListener('keydown', (e) => {
+        if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') return;
+        if (e.key === 'ArrowDown' || e.key === 'j') {
+          window.scrollBy({ top: 300, behavior: 'smooth' });
+        } else if (e.key === 'ArrowUp' || e.key === 'k') {
+          window.scrollBy({ top: -300, behavior: 'smooth' });
         }
       });
 
-      // 19. Initial Boot
+      // 17. Initial Boot
       applyTheme(currentTheme);
-      applyTypography();
-      updateReaderView(false);
+      applyWidth(currentWidth);
+      setFontSize(currentFontSize);
+      renderScrollPages();
+
+      // Scroll to previously visited page if > 1
+      if (currentPage > 1) {
+        setTimeout(() => {
+          scrollToPage(currentPage);
+        }, 150);
+      }
     })();
   </script>
 </body>
