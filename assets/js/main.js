@@ -515,10 +515,10 @@ function initChapters() {
         <p class="chapter-desc">${ch.desc}</p>
         <div class="chapter-quote-preview">«${ch.quote}»</div>
         <div class="chapter-footer">
-          <button class="chapter-read-btn" onclick="openReader(${idx % 5})">
-            <span>مطالعه خلاصه و متن</span>
+          <a class="chapter-read-btn" href="reader.html">
+            <span>ورق زدن در کتابخوان</span>
             <span>←</span>
-          </button>
+          </a>
         </div>
       `;
       container.appendChild(card);
