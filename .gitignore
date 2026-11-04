@@ -1,0 +1,13 @@
+# Operating System
+.DS_Store
+Thumbs.db
+
+# Logs & Temp
+*.log
+scratch/
+temp/
+.cache/
+
+# Node
+node_modules/
+npm-debug.log*
