@@ -3,57 +3,86 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>کتابخوان آنلاین معجزه‌گر خاموش | مطالعه ۳۰ صفحه اول (فاز ۱)</title>
-  <meta name="description" content="کتابخوان اختصاصی و پیشرفته کتاب معجزه‌گر خاموش اثر سید رضا حیات‌الغیب. ورق‌زن آنلاین، حالت دو صفحه‌ای و تک‌صفحه‌ای با کیفیت بالا.">
-  <meta name="theme-color" content="#121620">
+  <title>کتابخوان اختصاصی معجزه‌گر خاموش | حروف‌چینی دیجیتال ۳۰ صفحه اول</title>
+  <meta name="description" content="کتابخوان پیشرفته و اختصاصی کتاب معجزه‌گر خاموش اثر سید رضا حیات‌الغیب. حروف‌چینی دقیق دیجیتال، متن تایپوگرافی، حالت تطبیقی و مطالعه آنلاین.">
+  <meta name="theme-color" content="#0d1117">
   <link rel="stylesheet" href="assets/css/reader.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%3E%3Ctext y=%2222%22 font-size=%2220%22>📖</text></svg>">
 </head>
 <body data-theme="dark">
 
   <!-- ================= Reader Topbar ================= -->
   <header class="reader-topbar">
     <div class="reader-title-area">
-      <a href="index.html" class="back-btn" title="بازگشت به صفحه اصلی">
+      <a href="index.html" class="back-btn" title="بازگشت به سایت اصلی">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <polyline points="9 18 15 12 9 6"></polyline>
         </svg>
-        <span>بازگشت به سایت</span>
+        <span>صفحه اصلی</span>
       </a>
 
       <div class="book-title-info">
         <span class="book-main-title">معجزه‌گر خاموش (پاراگراف‌های زندگی‌ساز)</span>
-        <span class="book-chapter-badge" id="currentChapterBadge">پیش‌گفتار کتاب • صفحه ۱ از ۲۴۱</span>
+        <span class="book-chapter-badge" id="currentChapterBadge">فاز ۱: ۳۰ صفحه اول • بازنویسی دقیق دیجیتال</span>
       </div>
     </div>
 
-    <!-- Actions & Modes -->
+    <!-- View Mode Group: Digital Text vs Original Scan vs Side-by-Side Compare -->
+    <div class="view-mode-group">
+      <button class="view-mode-btn active" id="viewModeTextBtn" title="مطالعه متن بازنویسی شده با تایپوگرافی فاخر">
+        <span>📝</span>
+        <span>متن دیجیتال</span>
+      </button>
+      <button class="view-mode-btn" id="viewModeScanBtn" title="مشاهده تصویر اسکن نسخه چاپی کتاب">
+        <span>🖼️</span>
+        <span>اسکن چاپی</span>
+      </button>
+      <button class="view-mode-btn" id="viewModeCompareBtn" title="مقایسه همزمان متن دیجیتال و اسکن چاپی">
+        <span>⚖️</span>
+        <span>تطبیقی</span>
+      </button>
+    </div>
+
+    <!-- Actions & Controls -->
     <div class="reader-actions">
-      <!-- Ambient Zen Audio Toggle -->
-      <button class="r-btn" id="readerAudioBtn" title="پخش نوای سکوت و مراقبه">
-        <span>🧘</span>
-        <span>نوای آرامش</span>
+      <!-- Search within 30 Pages -->
+      <button class="r-btn" id="searchBtn" title="جستجو در ۳۰ صفحه (کلید S)">
+        <span>🔍</span>
+        <span>جستجو</span>
       </button>
 
-      <!-- View Mode: Single vs Double Page Spread -->
-      <button class="r-btn" id="spreadModeBtn" title="تغییر به حالت دو صفحه‌ای">
-        <span>📖</span>
-        <span id="spreadModeLabel">دو صفحه</span>
+      <!-- Font Size Controller -->
+      <button class="r-btn" id="fontSizeBtn" title="تغییر اندازه قلم">
+        <span style="font-weight: 800; font-size: 0.95rem;">A+</span>
+        <span id="fontSizeLabel">اندازه قلم</span>
       </button>
 
-      <!-- Theme Switcher: Dark / Sepia / Light -->
-      <button class="r-btn" id="readerThemeBtn" title="تغییر تم مطالعه">
+      <!-- Theme Switcher: Dark / Sepia / Paper / Light -->
+      <button class="r-btn" id="themeBtn" title="تغییر تم مطالعه (کلید T)">
         <span id="themeIcon">🌙</span>
         <span id="themeLabel">شب</span>
       </button>
 
+      <!-- Single vs Spread Mode -->
+      <button class="r-btn" id="spreadBtn" title="حالت دو صفحه‌ای (Spread)">
+        <span>📖</span>
+        <span id="spreadLabel">دو صفحه</span>
+      </button>
+
+      <!-- Ambient Zen Audio -->
+      <button class="r-btn" id="zenAudioBtn" title="پخش نوای فرکانس ۴۳۲ هرتز و سکوت مراقبه">
+        <span>🧘</span>
+        <span>نوای آرامش</span>
+      </button>
+
       <!-- Thumbnails Drawer Toggle -->
-      <button class="r-btn" id="toggleThumbnailsBtn" title="مشاهده بندانگشتی صفحات">
+      <button class="r-btn" id="drawerBtn" title="مشاهده بندانگشتی ۳۰ صفحه">
         <span>📑</span>
-        <span>صفحات (۳۰)</span>
+        <span>صفحات</span>
       </button>
 
       <!-- Fullscreen Toggle -->
-      <button class="r-btn" id="fullscreenBtn" title="حالت تمام‌صفحه">
+      <button class="r-btn" id="fullscreenBtn" title="تمام صفحه (F)">
         <span>⛶</span>
       </button>
     </div>
@@ -71,22 +100,22 @@
     <!-- Book Center Viewport -->
     <div class="book-viewport" id="bookViewport">
       <div class="book-spread" id="bookSpread">
-        <!-- Left Page Container (or Single Page) -->
-        <div class="book-page-container" id="pageContainerLeft">
-          <img src="assets/pages/page-001.jpg" alt="صفحه کتاب" class="page-img" id="pageImgLeft">
+        <!-- Main/Left Page Container -->
+        <div class="book-page-container" id="pageLeft">
+          <!-- Rendered dynamically -->
         </div>
 
-        <div class="book-spine-line"></div>
+        <div class="book-spine-line" id="bookSpine"></div>
 
-        <!-- Right Page Container (For Double Spread Mode) -->
-        <div class="book-page-container" id="pageContainerRight" style="display: none;">
-          <img src="" alt="صفحه روبرو" class="page-img" id="pageImgRight">
+        <!-- Secondary/Right Page Container (Double or Compare Mode) -->
+        <div class="book-page-container spread-right" id="pageRight" style="display: none;">
+          <!-- Rendered dynamically -->
         </div>
       </div>
     </div>
 
     <!-- Navigation Arrow Next (Left side in RTL) -->
-    <button class="page-nav-arrow next" id="nextPageBtn" title="صفحه بعدی (کلید →)">
+    <button class="page-nav-arrow next" id="nextPageBtn" title="صفحه بعدی (کلید → یا Space)">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
         <polyline points="15 18 9 12 15 6"></polyline>
       </svg>
@@ -98,8 +127,8 @@
     <div class="page-counter-badge">
       <span>صفحه</span>
       <input type="number" id="pageNumberInput" class="page-input" value="1" min="1" max="30">
-      <span>از ۲۴۱</span>
-      <span style="color: var(--reader-gold); font-size: 0.813rem; margin-right: 6px;" id="progressPercent">(۰.۴٪)</span>
+      <span>از ۳۰</span>
+      <span style="color: var(--reader-gold); font-size: 0.813rem; margin-right: 6px;" id="progressPercent">(ص چاپی: ۱)</span>
     </div>
 
     <!-- Scrubber Slider -->
@@ -109,13 +138,24 @@
       <span style="font-size: 0.75rem; color: var(--reader-text-muted);">۳۰</span>
     </div>
 
-    <div style="display: flex; align-items: center; gap: 12px;">
-      <span style="font-size: 0.813rem; color: var(--reader-text-muted);" id="batchInfo">
-        فاز ۱: ۳۰ صفحه اول آماده است
-      </span>
-      <button class="r-btn" onclick="saveBookmark()" title="علامت‌گذاری این صفحه">
-        <span>🔖</span>
-        <span>نشانه</span>
+    <!-- Action Tools -->
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <!-- Speech Audio Readout -->
+      <button class="r-btn" id="ttsBtn" title="خواندن صوتی این صفحه با صدای راوی هوشمند">
+        <span id="ttsIcon">🔊</span>
+        <span>شنیدن صفحه</span>
+      </button>
+
+      <!-- Copy Quote Button -->
+      <button class="r-btn" id="copyQuoteBtn" title="کپی متن و نقل‌قول این صفحه">
+        <span>📋</span>
+        <span>کپی گزیده</span>
+      </button>
+
+      <!-- Bookmark Save Button -->
+      <button class="r-btn" id="bookmarkBtn" title="علامت‌گذاری این صفحه">
+        <span id="bookmarkIcon">🔖</span>
+        <span>نشانک</span>
       </button>
     </div>
   </footer>
@@ -123,333 +163,632 @@
   <!-- ================= Thumbnails Drawer ================= -->
   <aside class="thumbnails-drawer" id="thumbnailsDrawer">
     <div class="thumb-header">
-      <span>فهرست بندانگشتی صفحات (برای رفتن به صفحه کلیک کنید)</span>
-      <button style="color: var(--reader-gold); font-size: 0.813rem; cursor: pointer; background: none; border: none;" onclick="toggleThumbnails(false)">✕ بستن</button>
+      <span>فهرست بندانگشتی ۳۰ صفحه اول</span>
+      <button style="color: var(--reader-gold); font-size: 0.813rem; cursor: pointer; background: none; border: none;" id="closeDrawerBtn">✕ بستن</button>
     </div>
     <div class="thumb-scroll" id="thumbScroll">
       <!-- Thumbnails populated dynamically via JS -->
     </div>
   </aside>
 
-  <!-- Reader JavaScript Engine -->
+  <!-- ================= Search Modal ================= -->
+  <div class="search-modal-overlay" id="searchModalOverlay">
+    <div class="search-modal">
+      <div class="search-modal-header">
+        <span style="font-size: 1.1rem;">🔍</span>
+        <input type="text" id="searchInput" class="search-input" placeholder="جستجوی کلمه در ۳۰ صفحه (مانند: پرواز، آزادی، ناخودآگاه، تصمیم...)" autofocus>
+        <button style="background:none; border:none; color:var(--reader-gold); cursor:pointer; font-size:1.1rem;" id="closeSearchBtn">✕</button>
+      </div>
+      <div class="search-results-list" id="searchResultsList">
+        <div style="text-align: center; color: var(--reader-text-muted); padding: 30px 10px;">
+          کلمه مورد نظر را تایپ کنید تا تمامی پاراگراف‌های مرتبط نمایش داده شوند.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load 30 Pages Structured Dataset -->
+  <script src="assets/js/book-pages-data.js"></script>
+
+  <!-- Reader Application Logic -->
   <script>
-    // --- 30 Pages Chapter Mapping & Titles ---
-    const TOTAL_BOOK_PAGES = 241;
-    const PAGES_METADATA = [
-      { num: 1, chapter: "روی جلد", desc: "معجزه‌گر خاموش - پاراگراف‌های زندگی ساز" },
-      { num: 2, chapter: "فهرست کتاب", desc: "فهرست کامل ۱۱ فصل اثر" },
-      { num: 3, chapter: "پیش‌گفتار", desc: "عنوان پیش‌گفتار کتاب" },
-      { num: 4, chapter: "پیش‌گفتار", desc: "اهمیت تامل بر خط به خط کتاب" },
-      { num: 5, chapter: "پیش‌گفتار", desc: "کتابی که در خاموشی معجزه می‌کند" },
-      { num: 6, chapter: "پیش‌گفتار", desc: "کتابی برای آگاهی، آزادی و عشق!" },
-      { num: 7, chapter: "ورای افق", desc: "ابرها و انگیزش پرواز به ورای افق‌ها" },
-      { num: 8, chapter: "فصل اول: پرواز", desc: "بیا و با من پرواز کن (سرآغاز)" },
-      { num: 9, chapter: "فصل اول: پرواز", desc: "گام نهادن به فراسوی جهالت (ص ۱۲)" },
-      { num: 10, chapter: "فصل اول: پرواز", desc: "کمال پرواز و رهایی از یک‌نواختی (ص ۱۳)" },
-      { num: 11, chapter: "فصل اول: پرواز", desc: "پرواز در آسمان حقیقت (ص ۱۴)" },
-      { num: 12, chapter: "فصل اول: پرواز", desc: "عبور از محدودیت‌ها و ترس‌ها (ص ۱۵)" },
-      { num: 13, chapter: "فصل اول: پرواز", desc: "عروج به کمال آگاهی (ص ۱۶)" },
-      { num: 14, chapter: "فصل دوم: افسانه شخصی", desc: "راهت را پیدا کن (سرآغاز)" },
-      { num: 15, chapter: "فصل دوم: افسانه شخصی", desc: "تصمیم آغاز یک ماجراست (ص ۱۸)" },
-      { num: 16, chapter: "فصل دوم: افسانه شخصی", desc: "مواجهه با نیروهای پیرامون (ص ۱۹)" },
-      { num: 17, chapter: "فصل دوم: افسانه شخصی", desc: "نشانه‌های مسیر و ندای قلب (ص ۲۰)" },
-      { num: 18, chapter: "فصل دوم: افسانه شخصی", desc: "راز کار: تسلیم نشدن (ص ۲۱)" },
-      { num: 19, chapter: "فصل دوم: افسانه شخصی", desc: "گذر از رنج‌ها و هدایت الهی (ص ۲۲)" },
-      { num: 20, chapter: "فصل دوم: افسانه شخصی", desc: "اعتماد به طبیب درون (ص ۲۳)" },
-      { num: 21, chapter: "فصل سوم: آفرینش زندگی", desc: "معمار واقعیت خویش باش (سرآغاز)" },
-      { num: 22, chapter: "فصل سوم: آفرینش زندگی", desc: "ارتعاشات افکار و ذهن ناخودآگاه (ص ۲۵)" },
-      { num: 23, chapter: "فصل سوم: آفرینش زندگی", desc: "آفرینش جهان از درون (ص ۲۶)" },
-      { num: 24, chapter: "فصل سوم: آفرینش زندگی", desc: "قانون جذب و مدار ارتعاشی (ص ۲۷)" },
-      { num: 25, chapter: "فصل سوم: آفرینش زندگی", desc: "تجسم خلاق و باروری ذهن (ص ۲۸)" },
-      { num: 26, chapter: "فصل سوم: آفرینش زندگی", desc: "پاک‌سازی باورهای بازدارنده (ص ۲۹)" },
-      { num: 27, chapter: "فصل سوم: آفرینش زندگی", desc: "رهایی از دلبستگی به نتیجه (ص ۳۰)" },
-      { num: 28, chapter: "فصل سوم: آفرینش زندگی", desc: "هم‌راستایی فکر، احساس و عمل (ص ۳۱)" },
-      { num: 29, chapter: "فصل سوم: آفرینش زندگی", desc: "معجزه شکرگزاری پیشاپیش (ص ۳۲)" },
-      { num: 30, chapter: "فصل سوم: آفرینش زندگی", desc: "تجلی آرزوها در کالبد مادی (ص ۳۳)" }
-    ];
+    (function() {
+      // Configuration & State
+      const TOTAL_PAGES = 30;
+      const pagesData = window.BOOK_PAGES_DATA || [];
 
-    let currentPage = parseInt(localStorage.getItem('mojeze_reader_page') || '1', 10);
-    if (currentPage < 1 || currentPage > 30) currentPage = 1;
+      let currentPage = parseInt(localStorage.getItem('mojeze_reader_page') || '1', 10);
+      if (currentPage < 1 || currentPage > TOTAL_PAGES) currentPage = 1;
 
-    let isDoubleMode = false;
-    let currentTheme = localStorage.getItem('mojeze_reader_theme') || 'dark';
+      // View Mode: 'text' (default), 'scan', 'compare'
+      let currentViewMode = localStorage.getItem('mojeze_view_mode') || 'text';
 
-    // Elements
-    const pageImgLeft = document.getElementById('pageImgLeft');
-    const pageImgRight = document.getElementById('pageImgRight');
-    const pageContainerRight = document.getElementById('pageContainerRight');
-    const bookSpread = document.getElementById('bookSpread');
-    const currentChapterBadge = document.getElementById('currentChapterBadge');
-    const pageNumberInput = document.getElementById('pageNumberInput');
-    const progressPercent = document.getElementById('progressPercent');
-    const pageScrubber = document.getElementById('pageScrubber');
-    const prevPageBtn = document.getElementById('prevPageBtn');
-    const nextPageBtn = document.getElementById('nextPageBtn');
-    const spreadModeBtn = document.getElementById('spreadModeBtn');
-    const spreadModeLabel = document.getElementById('spreadModeLabel');
-    const readerThemeBtn = document.getElementById('readerThemeBtn');
-    const themeIcon = document.getElementById('themeIcon');
-    const themeLabel = document.getElementById('themeLabel');
-    const toggleThumbnailsBtn = document.getElementById('toggleThumbnailsBtn');
-    const thumbnailsDrawer = document.getElementById('thumbnailsDrawer');
-    const thumbScroll = document.getElementById('thumbScroll');
-    const fullscreenBtn = document.getElementById('fullscreenBtn');
+      // Theme: 'dark', 'sepia', 'paper', 'light'
+      let currentTheme = localStorage.getItem('mojeze_reader_theme') || 'dark';
 
-    // Set Theme
-    function setTheme(theme) {
-      currentTheme = theme;
-      document.body.setAttribute('data-theme', theme);
-      localStorage.setItem('mojeze_reader_theme', theme);
+      // Layout: single vs spread
+      let isSpread = false;
 
-      if (theme === 'dark') {
-        themeIcon.textContent = '🌙';
-        themeLabel.textContent = 'شب';
-      } else if (theme === 'sepia') {
-        themeIcon.textContent = '📜';
-        themeLabel.textContent = 'سپیا';
-      } else {
-        themeIcon.textContent = '☀️';
-        themeLabel.textContent = 'روز';
-      }
-    }
+      // Font size scale index: 0=15px, 1=16.5px, 2=18.5px, 3=20.5px
+      const FONT_SIZES = ['15px', '16.5px', '18.5px', '20.5px'];
+      let fontSizeIdx = parseInt(localStorage.getItem('mojeze_font_size_idx') || '1', 10);
 
-    // Render Current Page
-    function renderPage(direction = 'none') {
-      const padNum = (num) => String(num).padStart(3, '0');
-      const meta = PAGES_METADATA[currentPage - 1] || { chapter: "فصل کتاب", desc: "" };
+      // DOM Elements
+      const bookSpread = document.getElementById('bookSpread');
+      const pageLeft = document.getElementById('pageLeft');
+      const pageRight = document.getElementById('pageRight');
+      const bookSpine = document.getElementById('bookSpine');
+      const currentChapterBadge = document.getElementById('currentChapterBadge');
+      const pageNumberInput = document.getElementById('pageNumberInput');
+      const pageScrubber = document.getElementById('pageScrubber');
+      const progressPercent = document.getElementById('progressPercent');
+      const prevPageBtn = document.getElementById('prevPageBtn');
+      const nextPageBtn = document.getElementById('nextPageBtn');
+      const viewModeTextBtn = document.getElementById('viewModeTextBtn');
+      const viewModeScanBtn = document.getElementById('viewModeScanBtn');
+      const viewModeCompareBtn = document.getElementById('viewModeCompareBtn');
+      const themeBtn = document.getElementById('themeBtn');
+      const themeIcon = document.getElementById('themeIcon');
+      const themeLabel = document.getElementById('themeLabel');
+      const spreadBtn = document.getElementById('spreadBtn');
+      const spreadLabel = document.getElementById('spreadLabel');
+      const fontSizeBtn = document.getElementById('fontSizeBtn');
+      const drawerBtn = document.getElementById('drawerBtn');
+      const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+      const thumbnailsDrawer = document.getElementById('thumbnailsDrawer');
+      const thumbScroll = document.getElementById('thumbScroll');
+      const searchBtn = document.getElementById('searchBtn');
+      const searchModalOverlay = document.getElementById('searchModalOverlay');
+      const closeSearchBtn = document.getElementById('closeSearchBtn');
+      const searchInput = document.getElementById('searchInput');
+      const searchResultsList = document.getElementById('searchResultsList');
+      const copyQuoteBtn = document.getElementById('copyQuoteBtn');
+      const bookmarkBtn = document.getElementById('bookmarkBtn');
+      const bookmarkIcon = document.getElementById('bookmarkIcon');
+      const ttsBtn = document.getElementById('ttsBtn');
+      const ttsIcon = document.getElementById('ttsIcon');
+      const zenAudioBtn = document.getElementById('zenAudioBtn');
+      const fullscreenBtn = document.getElementById('fullscreenBtn');
 
-      // Update Top and Bottom stats
-      currentChapterBadge.textContent = `${meta.chapter} • ${meta.desc} (صفحه ${currentPage} از ۲۴۱)`;
-      pageNumberInput.value = currentPage;
-      pageScrubber.value = currentPage;
+      // Initialize Theme & Typography
+      function applyTheme(theme) {
+        currentTheme = theme;
+        document.body.setAttribute('data-theme', theme);
+        localStorage.setItem('mojeze_reader_theme', theme);
 
-      const pct = ((currentPage / TOTAL_BOOK_PAGES) * 100).toFixed(1);
-      progressPercent.textContent = `(${pct}٪)`;
-
-      // Image Loading
-      if (isDoubleMode && currentPage < 30) {
-        pageContainerRight.style.display = 'flex';
-        bookSpread.classList.add('double-mode');
-        pageImgLeft.src = `assets/pages/page-${padNum(currentPage)}.jpg`;
-        pageImgRight.src = `assets/pages/page-${padNum(currentPage + 1)}.jpg`;
-      } else {
-        pageContainerRight.style.display = 'none';
-        bookSpread.classList.remove('double-mode');
-        pageImgLeft.src = `assets/pages/page-${padNum(currentPage)}.jpg`;
+        const labels = {
+          dark: { icon: '🌙', text: 'شب' },
+          sepia: { icon: '📜', text: 'سپیا' },
+          paper: { icon: '📖', text: 'کاغذ' },
+          light: { icon: '☀️', text: 'روز' }
+        };
+        const cur = labels[theme] || labels.dark;
+        themeIcon.textContent = cur.icon;
+        themeLabel.textContent = cur.text;
       }
 
-      // Page turn animations
-      bookSpread.classList.remove('turn-animate-left', 'turn-animate-right');
-      void bookSpread.offsetWidth; // trigger reflow
-      if (direction === 'next') bookSpread.classList.add('turn-animate-left');
-      if (direction === 'prev') bookSpread.classList.add('turn-animate-right');
-
-      // Nav buttons disable state
-      prevPageBtn.disabled = currentPage <= 1;
-      nextPageBtn.disabled = isDoubleMode ? currentPage >= 29 : currentPage >= 30;
-
-      // Update active thumbnail
-      updateActiveThumbnail();
-
-      // Store in LocalStorage
-      localStorage.setItem('mojeze_reader_page', currentPage);
-    }
-
-    function goToPage(pageNum, dir = 'none') {
-      let target = Math.max(1, Math.min(pageNum, 30));
-      if (target !== currentPage) {
-        currentPage = target;
-        renderPage(dir);
-        playFlipSound();
+      function cycleTheme() {
+        const themes = ['dark', 'sepia', 'paper', 'light'];
+        let nextIdx = (themes.indexOf(currentTheme) + 1) % themes.length;
+        applyTheme(themes[nextIdx]);
       }
-    }
 
-    function nextPage() {
-      const step = isDoubleMode ? 2 : 1;
-      if (currentPage + step <= 30) {
-        goToPage(currentPage + step, 'next');
-      } else if (currentPage < 30) {
-        goToPage(30, 'next');
+      function applyFontSize(idx) {
+        fontSizeIdx = idx % FONT_SIZES.length;
+        document.documentElement.style.setProperty('--page-font-size', FONT_SIZES[fontSizeIdx]);
+        localStorage.setItem('mojeze_font_size_idx', fontSizeIdx);
       }
-    }
 
-    function prevPage() {
-      const step = isDoubleMode ? 2 : 1;
-      if (currentPage - step >= 1) {
-        goToPage(currentPage - step, 'prev');
-      } else if (currentPage > 1) {
-        goToPage(1, 'prev');
-      }
-    }
+      // Generate HTML for a digital book page
+      function createDigitalPageHtml(pageData) {
+        if (!pageData) return '<div class="book-page-typography">صفحه یافت نشد</div>';
 
-    // Audio page rustle synthesis
-    let audioCtx = null;
-    function playFlipSound() {
-      try {
-        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-        const now = audioCtx.currentTime;
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(160, now);
-        osc.frequency.exponentialRampToValueAtTime(80, now + 0.15);
-        gain.gain.setValueAtTime(0.08, now);
-        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.15);
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start(now);
-        osc.stop(now + 0.15);
-      } catch (e) {}
-    }
+        const { pageIndex, bookPageNum, type, chapter, marginRibbon, marginQuote, sectionBadge, title, subtitle, author, publisher, paragraphs, callout } = pageData;
 
-    // Populate Thumbnails Drawer
-    function initThumbnails() {
-      thumbScroll.innerHTML = '';
-      PAGES_METADATA.forEach(p => {
-        const item = document.createElement('div');
-        item.className = `thumb-item ${p.num === currentPage ? 'active' : ''}`;
-        item.dataset.page = p.num;
-        const pad = String(p.num).padStart(3, '0');
-        item.innerHTML = `
-          <img src="assets/pages/page-${pad}.jpg" loading="lazy" alt="صفحه ${p.num}">
-          <div class="thumb-label">${p.num}</div>
-        `;
-        item.addEventListener('click', () => {
-          goToPage(p.num);
-          toggleThumbnails(false);
-        });
-        thumbScroll.appendChild(item);
-      });
-    }
-
-    function updateActiveThumbnail() {
-      document.querySelectorAll('.thumb-item').forEach(el => {
-        el.classList.toggle('active', parseInt(el.dataset.page, 10) === currentPage);
-      });
-      const activeEl = document.querySelector('.thumb-item.active');
-      if (activeEl) {
-        activeEl.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-      }
-    }
-
-    function toggleThumbnails(show = null) {
-      const isOpen = show !== null ? show : !thumbnailsDrawer.classList.contains('open');
-      thumbnailsDrawer.classList.toggle('open', isOpen);
-      toggleThumbnailsBtn.classList.toggle('active', isOpen);
-    }
-
-    function saveBookmark() {
-      localStorage.setItem('mojeze_bookmark', currentPage);
-      alert(`صفحه ${currentPage} با موفقیت نشانه‌گذاری شد! 🔖`);
-    }
-
-    // Event Listeners
-    prevPageBtn.addEventListener('click', prevPage);
-    nextPageBtn.addEventListener('click', nextPage);
-
-    pageScrubber.addEventListener('input', (e) => {
-      goToPage(parseInt(e.target.value, 10));
-    });
-
-    pageNumberInput.addEventListener('change', (e) => {
-      goToPage(parseInt(e.target.value, 10));
-    });
-
-    toggleThumbnailsBtn.addEventListener('click', () => toggleThumbnails());
-
-    spreadModeBtn.addEventListener('click', () => {
-      isDoubleMode = !isDoubleMode;
-      spreadModeBtn.classList.toggle('active', isDoubleMode);
-      spreadModeLabel.textContent = isDoubleMode ? 'تک صفحه' : 'دو صفحه';
-      renderPage();
-    });
-
-    readerThemeBtn.addEventListener('click', () => {
-      if (currentTheme === 'dark') setTheme('sepia');
-      else if (currentTheme === 'sepia') setTheme('light');
-      else setTheme('dark');
-    });
-
-    fullscreenBtn.addEventListener('click', () => {
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen();
-      } else {
-        document.exitFullscreen();
-      }
-    });
-
-    // Keyboard Shortcuts (Arrow navigation in RTL: Left is Next, Right is Prev)
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft' || e.key === 'PageDown' || e.key === ' ') {
-        e.preventDefault();
-        nextPage();
-      } else if (e.key === 'ArrowRight' || e.key === 'PageUp') {
-        e.preventDefault();
-        prevPage();
-      } else if (e.key === 'Home') {
-        goToPage(1);
-      } else if (e.key === 'End') {
-        goToPage(30);
-      } else if (e.key.toLowerCase() === 'f') {
-        fullscreenBtn.click();
-      } else if (e.key.toLowerCase() === 'm') {
-        readerThemeBtn.click();
-      }
-    });
-
-    // Mobile Swipe Gestures
-    let touchStartX = 0;
-    document.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-
-    document.addEventListener('touchend', (e) => {
-      const diffX = e.changedTouches[0].screenX - touchStartX;
-      if (Math.abs(diffX) > 50) {
-        if (diffX > 0) prevPage();
-        else nextPage();
-      }
-    }, { passive: true });
-
-    // Ambient Meditation Sound in Reader
-    let ambientPlaying = false;
-    let ambientOsc = null;
-    let ambientGain = null;
-    document.getElementById('readerAudioBtn').addEventListener('click', () => {
-      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-
-      const btn = document.getElementById('readerAudioBtn');
-      if (ambientPlaying) {
-        if (ambientGain) {
-          ambientGain.gain.linearRampToValueAtTime(0.0001, audioCtx.currentTime + 1);
-          setTimeout(() => {
-            ambientOsc.stop();
-            ambientOsc = null;
-          }, 1000);
+        // Cover Layout
+        if (type === 'cover') {
+          return `
+            <div class="book-page-typography" data-page-type="cover">
+              <div class="cover-wrapper">
+                <div class="cover-title">${title}</div>
+                <div class="cover-subtitle">${subtitle}</div>
+                <div class="cover-author">اثر: ${author}</div>
+                <div class="page-text-content" style="text-align: center; margin: 20px 0;">
+                  ${paragraphs.map(p => `<p class="book-p">${p}</p>`).join('')}
+                </div>
+                ${callout ? `<div class="page-callout-box" style="border: 1px solid var(--reader-gold);">${callout}</div>` : ''}
+                <div class="cover-publisher">ناشر: ${publisher || 'انتشارات سخنوران'} • چاپ نفیس</div>
+              </div>
+            </div>
+          `;
         }
-        ambientPlaying = false;
-        btn.classList.remove('active');
-      } else {
-        ambientOsc = audioCtx.createOscillator();
-        ambientGain = audioCtx.createGain();
-        ambientOsc.type = 'sine';
-        ambientOsc.frequency.setValueAtTime(432, audioCtx.currentTime); // 432 Hz
-        ambientGain.gain.setValueAtTime(0.01, audioCtx.currentTime);
-        ambientGain.gain.linearRampToValueAtTime(0.12, audioCtx.currentTime + 2);
-        ambientOsc.connect(ambientGain);
-        ambientGain.connect(audioCtx.destination);
-        ambientOsc.start();
-        ambientPlaying = true;
-        btn.classList.add('active');
-      }
-    });
 
-    // Init
-    setTheme(currentTheme);
-    initThumbnails();
-    renderPage();
+        // Table of Contents Layout
+        if (type === 'toc') {
+          return `
+            <div class="book-page-typography" data-page-type="toc">
+              <header class="page-header">
+                <span class="page-header-chapter">${chapter}</span>
+                <span class="page-header-ornament">✦</span>
+                <span class="page-header-title">معجزه‌گر خاموش</span>
+              </header>
+              <div class="page-body-wrapper">
+                <aside class="page-margin-ribbon">
+                  <div class="ribbon-vertical-text">${marginRibbon || 'فهرست فصول'}</div>
+                </aside>
+                <article class="page-text-content">
+                  <div class="page-section-badge">${sectionBadge || 'فهرست عناوین اثر'}</div>
+                  <div class="toc-list">
+                    ${paragraphs.map((p, idx) => {
+                      const targets = [3, 8, 14, 21, 25, 27, 28, 29, 30, 30, 30, 30];
+                      const targetPage = targets[idx] || 1;
+                      return `
+                        <div class="toc-item" onclick="window.readerGoToPage(${targetPage})" title="رفتن به این بخش">
+                          <span>${p.replace(/\.\.+/g, '')}</span>
+                          <span class="toc-dots"></span>
+                          <span class="toc-page">ص ${targetPage}</span>
+                        </div>
+                      `;
+                    }).join('')}
+                  </div>
+                  ${callout ? `<div class="page-callout-box">${callout}</div>` : ''}
+                </article>
+              </div>
+              <footer class="page-footer">
+                <span class="page-printed-number">${bookPageNum || '۲'}</span>
+              </footer>
+            </div>
+          `;
+        }
+
+        // Section Start / Chapter Cover
+        if (type === 'section_start') {
+          return `
+            <div class="book-page-typography" data-page-type="section_start">
+              <header class="page-header">
+                <span class="page-header-chapter">${chapter}</span>
+                <span class="page-header-ornament">✦</span>
+                <span class="page-header-title">معجزه‌گر خاموش</span>
+              </header>
+              <div class="page-body-wrapper">
+                <aside class="page-margin-ribbon">
+                  <div class="ribbon-vertical-text">${marginRibbon || chapter}</div>
+                </aside>
+                <article class="page-text-content">
+                  <div class="chapter-start-badge">${sectionBadge || chapter}</div>
+                  <div class="chapter-start-title">${title}</div>
+                  ${subtitle ? `<div class="chapter-start-subtitle">${subtitle}</div>` : ''}
+                  ${paragraphs.map(p => `<p class="book-p">${p}</p>`).join('')}
+                  ${callout ? `<div class="page-callout-box">${callout}</div>` : ''}
+                </article>
+              </div>
+              <footer class="page-footer">
+                <span class="page-printed-number">${bookPageNum || ''}</span>
+              </footer>
+            </div>
+          `;
+        }
+
+        // Regular Content Page
+        return `
+          <div class="book-page-typography" data-page-type="content">
+            <header class="page-header">
+              <span class="page-header-chapter">${chapter}</span>
+              <span class="page-header-ornament">✦ ─── ✦</span>
+              <span class="page-header-title">معجزه‌گر خاموش</span>
+            </header>
+            <div class="page-body-wrapper">
+              <aside class="page-margin-ribbon">
+                <div class="ribbon-vertical-text">${marginRibbon || 'پاراگراف‌های زندگی‌ساز'}</div>
+              </aside>
+              <article class="page-text-content">
+                ${sectionBadge ? `<div class="page-section-badge">${sectionBadge}</div>` : ''}
+                ${paragraphs.map(p => `<p class="book-p">${p}</p>`).join('')}
+                ${callout ? `<div class="page-callout-box">${callout}</div>` : ''}
+              </article>
+            </div>
+            <footer class="page-footer">
+              <span class="page-printed-number">${bookPageNum || pageIndex}</span>
+            </footer>
+          </div>
+        `;
+      }
+
+      // Generate HTML for scanned original page image
+      function createScanPageHtml(pageData) {
+        if (!pageData) return '';
+        return `
+          <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #fff;">
+            <img src="${pageData.scanImage}" alt="اسکن صفحه ${pageData.pageIndex}" class="page-scan-img" loading="eager">
+          </div>
+        `;
+      }
+
+      // Render Viewport
+      function render() {
+        const pageLeftData = pagesData[currentPage - 1];
+        if (!pageLeftData) return;
+
+        // Update Topbar and Bottombar Stats
+        currentChapterBadge.textContent = `${pageLeftData.chapter} • ${pageLeftData.sectionBadge || pageLeftData.title || 'پاراگراف‌های زندگی‌ساز'} (صفحه ${currentPage} از ۳۰)`;
+        pageNumberInput.value = currentPage;
+        pageScrubber.value = currentPage;
+        progressPercent.textContent = `(ص چاپی: ${pageLeftData.bookPageNum || currentPage})`;
+
+        // View Mode Handling
+        if (currentViewMode === 'compare') {
+          // Compare: Digital on Left, Original Scan on Right
+          bookSpread.classList.add('double-mode');
+          pageRight.style.display = 'flex';
+          pageLeft.innerHTML = createDigitalPageHtml(pageLeftData);
+          pageRight.innerHTML = createScanPageHtml(pageLeftData);
+        } else if (isSpread && currentPage < TOTAL_PAGES) {
+          // Double page spread mode
+          bookSpread.classList.add('double-mode');
+          pageRight.style.display = 'flex';
+          const pageRightData = pagesData[currentPage]; // next page
+          if (currentViewMode === 'scan') {
+            pageLeft.innerHTML = createScanPageHtml(pageLeftData);
+            pageRight.innerHTML = createScanPageHtml(pageRightData);
+          } else {
+            pageLeft.innerHTML = createDigitalPageHtml(pageLeftData);
+            pageRight.innerHTML = createDigitalPageHtml(pageRightData);
+          }
+        } else {
+          // Single page mode
+          bookSpread.classList.remove('double-mode');
+          pageRight.style.display = 'none';
+          if (currentViewMode === 'scan') {
+            pageLeft.innerHTML = createScanPageHtml(pageLeftData);
+          } else {
+            pageLeft.innerHTML = createDigitalPageHtml(pageLeftData);
+          }
+        }
+
+        // Navigation state
+        prevPageBtn.disabled = currentPage <= 1;
+        nextPageBtn.disabled = isSpread ? currentPage >= TOTAL_PAGES - 1 : currentPage >= TOTAL_PAGES;
+
+        // Update Thumbnails selection
+        updateActiveThumb();
+
+        // Update bookmark icon state
+        checkBookmarkState();
+
+        // Save progress to LocalStorage
+        localStorage.setItem('mojeze_reader_page', currentPage);
+        localStorage.setItem('mojeze_view_mode', currentViewMode);
+      }
+
+      // Navigation Functions
+      function goToPage(target) {
+        const p = Math.max(1, Math.min(target, TOTAL_PAGES));
+        if (p !== currentPage) {
+          currentPage = p;
+          playPageRustle();
+          render();
+        }
+      }
+      window.readerGoToPage = goToPage;
+
+      function nextPage() {
+        const step = (isSpread && currentViewMode !== 'compare') ? 2 : 1;
+        if (currentPage + step <= TOTAL_PAGES) {
+          goToPage(currentPage + step);
+        }
+      }
+
+      function prevPage() {
+        const step = (isSpread && currentViewMode !== 'compare') ? 2 : 1;
+        if (currentPage - step >= 1) {
+          goToPage(currentPage - step);
+        }
+      }
+
+      // View Mode Toggle
+      function setViewMode(mode) {
+        currentViewMode = mode;
+        viewModeTextBtn.classList.toggle('active', mode === 'text');
+        viewModeScanBtn.classList.toggle('active', mode === 'scan');
+        viewModeCompareBtn.classList.toggle('active', mode === 'compare');
+        render();
+      }
+
+      // Audio Paper Rustle Synthesis (Web Audio API)
+      let audioCtx = null;
+      function playPageRustle() {
+        try {
+          if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+          const now = audioCtx.currentTime;
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(140, now);
+          osc.frequency.exponentialRampToValueAtTime(70, now + 0.12);
+          gain.gain.setValueAtTime(0.06, now);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.12);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now);
+          osc.stop(now + 0.12);
+        } catch(e) {}
+      }
+
+      // Ambient 432Hz Zen Audio Synthesizer
+      let zenOsc = null;
+      let zenGain = null;
+      let isZenPlaying = false;
+      function toggleZenAudio() {
+        try {
+          if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+
+          if (!isZenPlaying) {
+            zenOsc = audioCtx.createOscillator();
+            zenGain = audioCtx.createGain();
+            zenOsc.type = 'sine';
+            zenOsc.frequency.setValueAtTime(432, audioCtx.currentTime); // 432Hz Miracle frequency
+            zenGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+            zenGain.gain.linearRampToValueAtTime(0.04, audioCtx.currentTime + 3);
+            zenOsc.connect(zenGain);
+            zenGain.connect(audioCtx.destination);
+            zenOsc.start();
+            isZenPlaying = true;
+            zenAudioBtn.classList.add('active');
+            zenAudioBtn.querySelector('span:nth-child(2)').textContent = 'نوای مراقبه (روشن)';
+          } else {
+            zenGain.gain.linearRampToValueAtTime(0.0001, audioCtx.currentTime + 1.5);
+            setTimeout(() => {
+              try { zenOsc.stop(); zenOsc.disconnect(); } catch(e){}
+            }, 1500);
+            isZenPlaying = false;
+            zenAudioBtn.classList.remove('active');
+            zenAudioBtn.querySelector('span:nth-child(2)').textContent = 'نوای آرامش';
+          }
+        } catch(e) {}
+      }
+
+      // Text to Speech
+      let isReadingTts = false;
+      function toggleTts() {
+        if (!('speechSynthesis' in window)) {
+          alert('مرورگر شما از قابلیت خواندن صوتی پشتیبانی نمی‌کند.');
+          return;
+        }
+
+        if (isReadingTts) {
+          window.speechSynthesis.cancel();
+          isReadingTts = false;
+          ttsBtn.classList.remove('active');
+          ttsIcon.textContent = '🔊';
+          return;
+        }
+
+        const pData = pagesData[currentPage - 1];
+        if (!pData) return;
+
+        const textToRead = [
+          pData.chapter,
+          pData.sectionBadge || '',
+          ...(pData.paragraphs || []).map(p => p.replace(/<[^>]*>/g, '')),
+          pData.callout || ''
+        ].filter(Boolean).join('. ');
+
+        const utterance = new SpeechSynthesisUtterance(textToRead);
+        utterance.lang = 'fa-IR';
+        utterance.rate = 0.92;
+
+        utterance.onstart = () => {
+          isReadingTts = true;
+          ttsBtn.classList.add('active');
+          ttsIcon.textContent = '⏸️';
+        };
+
+        utterance.onend = utterance.onerror = () => {
+          isReadingTts = false;
+          ttsBtn.classList.remove('active');
+          ttsIcon.textContent = '🔊';
+        };
+
+        window.speechSynthesis.speak(utterance);
+      }
+
+      // Copy Quote & Paragraph
+      function copyCurrentQuote() {
+        const pData = pagesData[currentPage - 1];
+        if (!pData) return;
+
+        const quote = pData.callout || (pData.paragraphs && pData.paragraphs[0]) || '';
+        const cleanQuote = quote.replace(/<[^>]*>/g, '');
+        const attribution = `\n\n— برگرفته از کتاب «معجزه‌گر خاموش» (اثر سید رضا حیات‌الغیب) | ${pData.chapter} - ص ${pData.bookPageNum || currentPage}`;
+
+        navigator.clipboard.writeText(`«${cleanQuote}»${attribution}`).then(() => {
+          copyQuoteBtn.classList.add('active');
+          const original = copyQuoteBtn.querySelector('span:nth-child(2)').textContent;
+          copyQuoteBtn.querySelector('span:nth-child(2)').textContent = 'کپی شد! ✓';
+          setTimeout(() => {
+            copyQuoteBtn.classList.remove('active');
+            copyQuoteBtn.querySelector('span:nth-child(2)').textContent = original;
+          }, 2000);
+        });
+      }
+
+      // Bookmarks Management
+      function checkBookmarkState() {
+        const bookmarks = JSON.parse(localStorage.getItem('mojeze_bookmarks') || '[]');
+        const isMarked = bookmarks.includes(currentPage);
+        bookmarkBtn.classList.toggle('active', isMarked);
+        bookmarkIcon.textContent = isMarked ? '★' : '🔖';
+      }
+
+      function toggleBookmark() {
+        let bookmarks = JSON.parse(localStorage.getItem('mojeze_bookmarks') || '[]');
+        if (bookmarks.includes(currentPage)) {
+          bookmarks = bookmarks.filter(b => b !== currentPage);
+        } else {
+          bookmarks.push(currentPage);
+          bookmarks.sort((a,b) => a - b);
+        }
+        localStorage.setItem('mojeze_bookmarks', JSON.stringify(bookmarks));
+        checkBookmarkState();
+      }
+
+      // Populate Thumbnails Drawer
+      function buildThumbnails() {
+        thumbScroll.innerHTML = pagesData.map(p => `
+          <div class="thumb-item ${p.pageIndex === currentPage ? 'active' : ''}" data-idx="${p.pageIndex}" onclick="window.readerGoToPage(${p.pageIndex})">
+            <div class="thumb-card-preview">
+              <span style="font-weight:700; color:var(--reader-gold); font-size:0.6rem;">${p.chapter}</span>
+              <span style="margin-top:4px; opacity:0.8; font-size:0.55rem; overflow:hidden;">${p.sectionBadge || p.title || 'پاراگراف زندگی‌ساز'}</span>
+            </div>
+            <span class="thumb-label">صفحه ${p.pageIndex} (ص ${p.bookPageNum || p.pageIndex})</span>
+          </div>
+        `).join('');
+      }
+
+      function updateActiveThumb() {
+        document.querySelectorAll('.thumb-item').forEach(el => {
+          const idx = parseInt(el.getAttribute('data-idx'), 10);
+          el.classList.toggle('active', idx === currentPage);
+        });
+      }
+
+      // Live Search System across 30 pages
+      function performSearch(query) {
+        const q = query.trim();
+        if (!q || q.length < 2) {
+          searchResultsList.innerHTML = `
+            <div style="text-align: center; color: var(--reader-text-muted); padding: 30px 10px;">
+              حداقل ۲ حرف برای جستجو در متن ۳۰ صفحه وارد کنید.
+            </div>
+          `;
+          return;
+        }
+
+        const regex = new RegExp(`(${q})`, 'gi');
+        const results = [];
+
+        pagesData.forEach(p => {
+          const textBlocks = [
+            p.sectionBadge || '',
+            ...(p.paragraphs || []),
+            p.callout || ''
+          ];
+
+          textBlocks.forEach(block => {
+            const clean = block.replace(/<[^>]*>/g, '');
+            if (regex.test(clean)) {
+              results.push({
+                pageIndex: p.pageIndex,
+                bookPageNum: p.bookPageNum,
+                chapter: p.chapter,
+                snippet: clean.replace(regex, '<span class="search-highlight">$1</span>')
+              });
+            }
+          });
+        });
+
+        if (results.length === 0) {
+          searchResultsList.innerHTML = `
+            <div style="text-align: center; color: var(--reader-text-muted); padding: 30px 10px;">
+              نتیجه‌ای برای «<strong>${q}</strong>» در ۳۰ صفحه اول یافت نشد.
+            </div>
+          `;
+          return;
+        }
+
+        searchResultsList.innerHTML = `
+          <div style="font-size: 0.813rem; color: var(--reader-gold); margin-bottom: 8px;">
+            ${results.length} مورد یافت شد:
+          </div>
+          ${results.map(r => `
+            <div class="search-result-item" onclick="window.readerGoToPage(${r.pageIndex}); document.getElementById('searchModalOverlay').classList.remove('open');">
+              <div class="search-result-header">
+                <span>${r.chapter}</span>
+                <span>صفحه ${r.pageIndex} (ص ${r.bookPageNum || r.pageIndex})</span>
+              </div>
+              <div class="search-result-snippet">${r.snippet}</div>
+            </div>
+          `).join('')}
+        `;
+      }
+
+      // Event Listeners
+      prevPageBtn.addEventListener('click', prevPage);
+      nextPageBtn.addEventListener('click', nextPage);
+
+      viewModeTextBtn.addEventListener('click', () => setViewMode('text'));
+      viewModeScanBtn.addEventListener('click', () => setViewMode('scan'));
+      viewModeCompareBtn.addEventListener('click', () => setViewMode('compare'));
+
+      themeBtn.addEventListener('click', cycleTheme);
+      fontSizeBtn.addEventListener('click', () => applyFontSize(fontSizeIdx + 1));
+
+      spreadBtn.addEventListener('click', () => {
+        isSpread = !isSpread;
+        spreadBtn.classList.toggle('active', isSpread);
+        spreadLabel.textContent = isSpread ? 'تک صفحه' : 'دو صفحه';
+        render();
+      });
+
+      zenAudioBtn.addEventListener('click', toggleZenAudio);
+      ttsBtn.addEventListener('click', toggleTts);
+      copyQuoteBtn.addEventListener('click', copyCurrentQuote);
+      bookmarkBtn.addEventListener('click', toggleBookmark);
+
+      drawerBtn.addEventListener('click', () => thumbnailsDrawer.classList.toggle('open'));
+      closeDrawerBtn.addEventListener('click', () => thumbnailsDrawer.classList.remove('open'));
+
+      searchBtn.addEventListener('click', () => {
+        searchModalOverlay.classList.add('open');
+        setTimeout(() => searchInput.focus(), 100);
+      });
+      closeSearchBtn.addEventListener('click', () => searchModalOverlay.classList.remove('open'));
+      searchModalOverlay.addEventListener('click', (e) => {
+        if (e.target === searchModalOverlay) searchModalOverlay.classList.remove('open');
+      });
+      searchInput.addEventListener('input', (e) => performSearch(e.target.value));
+
+      pageNumberInput.addEventListener('change', (e) => goToPage(parseInt(e.target.value, 10)));
+      pageScrubber.addEventListener('input', (e) => goToPage(parseInt(e.target.value, 10)));
+
+      fullscreenBtn.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        } else {
+          document.exitFullscreen().catch(() => {});
+        }
+      });
+
+      // Keyboard Shortcuts
+      window.addEventListener('keydown', (e) => {
+        if (e.target.tagName === 'INPUT') return;
+        if (e.key === 'ArrowRight' || e.key === 'p') prevPage();
+        if (e.key === 'ArrowLeft' || e.key === 'n' || e.key === ' ') {
+          e.preventDefault();
+          nextPage();
+        }
+        if (e.key === 'f') fullscreenBtn.click();
+        if (e.key === 't') cycleTheme();
+        if (e.key === 's') {
+          e.preventDefault();
+          searchBtn.click();
+        }
+        if (e.key === 'Escape') {
+          thumbnailsDrawer.classList.remove('open');
+          searchModalOverlay.classList.remove('open');
+        }
+      });
+
+      // Initialize
+      applyTheme(currentTheme);
+      applyFontSize(fontSizeIdx);
+      setViewMode(currentViewMode);
+      buildThumbnails();
+      render();
+
+    })();
   </script>
 </body>
 </html>
