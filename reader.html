@@ -447,7 +447,7 @@
   </div>
 
   <!-- Load 30 Pages Structured Dataset -->
-  <script src="assets/js/book-pages-data.js?v=pages_v4"></script>
+  <script src="assets/js/book-pages-data.js?v=pages_v5_verified10"></script>
 
   <!-- ================= ADVANCED READER JAVASCRIPT ================= -->
   <script>
@@ -892,7 +892,8 @@
 
           const marginBadge = pData.sectionBadge ? `<span class="page-chapter-badge">${pData.sectionBadge}</span>` : '';
           const titleHtml = pData.title ? `<h2 class="page-chapter-title">${pData.title}</h2>` : '';
-          const lineHtml = (pData.sectionBadge || pData.title) ? `<div class="page-motif-line"></div>` : '';
+          const subtitleHtml = pData.subtitle ? `<div class="page-chapter-subtitle" style="display:inline-block; margin-top:0.45rem; padding:0.25rem 0.85rem; background:var(--sub-surface); border:1px solid var(--border-soft); border-radius:999px; font-size:0.85rem; color:var(--ink-secondary); font-weight:600;">${pData.subtitle}</div>` : '';
+          const lineHtml = (pData.sectionBadge || pData.title || pData.subtitle) ? `<div class="page-motif-line"></div>` : '';
 
           const footnoteHtml = pData.marginQuote ? `
             <div style="display: flex; align-items: flex-start; gap: 0.4rem; line-height: 1.6; font-size: 0.75rem;">
@@ -924,6 +925,7 @@
               <div class="page-chapter-motif">
                 ${marginBadge}
                 ${titleHtml}
+                ${subtitleHtml}
                 ${lineHtml}
               </div>
 
