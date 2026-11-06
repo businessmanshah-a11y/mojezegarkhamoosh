@@ -90,7 +90,7 @@
 
       <div class="book-meta-info">
         <span class="book-title-heading">معجزه‌گر خاموش</span>
-        <span class="book-chapter-indicator" id="headerChapterIndicator">۳۰ صفحه اول • پاراگراف‌های زندگی‌ساز</span>
+        <span class="book-chapter-indicator" id="headerChapterIndicator">۲۴۱ صفحه کامل • پاراگراف‌های زندگی‌ساز</span>
       </div>
     </div>
 
@@ -105,11 +105,11 @@
       </div>
 
       <!-- Reading Progress -->
-      <div class="reading-progress-pill" title="میزان پیشرفت در مطالعه ۳۰ صفحه">
+      <div class="reading-progress-pill" title="میزان پیشرفت در مطالعه کتاب کامل (۲۴۱ صفحه)">
         <div class="progress-track-mini">
-          <div class="progress-fill-mini" id="headerProgressFill" style="width: 5%;"></div>
+          <div class="progress-fill-mini" id="headerProgressFill" style="width: 1%;"></div>
         </div>
-        <span id="headerProgressText" style="font-weight: 700; color: var(--accent-teal);">صفحه ۱ از ۳۰</span>
+        <span id="headerProgressText" style="font-weight: 700; color: var(--accent-teal);">صفحه ۱ از ۲۴۱</span>
       </div>
     </div>
 
@@ -122,8 +122,8 @@
         <span class="header-icon-mobile" style="display:none;">🎧</span>
       </button>
 
-      <!-- Search in 30 Pages -->
-      <button class="header-action-btn" id="openSearchModalBtn" title="جستجو در کل متن ۳۰ صفحه">
+      <!-- Search in Book Pages -->
+      <button class="header-action-btn" id="openSearchModalBtn" title="جستجو در کل متن کتاب">
         <span>🔍</span>
       </button>
 
@@ -204,7 +204,7 @@
     <div class="status-right">
       <span id="statusCurrentChapter">فصل اول: پرواز</span>
       <span class="status-dot-sep">·</span>
-      <span id="statusPageCounter">صفحه ۱ از ۳۰</span>
+      <span id="statusPageCounter">صفحه ۱ از ۲۴۱</span>
       <span class="status-dot-sep">·</span>
       <span id="statusBookmarksCount">نشانک‌ها: ۰</span>
     </div>
@@ -218,49 +218,93 @@
     </div>
   </footer>
 
-  <!-- ================= MOBILE FLOATING UTILITY ISLAND ================= -->
-  <div class="mobile-floating-island" id="mobileFloatingIsland">
-    <!-- Fast Scrubber Slider -->
-    <div class="mobile-scrubber-row">
-      <button style="background: var(--sub-surface); border: 1px solid var(--border-color); border-radius: 0.4rem; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink-primary);" id="mPrevPageBtn">‹</button>
-      
-      <div style="flex: 1; display: flex; flex-direction: column; gap: 2px;">
-        <div style="display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--ink-muted);">
-          <span id="mPageIndicatorLabel">صفحه ۱</span>
-          <span style="color: var(--accent-teal); font-weight: 700;">۳۰ صفحه</span>
-        </div>
-        <input type="range" id="mPageSlider" min="1" max="30" value="1" style="width: 100%; accent-color: var(--accent-teal); height: 4px; border-radius: 9999px; cursor: pointer;">
-      </div>
+  <!-- ================= MOBILE FLOATING ACTION BUTTON (FAB) ================= -->
+  <button class="mobile-tools-fab" id="mobileToolsFabBtn" title="جعبه ابزار مطالعه" aria-label="ابزارها">
+    <span id="mobileFabIcon">🎛️</span>
+  </button>
 
-      <button style="background: var(--sub-surface); border: 1px solid var(--border-color); border-radius: 0.4rem; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink-primary);" id="mNextPageBtn">›</button>
+  <!-- ================= MOBILE TOOLS BOTTOM SHEET DRAWER ================= -->
+  <div class="mobile-tools-sheet" id="mobileToolsSheet">
+    <!-- Sheet Header -->
+    <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 0.65rem;">
+      <div style="display: flex; align-items: center; gap: 0.4rem; font-weight: 700; font-size: 0.85rem; color: var(--accent-gold);">
+        <span>🎛️</span>
+        <span>جعبه ابزار و تنظیمات مطالعه</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span id="mSheetPageBadge" style="font-size: 0.72rem; color: var(--accent-teal); font-weight: 700; font-family: monospace;">صفحه ۱ از ۲۴۱</span>
+        <button id="closeMobileSheetBtn" style="background: none; border: none; font-size: 1.15rem; color: var(--ink-muted); cursor: pointer; padding: 0.2rem 0.4rem;">✕</button>
+      </div>
     </div>
 
-    <!-- Quick Thumb Buttons -->
-    <div class="mobile-quick-actions">
-      <button class="m-action-btn" id="mZenAudioTrigger" title="نوای آرامش مراقبه">
-        <span class="m-action-icon">🧘</span>
-        <span>آرامش</span>
-      </button>
+    <!-- 1. Fast Scrubber Slider Row -->
+    <div class="mobile-scrubber-row" style="display: flex; align-items: center; gap: 0.65rem;">
+      <button style="background: var(--sub-surface); border: 1px solid var(--border-color); border-radius: 0.4rem; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink-primary); font-size: 1.1rem; font-weight: 700;" id="mPrevPageBtn" title="صفحه قبل">‹</button>
+      
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 3px;">
+        <div style="display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--ink-muted);">
+          <span id="mPageIndicatorLabel">صفحه ۱</span>
+          <span id="mTotalPagesLabel" style="color: var(--accent-teal); font-weight: 700;">۲۴۱ صفحه</span>
+        </div>
+        <input type="range" id="mPageSlider" min="1" max="241" value="1" style="width: 100%; accent-color: var(--accent-teal); height: 5px; border-radius: 9999px; cursor: pointer;">
+      </div>
 
-      <button class="m-action-btn" id="mNarrationTrigger" title="خوانش صوتی گوینده">
-        <span class="m-action-icon">🔊</span>
-        <span>خوانش</span>
+      <button style="background: var(--sub-surface); border: 1px solid var(--border-color); border-radius: 0.4rem; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink-primary); font-size: 1.1rem; font-weight: 700;" id="mNextPageBtn" title="صفحه بعد">›</button>
+    </div>
+
+    <!-- 2. Primary Tool Actions Grid -->
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.4rem;">
+      <button class="m-action-btn" id="mTocTrigger" title="فهرست کامل فصول و بخش‌ها">
+        <span class="m-action-icon">📚</span>
+        <span style="font-size: 0.68rem; font-weight: 600;">فهرست فصول</span>
       </button>
 
       <button class="m-action-btn" id="mOracleTrigger" title="الهام روز و استخاره">
         <span class="m-action-icon">🔮</span>
-        <span>الهام</span>
+        <span style="font-size: 0.68rem; font-weight: 600;">الهام روز</span>
       </button>
 
-      <button class="m-action-btn" id="mWidthTrigger" title="تنظیم عرض صفحه">
-        <span class="m-action-icon">↔️</span>
-        <span>عرض</span>
+      <button class="m-action-btn" id="mSearchTrigger" title="جستجو در متن ۲۴۱ صفحه">
+        <span class="m-action-icon">🔍</span>
+        <span style="font-size: 0.68rem; font-weight: 600;">جستجو</span>
       </button>
 
-      <button class="m-action-btn" id="mFontTrigger" title="تنظیم اندازه قلم">
-        <span class="m-action-icon">A±</span>
-        <span>قلم</span>
+      <button class="m-action-btn" id="mZenAudioTrigger" title="استودیو نوای آرامش">
+        <span class="m-action-icon">🧘</span>
+        <span style="font-size: 0.68rem; font-weight: 600;">نوای آرامش</span>
       </button>
+
+      <button class="m-action-btn" id="mNarrationTrigger" title="خوانش صوتی هوشمند">
+        <span class="m-action-icon">🔊</span>
+        <span style="font-size: 0.68rem; font-weight: 600;">خوانش صوتی</span>
+      </button>
+
+      <button class="m-action-btn" id="mBookmarkTrigger" title="نشانک‌گذاری این صفحه">
+        <span class="m-action-icon">🔖</span>
+        <span style="font-size: 0.68rem; font-weight: 600;">ثبت نشانک</span>
+      </button>
+    </div>
+
+    <!-- 3. Reading Typography & Theme Settings -->
+    <div style="background: var(--sub-surface); border: 1px solid var(--border-color); border-radius: 0.75rem; padding: 0.65rem 0.85rem; display: flex; flex-direction: column; gap: 0.5rem;">
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+        <span style="font-size: 0.72rem; color: var(--ink-muted); font-weight: 600;">اندازه قلم:</span>
+        <div style="display: flex; align-items: center; gap: 0.4rem;">
+          <button id="mBtnFontDecr" style="width: 30px; height: 30px; border-radius: 0.4rem; background: var(--card-bg); border: 1px solid var(--border-color); color: var(--ink-primary); font-size: 0.781rem; cursor: pointer; font-weight: 700;">A-</button>
+          <span id="mFontSizeBadge" style="font-size: 0.75rem; font-weight: 700; color: var(--accent-teal); font-family: monospace; min-width: 36px; text-align: center;">۱۸px</span>
+          <button id="mBtnFontIncr" style="width: 30px; height: 30px; border-radius: 0.4rem; background: var(--card-bg); border: 1px solid var(--border-color); color: var(--ink-primary); font-size: 0.781rem; cursor: pointer; font-weight: 700;">A+</button>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px dashed var(--border-color); padding-top: 0.45rem;">
+        <span style="font-size: 0.72rem; color: var(--ink-muted); font-weight: 600;">پالت رنگی:</span>
+        <div style="display: flex; gap: 0.3rem;" id="mThemeButtons">
+          <button class="m-theme-btn active" data-theme="cream" style="padding: 0.25rem 0.55rem; border-radius: 0.4rem; font-size: 0.68rem; border: 1px solid var(--border-color); background: #FAF7F0; color: #2D2314; cursor: pointer;">کرم</button>
+          <button class="m-theme-btn" data-theme="sepia" style="padding: 0.25rem 0.55rem; border-radius: 0.4rem; font-size: 0.68rem; border: 1px solid var(--border-color); background: #F4ECD8; color: #433422; cursor: pointer;">سپیا</button>
+          <button class="m-theme-btn" data-theme="dark" style="padding: 0.25rem 0.55rem; border-radius: 0.4rem; font-size: 0.68rem; border: 1px solid var(--border-color); background: #161B22; color: #E6EDF3; cursor: pointer;">شب</button>
+          <button class="m-theme-btn" data-theme="light" style="padding: 0.25rem 0.55rem; border-radius: 0.4rem; font-size: 0.68rem; border: 1px solid var(--border-color); background: #FFFFFF; color: #1F2937; cursor: pointer;">روز</button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -334,7 +378,7 @@
   <div class="drawer-backdrop" id="drawerBackdrop"></div>
   
   <aside class="drawer-panel right-drawer" id="tocDrawer">
-    <div>
+    <div style="display: flex; flex-direction: column; height: 100%; min-height: 0;">
       <div class="drawer-header">
         <div class="drawer-title-group">
           <span>📚</span>
@@ -349,88 +393,134 @@
           <span style="font-size: 0.75rem; font-weight: 700; color: var(--accent-gold);">🔖 نشانک‌های من:</span>
           <button style="background: none; border: none; font-size: 0.68rem; color: var(--ink-muted); cursor: pointer;" id="clearAllBookmarksBtn">پاک کردن همه</button>
         </div>
-        <div id="savedBookmarksList" style="display: flex; flex-direction: column; gap: 0.35rem; max-height: 140px; overflow-y: auto;">
+        <div id="savedBookmarksList" style="display: flex; flex-direction: column; gap: 0.35rem; max-height: 105px; overflow-y: auto;">
           <!-- Dynamically populated -->
         </div>
       </div>
 
+      <!-- TOC Search & Fast Filter -->
+      <div style="margin: 0.65rem 0 0.45rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+          <span style="font-size: 0.75rem; font-weight: 700; color: var(--ink-muted);">سرفصل‌های کامل کتاب (۲۴۱ صفحه):</span>
+        </div>
+        <input type="text" id="tocSearchInput" placeholder="جستجوی عنوان، موضوع یا فصل..." style="width: 100%; padding: 0.5rem 0.75rem; border-radius: 0.5rem; background: var(--sub-surface); border: 1px solid var(--border-color); color: var(--ink-primary); font-size: 0.75rem; outline: none;">
+      </div>
+
       <!-- TOC Chapters List Scroll -->
-      <div style="margin-top: 0.75rem; font-size: 0.75rem; font-weight: 700; color: var(--ink-muted);">سرفصل‌های ۳۰ صفحه اول:</div>
-      <div class="drawer-content-scroll" id="tocListContainer">
+      <div class="drawer-content-scroll" id="tocListContainer" style="flex: 1; overflow-y: auto;">
         <!-- Dynamically injected -->
       </div>
     </div>
 
-    <div style="padding-top: 1rem; border-top: 1px solid var(--border-color); text-align: center; font-size: 0.72rem; color: var(--ink-muted);">
-      نسخه پژوهشی و دیجیتال «معجزه‌گر خاموش» با فونت ایران‌سنس
+    <div style="padding-top: 0.75rem; border-top: 1px solid var(--border-color); text-align: center; font-size: 0.72rem; color: var(--ink-muted);">
+      نسخه پژوهشی و دیجیتال «معجزه‌گر خاموش» • ۲۴۱ صفحه کامل
     </div>
   </aside>
 
   <!-- ================= DRAWER 2: Spiritual Oracle & AI Companion ================= -->
   <aside class="drawer-panel left-drawer" id="oracleDrawer">
-    <div style="display: flex; flex-direction: column; height: 100%;">
+    <div style="display: flex; flex-direction: column; height: 100%; min-height: 0;">
       <div class="drawer-header">
         <div class="drawer-title-group">
           <span>🔮</span>
           <div>
-            <h3>دستیار معنوی و کاوشگر خرد</h3>
-            <span style="font-size: 0.68rem; color: var(--accent-gold);">تفسیر حکمت پاراگراف‌های زندگی‌ساز</span>
+            <h3>الهام روز و کاوشگر خرد</h3>
+            <span style="font-size: 0.68rem; color: var(--accent-gold);">حکمت‌های دگرگون‌ساز از متن فصول کتاب</span>
           </div>
         </div>
         <button class="drawer-close-btn" id="closeOracleDrawerBtn">✕</button>
       </div>
 
       <!-- Oracle Insights Body -->
-      <div class="drawer-content-scroll" style="display: flex; flex-direction: column; gap: 1rem;">
-        <!-- Insight Card -->
-        <div style="background: var(--accent-teal-subtle); border: 1px solid var(--accent-teal); border-radius: 0.85rem; padding: 1rem;">
-          <div style="display: flex; align-items: center; gap: 0.4rem; color: var(--accent-teal); font-weight: 700; font-size: 0.813rem; margin-bottom: 0.5rem;">
+      <div class="drawer-content-scroll" style="display: flex; flex-direction: column; gap: 0.85rem; flex: 1; overflow-y: auto;">
+        
+        <!-- Daily Oracle Card (استخاره و الهام روز) -->
+        <div style="background: var(--card-bg); border: 1px solid var(--accent-gold); border-radius: 0.85rem; padding: 0.95rem; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.08);">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+            <span style="font-size: 0.781rem; font-weight: 700; color: var(--accent-gold); display: flex; align-items: center; gap: 0.35rem;">
+              <span>🪽</span>
+              <span>الهام و استخاره روزانه</span>
+            </span>
+            <span id="oracleBadgeCat" style="font-size: 0.68rem; padding: 0.15rem 0.55rem; background: var(--accent-gold-subtle); color: var(--accent-gold); border-radius: 1rem; font-weight: 600;">پرواز و رهایی</span>
+          </div>
+
+          <!-- Oracle Category Filter Chips -->
+          <div style="display: flex; gap: 0.3rem; overflow-x: auto; padding-bottom: 0.4rem; margin-bottom: 0.5rem; scrollbar-width: none;" id="readerOracleChips">
+            <button class="reader-chip active" data-cat="all">همه</button>
+            <button class="reader-chip" data-cat="freedom">پرواز</button>
+            <button class="reader-chip" data-cat="destiny">رسالت</button>
+            <button class="reader-chip" data-cat="wealth">تجلی</button>
+            <button class="reader-chip" data-cat="heart">قلب</button>
+            <button class="reader-chip" data-cat="peace">سکوت</button>
+            <button class="reader-chip" data-cat="presence">اکنون</button>
+            <button class="reader-chip" data-cat="love">عشق</button>
+            <button class="reader-chip" data-cat="wisdom">آگاهی</button>
+          </div>
+
+          <!-- Oracle Quote Text -->
+          <blockquote id="oracleCardQuote" style="font-size: 0.813rem; line-height: 1.85; color: var(--ink-primary); margin: 0.5rem 0; font-style: normal; border-right: 3px solid var(--accent-gold); padding-right: 0.65rem; min-height: 65px; transition: opacity 0.2s ease;">
+            «می‌توانیم به فراسوی جهالت گام بگذاریم. می‌توانیم خود را موجوداتی هوشمند ببینیم و پرواز را بیاموزیم...»
+          </blockquote>
+
+          <div id="oracleCardMeta" style="font-size: 0.7rem; color: var(--ink-muted); margin-bottom: 0.75rem; display: flex; justify-content: space-between; align-items: center;">
+            <span id="oracleCardChapter">📖 فصل اول: پرواز</span>
+            <span id="oracleCardPage" style="font-family: monospace; font-weight: 700; color: var(--accent-teal);">صفحه ۸</span>
+          </div>
+
+          <!-- Oracle Actions -->
+          <div style="display: flex; flex-direction: column; gap: 0.45rem;">
+            <button id="oracleJumpPageBtn" style="width: 100%; padding: 0.6rem; background: var(--accent-gold); color: #fff; border: none; border-radius: 0.5rem; font-size: 0.781rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.4rem; transition: opacity 0.2s;">
+              <span>مطالعه این بخش در کتاب (صفحه ۸) 📖</span>
+            </button>
+            <div style="display: flex; gap: 0.45rem;">
+              <button id="triggerRandomOracleBtn" style="flex: 1; padding: 0.5rem; background: var(--sub-surface); color: var(--ink-primary); border: 1px solid var(--border-color); border-radius: 0.5rem; font-size: 0.72rem; font-weight: 600; cursor: pointer;">
+                الهام دیگر 🪽
+              </button>
+              <button id="copyOracleQuoteBtn" style="padding: 0.5rem 0.75rem; background: var(--sub-surface); color: var(--ink-primary); border: 1px solid var(--border-color); border-radius: 0.5rem; font-size: 0.72rem; cursor: pointer;" title="کپی متن">
+                کپی 📋
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Current Page Essence Card -->
+        <div style="background: var(--accent-teal-subtle); border: 1px solid var(--accent-teal); border-radius: 0.85rem; padding: 0.85rem;">
+          <div style="display: flex; align-items: center; gap: 0.4rem; color: var(--accent-teal); font-weight: 700; font-size: 0.781rem; margin-bottom: 0.4rem;">
             <span>✨</span>
             <span>عصاره فلسفی بخش در حال مطالعه:</span>
           </div>
-          <p id="oraclePageEssence" style="font-size: 0.781rem; line-height: 1.9; color: var(--ink-primary);">
-            «پرواز تنها یک استعاره نیست؛ بلکه یادآوری این حقیقت است که مرزهای آزادی ما دقیقاً همان مرزهایی است که ذهنمان پذیرفته است.»
+          <p id="oraclePageEssence" style="font-size: 0.75rem; line-height: 1.85; color: var(--ink-primary); margin: 0;">
+            «در خاموشی معجزه رخ می‌دهد...»
           </p>
         </div>
 
         <!-- Psychological Energy Spectrum -->
-        <div style="background: var(--sub-surface); border: 1px solid var(--border-color); border-radius: 0.85rem; padding: 1rem;">
-          <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 700; margin-bottom: 0.5rem;">
+        <div style="background: var(--sub-surface); border: 1px solid var(--border-color); border-radius: 0.85rem; padding: 0.85rem;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 700; margin-bottom: 0.45rem;">
             <span>طیف ارتعاشی این بخش</span>
             <span style="color: var(--accent-gold);" id="oracleVibeScore">رهایی و آرامش ۹۲٪</span>
           </div>
           <div style="height: 6px; width: 100%; background: var(--border-color); border-radius: 9999px; overflow: hidden; display: flex;">
-            <div style="width: 50%; background: var(--accent-teal);" title="آرامش"></div>
-            <div style="width: 30%; background: var(--accent-gold);" title="شجاعت"></div>
-            <div style="width: 20%; background: var(--ink-muted);" title="سکوت"></div>
+            <div id="vibeBar1" style="width: 50%; background: var(--accent-teal);" title="آرامش"></div>
+            <div id="vibeBar2" style="width: 30%; background: var(--accent-gold);" title="شجاعت"></div>
+            <div id="vibeBar3" style="width: 20%; background: var(--ink-muted);" title="سکوت"></div>
           </div>
-          <div style="display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--ink-muted); margin-top: 0.35rem;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--ink-muted); margin-top: 0.35rem;" id="vibeLabels">
             <span>آرامش ۵۰٪</span>
             <span>شجاعت ۳۰٪</span>
             <span>سکوت ۲۰٪</span>
           </div>
         </div>
 
-        <!-- Daily Random Oracle (استخاره روزانه) -->
-        <div style="background: var(--card-bg); border: 1px dashed var(--accent-gold); border-radius: 0.85rem; padding: 1rem; text-align: center;">
-          <span style="font-size: 1.5rem;">🎴</span>
-          <h4 style="font-size: 0.813rem; font-weight: 700; color: var(--accent-gold); margin: 0.3rem 0;">استخاره و الهام روزانه</h4>
-          <p style="font-size: 0.72rem; color: var(--ink-secondary); margin-bottom: 0.75rem;">
-            نیت کنید و یک آیه سرنوشت‌ساز از میان ۳۰ صفحه اول برای حال اکنو‌نتان دریافت نمایید.
-          </p>
-          <button style="width: 100%; padding: 0.55rem; background: var(--accent-gold); color: #fff; border: none; border-radius: 0.5rem; font-size: 0.781rem; font-weight: 700; cursor: pointer;" id="triggerRandomOracleBtn">
-            گشودن صفحه الهام 🪽
-          </button>
-        </div>
       </div>
     </div>
   </aside>
 
-  <!-- ================= MODAL: Search within 30 Pages ================= -->
+  <!-- ================= MODAL: Search within 241 Pages ================= -->
   <div class="modal-overlay" id="searchModal">
     <div class="modal-card" style="max-width: 520px;">
       <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-color);">
-        <h3 style="font-size: 0.938rem; font-weight: 700; color: var(--accent-teal);">جستجو در ۳۰ صفحه اول</h3>
+        <h3 style="font-size: 0.938rem; font-weight: 700; color: var(--accent-teal);" id="searchModalTitle">جستجو در متن کامل کتاب (۲۴۱ صفحه)</h3>
         <button style="background: none; border: none; font-size: 1.1rem; cursor: pointer; color: var(--ink-muted);" id="closeSearchModalBtn">✕</button>
       </div>
 
@@ -446,17 +536,28 @@
     </div>
   </div>
 
-  <!-- Load 30 Pages Structured Dataset -->
+  <!-- Load 241 Pages & Oracle Datasets -->
+  <script src="assets/js/oracle-quotes-data.js?v=241pages"></script>
   <script src="assets/js/book-pages-data.js?v=pages_v5_verified10"></script>
 
   <!-- ================= ADVANCED READER JAVASCRIPT ================= -->
   <script>
     (function initContinuousReader() {
       // 1. Data & State Initialization
-      const TOTAL_PAGES = 30;
       const pagesData = window.BOOK_PAGES_DATA || [];
+      const TOTAL_PAGES = pagesData.length > 0 ? pagesData.length : 241;
 
-      let currentPage = parseInt(localStorage.getItem('mojeze_reader_page') || '1', 10);
+      const mPageSliderEl = document.getElementById('mPageSlider');
+      if (mPageSliderEl) mPageSliderEl.max = TOTAL_PAGES;
+      const mTotalPagesLabelEl = document.getElementById('mTotalPagesLabel');
+      if (mTotalPagesLabelEl) mTotalPagesLabelEl.innerText = `${TOTAL_PAGES} صفحه`;
+
+      // Check URL parameters for direct deep-link (e.g. reader.html?page=95)
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlPage = parseInt(urlParams.get('page') || window.location.hash.replace(/\D/g, ''), 10);
+      let currentPage = (urlPage && urlPage >= 1 && urlPage <= TOTAL_PAGES)
+        ? urlPage
+        : parseInt(localStorage.getItem('mojeze_reader_page') || '1', 10);
       if (currentPage < 1 || currentPage > TOTAL_PAGES) currentPage = 1;
 
       let currentTheme = localStorage.getItem('mojeze_reader_theme') || 'cream';
@@ -735,7 +836,18 @@
       const liveSearchInput = document.getElementById('liveSearchInput');
       const searchResultsArea = document.getElementById('searchResultsArea');
 
-      // Mobile Island
+      // Mobile Tools & Sheet Elements
+      const mobileToolsFabBtn = document.getElementById('mobileToolsFabBtn');
+      const mobileFabIcon = document.getElementById('mobileFabIcon');
+      const mobileToolsSheet = document.getElementById('mobileToolsSheet');
+      const closeMobileSheetBtn = document.getElementById('closeMobileSheetBtn');
+      const mSheetPageBadge = document.getElementById('mSheetPageBadge');
+      const mTocTrigger = document.getElementById('mTocTrigger');
+      const mSearchTrigger = document.getElementById('mSearchTrigger');
+      const mBookmarkTrigger = document.getElementById('mBookmarkTrigger');
+      const mBtnFontDecr = document.getElementById('mBtnFontDecr');
+      const mBtnFontIncr = document.getElementById('mBtnFontIncr');
+      const mFontSizeBadge = document.getElementById('mFontSizeBadge');
       const mPageSlider = document.getElementById('mPageSlider');
       const mPageIndicatorLabel = document.getElementById('mPageIndicatorLabel');
       const mPrevPageBtn = document.getElementById('mPrevPageBtn');
@@ -743,8 +855,6 @@
       const mZenAudioTrigger = document.getElementById('mZenAudioTrigger');
       const mNarrationTrigger = document.getElementById('mNarrationTrigger');
       const mOracleTrigger = document.getElementById('mOracleTrigger');
-      const mWidthTrigger = document.getElementById('mWidthTrigger');
-      const mFontTrigger = document.getElementById('mFontTrigger');
 
       // 5. Theme Application
       function applyTheme(themeName) {
@@ -753,6 +863,9 @@
         localStorage.setItem('mojeze_reader_theme', themeName);
         themePills.forEach(pill => {
           pill.classList.toggle('active', pill.getAttribute('data-theme-val') === themeName);
+        });
+        document.querySelectorAll('#mThemeButtons .m-theme-btn').forEach(btn => {
+          btn.classList.toggle('active', btn.getAttribute('data-theme') === themeName);
         });
       }
 
@@ -784,24 +897,19 @@
         });
       });
 
-      mWidthTrigger?.addEventListener('click', () => {
-        const widths = ['680px', '840px', '1040px', '1220px'];
-        let idx = widths.indexOf(currentWidth);
-        let nextIdx = (idx + 1) % widths.length;
-        applyWidth(widths[nextIdx]);
-      });
-
       // 7. Direct Font Sizer Logic (کنترل مستقیم اندازه قلم)
       function setFontSize(newSize) {
         currentFontSize = Math.min(26, Math.max(14, newSize));
         document.documentElement.style.setProperty('--font-reading-size', currentFontSize + 'px');
         localStorage.setItem('mojeze_reader_size', currentFontSize);
         if (fontSizeBadge) fontSizeBadge.innerText = currentFontSize + 'px';
+        if (mFontSizeBadge) mFontSizeBadge.innerText = currentFontSize + 'px';
       }
 
       btnFontDecr?.addEventListener('click', () => setFontSize(currentFontSize - 1));
       btnFontIncr?.addEventListener('click', () => setFontSize(currentFontSize + 1));
-      mFontTrigger?.addEventListener('click', () => setFontSize(currentFontSize >= 24 ? 16 : currentFontSize + 2));
+      mBtnFontDecr?.addEventListener('click', () => setFontSize(currentFontSize - 1));
+      mBtnFontIncr?.addEventListener('click', () => setFontSize(currentFontSize + 1));
 
       // 8. Bookmark Per-Page System
       function toggleBookmark(pageIdx) {
@@ -991,17 +1099,73 @@
 
         const pct = Math.round((pNum / TOTAL_PAGES) * 100);
         if (headerProgressFill) headerProgressFill.style.width = pct + '%';
-        if (headerProgressText) headerProgressText.innerText = `صفحه ${pNum} از ۳۰ (${pct}٪)`;
+        if (headerProgressText) headerProgressText.innerText = `صفحه ${pNum} از ${TOTAL_PAGES} (${pct}٪)`;
 
         if (mPageSlider) mPageSlider.value = pNum;
         if (mPageIndicatorLabel) mPageIndicatorLabel.innerText = `صفحه ${pNum}`;
+        if (mSheetPageBadge) mSheetPageBadge.innerText = `صفحه ${pNum} از ${TOTAL_PAGES}`;
 
         localStorage.setItem('mojeze_reader_page', pNum);
 
-        // Update Oracle Drawer
+        // Update Oracle Drawer (Essence & Vibe)
         if (pData) {
-          const callout = pData.callout || (pData.paragraphs && pData.paragraphs[0]) || 'در خاموشی معجزه رخ می‌دهد...';
-          if (oraclePageEssence) oraclePageEssence.innerHTML = `«${callout.replace(/<[^>]*>/g, '')}»`;
+          if (pNum < 8) {
+            if (oraclePageEssence) {
+              oraclePageEssence.innerHTML = `«معجزه‌گر خاموش؛ راهنمای رهایی از قید باورهای شرطی‌شده و اوج گرفتن در آسمان آگاهی ناب.»`;
+            }
+          } else {
+            const callout = pData.callout || (pData.paragraphs && pData.paragraphs[0]) || 'در خاموشی معجزه رخ می‌دهد...';
+            if (oraclePageEssence) {
+              oraclePageEssence.innerHTML = `«${callout.replace(/<[^>]*>/g, '').trim()}»`;
+            }
+          }
+
+          // Dynamic Vibe Spectrum
+          const vibeScore = document.getElementById('oracleVibeScore');
+          const vibeBar1 = document.getElementById('vibeBar1');
+          const vibeBar2 = document.getElementById('vibeBar2');
+          const vibeBar3 = document.getElementById('vibeBar3');
+          const vibeLabels = document.getElementById('vibeLabels');
+
+          if (vibeScore) {
+            if (chapter.includes('سکوت') || chapter.includes('مراقبه')) {
+              vibeScore.innerText = 'سکوت و تسلیم ۹۶٪';
+              if (vibeBar1) vibeBar1.style.width = '70%';
+              if (vibeBar2) vibeBar2.style.width = '20%';
+              if (vibeBar3) vibeBar3.style.width = '10%';
+              if (vibeLabels) vibeLabels.innerHTML = '<span>سکوت ۷۰٪</span><span>حضور ۲۰٪</span><span>آرامش ۱۰٪</span>';
+            } else if (chapter.includes('پرواز')) {
+              vibeScore.innerText = 'رهایی و شجاعت ۹۴٪';
+              if (vibeBar1) vibeBar1.style.width = '60%';
+              if (vibeBar2) vibeBar2.style.width = '30%';
+              if (vibeBar3) vibeBar3.style.width = '10%';
+              if (vibeLabels) vibeLabels.innerHTML = '<span>رهایی ۶۰٪</span><span>شجاعت ۳۰٪</span><span>آگاهی ۱۰٪</span>';
+            } else if (chapter.includes('روابط') || chapter.includes('عشق')) {
+              vibeScore.innerText = 'عشق و پذیرش ۹۵٪';
+              if (vibeBar1) vibeBar1.style.width = '55%';
+              if (vibeBar2) vibeBar2.style.width = '30%';
+              if (vibeBar3) vibeBar3.style.width = '15%';
+              if (vibeLabels) vibeLabels.innerHTML = '<span>پذیرش ۵۵٪</span><span>شفقت ۳۰٪</span><span>صلح ۱۵٪</span>';
+            } else if (chapter.includes('اکنون')) {
+              vibeScore.innerText = 'حضور و رهایی از ذهن ۹۸٪';
+              if (vibeBar1) vibeBar1.style.width = '65%';
+              if (vibeBar2) vibeBar2.style.width = '25%';
+              if (vibeBar3) vibeBar3.style.width = '10%';
+              if (vibeLabels) vibeLabels.innerHTML = '<span>حضور ۶۵٪</span><span>بصیرت ۲۵٪</span><span>آزادی ۱۰٪</span>';
+            } else if (chapter.includes('طلب') || chapter.includes('آفرینش')) {
+              vibeScore.innerText = 'تجلی و شکرگزاری ۹۳٪';
+              if (vibeBar1) vibeBar1.style.width = '60%';
+              if (vibeBar2) vibeBar2.style.width = '25%';
+              if (vibeBar3) vibeBar3.style.width = '15%';
+              if (vibeLabels) vibeLabels.innerHTML = '<span>شکرگزاری ۶۰٪</span><span>ایمان ۲۵٪</span><span>برکت ۱۵٪</span>';
+            } else {
+              vibeScore.innerText = 'آگاهی و سرور ۹۲٪';
+              if (vibeBar1) vibeBar1.style.width = '50%';
+              if (vibeBar2) vibeBar2.style.width = '30%';
+              if (vibeBar3) vibeBar3.style.width = '20%';
+              if (vibeLabels) vibeLabels.innerHTML = '<span>آرامش ۵۰٪</span><span>شجاعت ۳۰٪</span><span>سکوت ۲۰٪</span>';
+            }
+          }
         }
       }
 
@@ -1051,6 +1215,11 @@
         oracleDrawer.classList.remove('active');
         zenAudioModal.classList.remove('active');
         searchModal.classList.remove('active');
+        mobileToolsSheet?.classList.remove('active');
+        if (mobileToolsFabBtn) {
+          mobileToolsFabBtn.classList.remove('active');
+          if (mobileFabIcon) mobileFabIcon.innerText = '🎛️';
+        }
       }
 
       openTocDrawerBtn?.addEventListener('click', () => openDrawer(tocDrawer));
@@ -1058,44 +1227,112 @@
 
       openOracleDrawerBtn?.addEventListener('click', () => openDrawer(oracleDrawer));
       closeOracleDrawerBtn?.addEventListener('click', closeAllDrawers);
-      mOracleTrigger?.addEventListener('click', () => openDrawer(oracleDrawer));
+      mOracleTrigger?.addEventListener('click', () => {
+        closeAllDrawers();
+        openDrawer(oracleDrawer);
+      });
 
       drawerBackdrop?.addEventListener('click', closeAllDrawers);
 
-      // Populate TOC List
-      function buildTocList() {
+      // Mobile FAB & Tools Sheet Controller
+      function toggleMobileToolsSheet() {
+        const isOpen = mobileToolsSheet?.classList.contains('active');
+        if (isOpen) {
+          closeAllDrawers();
+        } else {
+          closeAllDrawers();
+          drawerBackdrop.classList.add('active');
+          mobileToolsSheet?.classList.add('active');
+          mobileToolsFabBtn?.classList.add('active');
+          if (mobileFabIcon) mobileFabIcon.innerText = '✕';
+        }
+      }
+
+      mobileToolsFabBtn?.addEventListener('click', toggleMobileToolsSheet);
+      closeMobileSheetBtn?.addEventListener('click', closeAllDrawers);
+
+      mTocTrigger?.addEventListener('click', () => {
+        closeAllDrawers();
+        openDrawer(tocDrawer);
+      });
+
+      mSearchTrigger?.addEventListener('click', () => {
+        closeAllDrawers();
+        searchModal.classList.add('active');
+        liveSearchInput.focus();
+      });
+
+      mBookmarkTrigger?.addEventListener('click', () => {
+        toggleBookmark(currentPage);
+      });
+
+      document.querySelectorAll('#mThemeButtons .m-theme-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          applyTheme(btn.getAttribute('data-theme'));
+        });
+      });
+
+      // Populate TOC List (241 Pages grouped by chapters)
+      const tocSearchInput = document.getElementById('tocSearchInput');
+
+      function buildTocList(filterQuery = '') {
         if (!tocListContainer) return;
-        const chapters = [
-          { title: 'روی جلد و شناسنامه کتاب', page: 1 },
-          { title: 'فهرست سرفصل‌های کتاب', page: 2 },
-          { title: 'پیش‌گفتار اثر (چرا این کتاب؟)', page: 3 },
-          { title: 'حکمت و اندیشه آغازین (ریچارد باخ)', page: 8 },
-          { title: 'فصل اول: پرواز (راز آزادی و اوج)', page: 9 },
-          { title: 'فصل اول: تصمیم آغاز یک ماجراست', page: 11 },
-          { title: 'فصل اول: راز کار تسلیم نشدن است', page: 13 },
-          { title: 'فصل دوم: افسانه شخصی (رسالت روح)', page: 17 },
-          { title: 'فصل دوم: رهایی از بند تعصبات', page: 20 },
-          { title: 'فصل سوم: آفرینش زندگی (کیمیاگری)', page: 25 },
-          { title: 'فصل سوم: قدرت شگفت ناخودآگاه', page: 28 }
-        ];
+        const chaptersNav = window.BOOK_CHAPTERS_NAV || [];
+        const q = (filterQuery || '').trim().toLowerCase();
 
-        tocListContainer.innerHTML = chapters.map(ch => `
-          <a href="#" class="toc-item-link" data-jump-page="${ch.page}">
-            <span>${ch.title}</span>
-            <span style="font-family: monospace; color: var(--ink-muted);">ص ${ch.page}</span>
-          </a>
-        `).join('');
+        let html = '';
+        chaptersNav.forEach((group) => {
+          const matchingSections = (group.sections || []).filter(s => 
+            !q || s.title.toLowerCase().includes(q) || group.title.toLowerCase().includes(q) || group.num.toLowerCase().includes(q)
+          );
 
-        tocListContainer.querySelectorAll('.toc-item-link').forEach(link => {
-          link.addEventListener('click', (e) => {
+          if (q && matchingSections.length === 0 && !group.title.toLowerCase().includes(q)) {
+            return;
+          }
+
+          html += `
+            <div class="toc-group" style="margin-bottom: 0.65rem;">
+              <div class="toc-group-header" data-jump-page="${group.startPage}" style="display: flex; align-items: center; justify-content: space-between; padding: 0.45rem 0.65rem; background: var(--sub-surface); border-radius: 0.5rem; cursor: pointer; border-right: 3px solid var(--accent-gold); margin-bottom: 0.25rem;">
+                <div style="font-weight: 700; font-size: 0.781rem; color: var(--accent-gold);">
+                  <span>${group.num}:</span> <span>${group.title}</span>
+                </div>
+                <span style="font-size: 0.7rem; font-family: monospace; color: var(--ink-muted);">ص ${group.startPage}</span>
+              </div>
+              <div class="toc-group-sections" style="padding-right: 0.5rem; display: flex; flex-direction: column; gap: 0.15rem;">
+                ${matchingSections.map(s => `
+                  <a href="#" class="toc-item-link" data-jump-page="${s.page}" style="padding: 0.35rem 0.5rem; font-size: 0.75rem; border-radius: 0.4rem;">
+                    <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${s.title}</span>
+                    <span style="font-family: monospace; color: var(--ink-muted); font-size: 0.68rem; margin-right: 0.5rem; flex-shrink: 0;">ص ${s.page}</span>
+                  </a>
+                `).join('')}
+              </div>
+            </div>
+          `;
+        });
+
+        if (!html) {
+          html = `<div style="text-align: center; color: var(--ink-muted); font-size: 0.75rem; padding: 1.5rem 0;">موردی برای «${filterQuery}» یافت نشد.</div>`;
+        }
+
+        tocListContainer.innerHTML = html;
+
+        tocListContainer.querySelectorAll('[data-jump-page]').forEach(el => {
+          el.addEventListener('click', (e) => {
             e.preventDefault();
-            const targetPage = parseInt(link.getAttribute('data-jump-page'), 10);
-            scrollToPage(targetPage);
+            const targetPage = parseInt(el.getAttribute('data-jump-page'), 10);
+            if (targetPage) {
+              scrollToPage(targetPage);
+              closeAllDrawers();
+            }
           });
         });
       }
 
       buildTocList();
+
+      tocSearchInput?.addEventListener('input', (e) => {
+        buildTocList(e.target.value);
+      });
 
       // 13. Zen Audio Modal Controls
       openAudioStudioBtn?.addEventListener('click', () => {
@@ -1199,11 +1436,75 @@
         `).join('');
       });
 
-      // 15. Random Oracle Generator (استخاره روزانه)
-      triggerRandomOracleBtn?.addEventListener('click', () => {
-        const randomPage = Math.floor(Math.random() * (TOTAL_PAGES - 3)) + 4;
-        scrollToPage(randomPage);
+      // 15. Intelligent Oracle & Inspiration System
+      const readerOracleChips = document.querySelectorAll('#readerOracleChips .reader-chip');
+      const oracleCardQuote = document.getElementById('oracleCardQuote');
+      const oracleCardChapter = document.getElementById('oracleCardChapter');
+      const oracleCardPage = document.getElementById('oracleCardPage');
+      const oracleBadgeCat = document.getElementById('oracleBadgeCat');
+      const oracleJumpPageBtn = document.getElementById('oracleJumpPageBtn');
+      const copyOracleQuoteBtn = document.getElementById('copyOracleQuoteBtn');
+
+      let currentOracleCategory = 'all';
+      let currentActiveOracle = null;
+
+      function drawOracleQuote(category = currentOracleCategory) {
+        const quotesPool = (window.ORACLE_QUOTES || []).filter(q => q.page >= 8); // Ensure NEVER pages 1 to 7
+        let filtered = quotesPool;
+        if (category !== 'all') {
+          filtered = quotesPool.filter(q => q.category === category);
+        }
+        if (filtered.length === 0) filtered = quotesPool;
+
+        const pick = filtered[Math.floor(Math.random() * filtered.length)];
+        currentActiveOracle = pick;
+
+        if (oracleCardQuote && pick) {
+          oracleCardQuote.style.opacity = '0';
+          setTimeout(() => {
+            oracleCardQuote.innerText = `«${pick.quote}»`;
+            if (oracleCardChapter) oracleCardChapter.innerText = `📖 ${pick.chapter} • ${pick.title}`;
+            if (oracleCardPage) oracleCardPage.innerText = `صفحه ${pick.page}`;
+            if (oracleBadgeCat) oracleBadgeCat.innerText = pick.categoryLabel || pick.theme;
+            if (oracleJumpPageBtn) {
+              oracleJumpPageBtn.innerHTML = `<span>مطالعه این بخش در کتاب (صفحه ${pick.page}) 📖</span>`;
+            }
+            oracleCardQuote.style.opacity = '1';
+          }, 150);
+        }
+      }
+
+      readerOracleChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          readerOracleChips.forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          currentOracleCategory = chip.getAttribute('data-cat') || 'all';
+          drawOracleQuote(currentOracleCategory);
+        });
       });
+
+      triggerRandomOracleBtn?.addEventListener('click', () => {
+        drawOracleQuote(currentOracleCategory);
+      });
+
+      oracleJumpPageBtn?.addEventListener('click', () => {
+        if (currentActiveOracle && currentActiveOracle.page) {
+          scrollToPage(currentActiveOracle.page);
+          closeAllDrawers();
+        }
+      });
+
+      copyOracleQuoteBtn?.addEventListener('click', () => {
+        if (currentActiveOracle) {
+          const txt = `«${currentActiveOracle.quote}»\n\n— کتاب معجزه‌گر خاموش (${currentActiveOracle.chapter}، صفحه ${currentActiveOracle.page})`;
+          navigator.clipboard.writeText(txt).then(() => {
+            alert('متن الهام در حافظه کپی شد ✨');
+          });
+        }
+      });
+
+      // Initial oracle draw
+      drawOracleQuote('all');
 
       // 16. Keyboard Navigation
       window.addEventListener('keydown', (e) => {

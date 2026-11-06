@@ -220,106 +220,20 @@ function init3DTilt() {
 }
 
 // --- 3. Quotes Library (پاراگراف‌های زندگی‌ساز) ---
-const BOOK_QUOTES = [
-  {
-    id: 1,
-    chapter: "فصل اول: پرواز",
-    quote: "می‌توانیم به فراسوی جهالت گام بگذاریم. می‌توانیم خود را موجوداتی هوشمند با مهارت و برتر ببینیم. می‌توانیم پرواز (آزادی) را بیاموزیم. از میان میلیون‌ها انسان، خیلی انگشت‌شماری پیدا می‌شوند که راه پرواز را بجویند.",
-    category: "freedom",
-    theme: "پرواز و رهایی"
-  },
-  {
-    id: 2,
-    chapter: "فصل اول: پرواز",
-    quote: "یک‌نواختی، ترس و خشم، دلیل کوتاهی عمر ماست. با بیرون انداختن این پندارها از ذهن، عمر طولانی و مسرت‌بخشی برای خود رقم خواهیم زد. اگر به سمت کمال قدم برداریم، به‌یکباره آن‌قدر خواهیم آموخت که نیازی نباشد هزاران بار زندگی کنیم تا به این مرحله برسیم.",
-    category: "peace",
-    theme: "آرامش و طول عمر"
-  },
-  {
-    id: 3,
-    chapter: "فصل دوم: افسانه شخصی",
-    quote: "هنگامی که انسان تصمیمی می‌گیرد؛ در حقیقت به درون جریان نیرومندی پرتاب می‌شود که او را به مکانی خواهد برد که در زمان تصمیم‌گیری حتی خوابش را هم نمی‌دیده است. راز کار این است: تسلیم نشدن!",
-    category: "destiny",
-    theme: "رسالت و تصمیم"
-  },
-  {
-    id: 4,
-    chapter: "فصل دوم: افسانه شخصی",
-    quote: "خداوند در هر سنی و در هر موقعیتی دلواپسی‌های خاص همان سن را به انسان می‌دهد. از هر لحظه از زندگیت استفاده کن تا بعدها پشیمان نشوی و نگویی جوانی‌ام به بطالت گذشته است. خداوند طبیب توست و تو را در کنار آب‌های آرام هدایت می‌کند.",
-    category: "peace",
-    theme: "اعتماد به خداوند"
-  },
-  {
-    id: 5,
-    chapter: "فصل سوم: آفرینش زندگی",
-    quote: "جهان پیرامون شما آینه‌ای دقیق از ارتعاشات درونی شماست. هر آنچه در ذهن ناخودآگاه بکارید، در دنیای مادی درو خواهید کرد. زندگی به آنچه می‌خواهید پاسخ نمی‌دهد، بلکه به آنچه «هستید» پاسخ می‌گوید.",
-    category: "wealth",
-    theme: "قانون آفرینش و تجلی"
-  },
-  {
-    id: 6,
-    chapter: "فصل چهارم: قدرت قلب",
-    quote: "قلب شما هزاران بار قدرتمندتر از مغز شما سخن می‌گوید. هر زمان که در دوراهی شک و سردرگمی گرفتار شدید، صدای هیاهوی عقل حسابگر را کم کنید و به تپش آرام قلب‌تان گوش بسپارید؛ او همواره مسیر نور را می‌شناسد.",
-    category: "intuition",
-    theme: "خرد قلب و شهود"
-  },
-  {
-    id: 7,
-    chapter: "فصل ششم: قلمرو سکوت و مراقبه",
-    quote: "برای زندگی بخشیدن باید به خلاء، به سکوت بین افکارمان راه یابیم. سرچشمه تمامی معجزه‌ها، خلقت‌ها و نوآوری‌ها در این‌جا در شکافی نامحدود و بدون شکل قرار دارد. سکوت تنها صدای خداست.",
-    category: "peace",
-    theme: "سکوت و معجزه"
-  },
-  {
-    id: 8,
-    chapter: "فصل ششم: قلمرو سکوت و مراقبه",
-    quote: "خداوند همچون دریاست. همه مذهب‌ها رودخانه‌هایی هستند که به دریا می‌رسند. بسیاری از این رودخانه‌ها مسیر پر پیچ‌وخم دارند؛ چرا مستقیم به دریا نرویم؟! با ماندن در سکوت بین واژه‌ها، دل از نگرانی و تشویش آسوده می‌شود.",
-    category: "peace",
-    theme: "وصل مستقیم به حقیقت"
-  },
-  {
-    id: 9,
-    chapter: "فصل هفتم: زیستن در آتش کنون",
-    quote: "ذهن، برای آنکه مطمئن شود کنترل ما را در دست خود نگه خواهد داشت، لحظه حال را مدام با گذشته و آینده می‌پوشاند. اگر چیزی هست، مقاومت در برابر آن بی‌فایده است. خود را تسلیم هست کن و به زندگی بگو «آری!»؛ ناگهان خواهی دید که زندگی برای توست، نه بر علیه تو.",
-    category: "peace",
-    theme: "تسلیم و لحظه حال"
-  },
-  {
-    id: 10,
-    chapter: "فصل هشتم: جدال بین نفس و عشق در روابط",
-    quote: "ایگو همواره خواهان تصاحب، مقایسه و شرط‌گذاری است؛ اما عشق حقیقی هیچ ادعایی ندارد و تنها جاری می‌شود. هر زمان در رابطه به جای برنده شدن، خواهان جاری شدن درک و پذیرش بودید، معجزه عشق خود را نشان خواهد داد.",
-    category: "love",
-    theme: "عشق بی‌قیدوشرط"
-  },
-  {
-    id: 11,
-    chapter: "فصل نهم: طلب کنید، داده خواهد شد",
-    quote: "درخواست کردن هنر طلب از کائنات است. اما بزرگ‌ترین اشتباه آن است که از سر کمبود طلب کنید. وقتی با احساس دارایی، شکرگزاری عمیق و اطمینان قلبی چیزی را بخواهید، درهای تجلی بر رویتان گشوده خواهد شد.",
-    category: "wealth",
-    theme: "شکرگزاری و فراوانی"
-  },
-  {
-    id: 12,
-    chapter: "فصل دهم: اقیانوس درون",
-    quote: "تو قطره‌ای در اقیانوس نیستی؛ بلکه تمام اقیانوس هستی که در قالب یک قطره تجلی یافته‌ای. محدودیت‌هایی که در خود حس می‌کنی، تنها مرزهای خیالی ذهن هستند. به ژرفای وجودت غواصی کن و جواهر جاودانه را بیاب.",
-    category: "freedom",
-    theme: "عظمت نامحدود درون"
-  },
-  {
-    id: 13,
-    chapter: "فصل پایانی: آگاهی، آزادی، عشق",
-    quote: "هر چیزی که دارای حد و مرز است تو را اسیر می‌سازد. تو باید از تمام حد و مرزها فراتر روی. چنان رها باش که وجودت از حرکت بازنماند. همچون رودخانه باش؛ رودخانه از میان مناظر بسیار زیبا می‌گذرد بدون آنکه دل‌بسته شود، می‌رود و می‌رود تا به دریا برسد.",
-    category: "freedom",
-    theme: "رهایی چون رودخانه"
-  },
-  {
-    id: 14,
-    chapter: "پیش‌گفتار کتاب",
-    quote: "این کتاب واقعاً در خاموشی معجزه می‌کند. پرواز را به شما می‌آموزد، شفا می‌دهد درون بیمارتان را، روابطتان را بهبود می‌بخشد، ثروت را به سمتتان سرازیر می‌کند و مجبورتان می‌کند افسانه شخصی‌تان را دنبال کنید.",
-    category: "destiny",
-    theme: "معجزه در خاموشی"
-  }
-];
+// Loaded dynamically from window.ORACLE_QUOTES (60+ master quotes from chapters 1-11)
+const BOOK_QUOTES = (typeof window !== 'undefined' && window.ORACLE_QUOTES && window.ORACLE_QUOTES.length > 0)
+  ? window.ORACLE_QUOTES
+  : [
+      {
+        id: 1,
+        page: 8,
+        chapter: "فصل اول: پرواز",
+        title: "پرواز و رهایی",
+        quote: "می‌توانیم به فراسوی جهالت گام بگذاریم. می‌توانیم خود را موجوداتی هوشمند با مهارت و برتر ببینیم. می‌توانیم پرواز (آزادی) را بیاموزیم. از میان میلیون‌ها انسان، خیلی انگشت‌شماری پیدا می‌شوند که راه پرواز را بجویند.",
+        category: "freedom",
+        theme: "پرواز و رهایی"
+      }
+    ];
 
 // --- 4. Oracle Interaction Controller ---
 let currentQuote = BOOK_QUOTES[0];
@@ -330,16 +244,22 @@ function initOracle() {
   const rollBtn = document.getElementById('rollOracleBtn');
   const copyBtn = document.getElementById('copyOracleBtn');
   const shareBtn = document.getElementById('shareOracleBtn');
+  const readInReaderBtn = document.getElementById('readInReaderBtn');
+  const readInReaderBtnText = document.getElementById('readInReaderBtnText');
   const filterChips = document.querySelectorAll('.filter-chip');
 
   let activeCategory = 'all';
 
   function displayRandomQuote(category = activeCategory) {
-    let pool = BOOK_QUOTES;
+    const poolData = (typeof window !== 'undefined' && window.ORACLE_QUOTES && window.ORACLE_QUOTES.length > 0)
+      ? window.ORACLE_QUOTES
+      : BOOK_QUOTES;
+
+    let pool = poolData;
     if (category !== 'all') {
-      pool = BOOK_QUOTES.filter(q => q.category === category);
+      pool = poolData.filter(q => q.category === category);
     }
-    if (pool.length === 0) pool = BOOK_QUOTES;
+    if (pool.length === 0) pool = poolData;
 
     const randomIndex = Math.floor(Math.random() * pool.length);
     currentQuote = pool[randomIndex];
@@ -351,7 +271,13 @@ function initOracle() {
       setTimeout(() => {
         quoteText.textContent = `«${currentQuote.quote}»`;
         if (metaText) {
-          metaText.innerHTML = `<span>📖 ${currentQuote.chapter}</span> • <span>✨ موضوع: ${currentQuote.theme}</span>`;
+          metaText.innerHTML = `<span>📖 ${currentQuote.chapter} • ${currentQuote.title || ''}</span> • <span style="color: var(--text-gold); font-weight: 700;">صفحه ${currentQuote.page}</span> • <span>✨ ${currentQuote.categoryLabel || currentQuote.theme}</span>`;
+        }
+        if (readInReaderBtn) {
+          readInReaderBtn.href = `reader.html?page=${currentQuote.page}`;
+        }
+        if (readInReaderBtnText) {
+          readInReaderBtnText.textContent = `مطالعه کامل این بخش در کتابخوان (صفحه ${currentQuote.page})`;
         }
         quoteText.style.opacity = 1;
       }, 200);
@@ -364,7 +290,8 @@ function initOracle() {
 
   if (copyBtn) {
     copyBtn.addEventListener('click', () => {
-      const textToCopy = `«${currentQuote.quote}»\n\n— برگرفته از کتاب معجزه‌گر خاموش (${currentQuote.chapter})`;
+      const pageTag = currentQuote.page ? `، صفحه ${currentQuote.page}` : '';
+      const textToCopy = `«${currentQuote.quote}»\n\n— برگرفته از کتاب معجزه‌گر خاموش (${currentQuote.chapter}${pageTag})`;
       navigator.clipboard.writeText(textToCopy).then(() => {
         showToast('پاراگراف معجزه‌گر در حافظه کپی شد ✨');
       });
@@ -373,7 +300,8 @@ function initOracle() {
 
   if (shareBtn) {
     shareBtn.addEventListener('click', () => {
-      const shareText = encodeURIComponent(`«${currentQuote.quote}»\n\nاز کتاب معجزه‌گر خاموش:\nhttps://github.com/businessmanshah-a11y/mojezegarkhamoosh`);
+      const pageParam = currentQuote.page ? `?page=${currentQuote.page}` : '';
+      const shareText = encodeURIComponent(`«${currentQuote.quote}»\n\nاز کتاب معجزه‌گر خاموش (${currentQuote.chapter}):\nhttps://github.com/businessmanshah-a11y/mojezegarkhamoosh/reader.html${pageParam}`);
       window.open(`https://t.me/share/url?url=${shareText}`, '_blank');
     });
   }
@@ -396,7 +324,8 @@ const CHAPTERS_DATA = [
   {
     num: "فصل اول",
     title: "پرواز (پرواز به سوی آگاهی و کمال)",
-    pages: "صفحه ۱۱ تا ۱۶",
+    startPage: 8,
+    pages: "صفحه ۸ تا ۱۳",
     category: "freedom",
     desc: "چگونه باورهای محدودکننده جامعه و تربیت‌های ناکارآمد را رها کنیم و شجاعت اوج گرفتن در آسمان آگاهی ناب را بیابیم.",
     quote: "از میان میلیون‌ها انسان، خیلی انگشت‌شماری پیدا می‌شوند که راه پرواز را بجویند."
@@ -404,7 +333,8 @@ const CHAPTERS_DATA = [
   {
     num: "فصل دوم",
     title: "افسانه شخصی (کشف مأموریت روحی)",
-    pages: "صفحه ۱۷ تا ۲۳",
+    startPage: 14,
+    pages: "صفحه ۱۴ تا ۲۰",
     category: "destiny",
     desc: "شناخت دلیل اصیل تولد شما در این جهان و چگونگی هم‌راستا شدن با ندای رسالت روحی که هیچ تردیدی در آن نیست.",
     quote: "وقتی تصمیمی می‌گیرید، به درون جریان نیرومندی پرتاب می‌شوید که فراتر از رویاهای شماست."
@@ -412,7 +342,8 @@ const CHAPTERS_DATA = [
   {
     num: "فصل سوم",
     title: "آفرینش زندگی (معماری سرنوشت)",
-    pages: "صفحه ۲۴ تا ۳۷",
+    startPage: 21,
+    pages: "صفحه ۲۱ تا ۳۴",
     category: "wealth",
     desc: "اسرار ارتعاشات ذهنی و فرکانس‌های نامرئی؛ چگونه جهان پیرامون به باورهای عمیق ناخودآگاه شما شکل فیزیکی می‌دهد.",
     quote: "جهان پیرامون، آینه‌ای بی‌نقص از ارتعاشات حقیقی درون شماست."
@@ -420,47 +351,53 @@ const CHAPTERS_DATA = [
   {
     num: "فصل چهارم",
     title: "قدرت قلب (قطب‌نمای درون)",
-    pages: "صفحه ۳۸ تا ۴۵",
-    category: "peace",
+    startPage: 35,
+    pages: "صفحه ۳۵ تا ۴۲",
+    category: "heart",
     desc: "عبور از بازی‌های فرساینده ذهن شکاک و اتصال به میدان الکترومغناطیسی قدرتمند قلب برای دریافت مستقیم پاسخ‌ها.",
     quote: "صدای هیاهوی عقل را کم کنید؛ قلب همواره مسیر نور را می‌شناسد."
   },
   {
     num: "فصل پنجم",
     title: "شهود و مکاشفه (ارتباط با خرد کل)",
-    pages: "صفحه ۴۶ تا ۹۴",
-    category: "peace",
+    startPage: 43,
+    pages: "صفحه ۴۳ تا ۹۱",
+    category: "heart",
     desc: "راهنمای گام‌به‌گام دریافت نشانه‌ها، الهامات غیبی و هم‌زمانی‌های معنادار کیهانی در کارهای روزمره.",
     quote: "شهود زبانی است که خداوند در لحظات سکوت با بندگانش سخن می‌گوید."
   },
   {
     num: "فصل ششم",
     title: "قلمرو سکوت و مراقبه (سرچشمه معجزات)",
-    pages: "صفحه ۹۵ تا ۱۰۹",
+    startPage: 92,
+    pages: "صفحه ۹۲ تا ۱۰۰",
     category: "peace",
     desc: "ورود به خلاء شفا‌بخش بین دو اندیشه؛ جایی که تمامی خلق‌ها، درمان‌ها و مکاشفات عظیم در خاموشی شکل می‌گیرند.",
     quote: "سکوت تنها صدای خداست. برای زندگی بخشیدن باید به سکوت بین افکار راه یابیم."
   },
   {
     num: "فصل هفتم",
-    title: "زیستن در آتش کنون (رهایی از بار زمان)",
-    pages: "صفحه ۱۱۰ تا ۱۲۱",
-    category: "peace",
+    title: "زیستن در آتش اکنون (رهایی از بار زمان)",
+    startPage: 101,
+    pages: "صفحه ۱۰۱ تا ۱۱۸",
+    category: "presence",
     desc: "پایان دادن به شکنجه ذهنی حسرت گذشته و اضطراب آینده با غرق شدن تمام‌عیار در معجزه ابدی لحظه اکنون.",
     quote: "اگر دیگر نمی‌خواهی رنج تولید کنی، بیش از این در ذهنت زمان نیافرین."
   },
   {
     num: "فصل هشتم",
     title: "جدال بین نفس و عشق در روابط",
-    pages: "صفحه ۱۲۲ تا ۱۵۵",
+    startPage: 119,
+    pages: "صفحه ۱۱۹ تا ۱۵۲",
     category: "love",
     desc: "شناسایی بازی‌های مخرب ایگو و برتری‌طلبی در روابط و جایگزینی آن با هم‌دلی، پذیرش عمیق و عشق بی‌قیدوشرط.",
     quote: "عشق ادعایی ندارد و مالکیت نمی‌شناسد؛ عشق جاری شدن در آرامش است."
   },
   {
     num: "فصل نهم",
-    title: "طلب کنید، داده خواهد شد",
-    pages: "صفحه ۱۵۶ تا ۱۷۹",
+    title: "طلب کنید، داده خواهد شد (هنر تجلی)",
+    startPage: 153,
+    pages: "صفحه ۱۵۳ تا ۱۷۶",
     category: "wealth",
     desc: "اصول علمی و معنوی درخواست از کائنات؛ عبور از فرکانس نیاز و فقر به ارتعاش شکرگزاری و دریافت بی‌نهایت.",
     quote: "وقتی با حس اطمینان و شکرگزاری طلب کنید، درهای رزق آسمانی گشوده می‌شود."
@@ -468,16 +405,18 @@ const CHAPTERS_DATA = [
   {
     num: "فصل دهم",
     title: "اقیانوس درون (غواصی در بی‌نهایت)",
-    pages: "صفحه ۱۸۰ تا ۲۱۱",
-    category: "freedom",
+    startPage: 177,
+    pages: "صفحه ۱۷۷ تا ۲۰۸",
+    category: "wisdom",
     desc: "کشف منابع لایزال انرژی، نبوغ و شفا در ژرفای وجود انسانی که ماورای تصور حواس پنج‌گانه است.",
     quote: "تو تمام اقیانوسی که در قالب یک قطره متجلی شده است؛ مرزها در ذهن توست."
   },
   {
     num: "فصل پایانی",
     title: "آگاهی، آزادی، عشق (پرواز نهایی)",
-    pages: "صفحه ۲۱۲ تا ۲۴۱",
-    category: "freedom",
+    startPage: 209,
+    pages: "صفحه ۲۰۹ تا ۲۴۱",
+    category: "wisdom",
     desc: "فصل جمع‌بندی و عروج روحی؛ رهایی از تمام قیدها چون رودخانه‌ای سبک‌بال که سرانجام به آغوش دریا می‌پیوندد.",
     quote: "چنان رها باش که وجودت از حرکت بازنماند؛ همچون رودخانه باش..."
   }
@@ -515,7 +454,7 @@ function initChapters() {
         <p class="chapter-desc">${ch.desc}</p>
         <div class="chapter-quote-preview">«${ch.quote}»</div>
         <div class="chapter-footer">
-          <a class="chapter-read-btn" href="reader.html">
+          <a class="chapter-read-btn" href="reader.html?page=${ch.startPage}">
             <span>ورق زدن در کتابخوان</span>
             <span>←</span>
           </a>

@@ -1,6 +1,27 @@
 # Operating System
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
 Thumbs.db
+ehthumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# Editor & IDE
+.vscode/
+.idea/
+*.swp
+*.swo
 
 # Logs & Temp
 *.log
@@ -11,3 +32,4 @@ temp/
 # Node
 node_modules/
 npm-debug.log*
+

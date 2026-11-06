@@ -420,8 +420,13 @@ button, input, select {
    ۵. نوار کنترل تنظیمات زیرین (Sub-Bar Controls)
    -------------------------------------------------------------------------- */
 .reader-subbar {
+  position: sticky;
+  top: var(--header-height);
+  z-index: 45;
   width: 100%;
-  background: rgba(250, 247, 240, 0.7);
+  background: var(--header-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-color);
   padding: 0.4rem 1.25rem;
   display: flex;
@@ -429,6 +434,7 @@ button, input, select {
   justify-content: space-between;
   font-size: 0.781rem;
   color: var(--ink-secondary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
 .subbar-right, .subbar-center, .subbar-left {
@@ -1174,61 +1180,14 @@ p.active-tts-paragraph {
     gap: 0 !important;
   }
 
-  /* Subbar clean-up on mobile: clean single row */
+  /* Subbar is hidden on mobile to maximize reading space; all tools inside FAB sheet */
   .reader-subbar {
-    padding: 0.35rem 0.75rem !important;
-    height: 42px !important;
-  }
-
-  .subbar-center, .subbar-left {
     display: none !important;
-  }
-
-  .subbar-right {
-    width: 100% !important;
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    gap: 0.35rem !important;
-  }
-
-  .subbar-btn-text {
-    display: none !important;
-  }
-
-  .subbar-sep {
-    display: none !important;
-  }
-
-  .font-sizer-label {
-    display: none !important;
-  }
-
-  .width-btn {
-    padding: 0.25rem 0.55rem !important;
-    font-size: 0.75rem !important;
-  }
-
-  .font-sizer-control {
-    display: flex !important;
-    align-items: center !important;
-    gap: 0.25rem !important;
-  }
-
-  .font-size-step-btn {
-    width: 28px !important;
-    height: 28px !important;
-    font-size: 0.72rem !important;
-  }
-
-  .font-size-value-badge {
-    padding: 0.15rem 0.4rem !important;
-    font-size: 0.72rem !important;
   }
 
   /* Main reading stage on mobile */
   .reader-main-stage {
-    padding: 1rem 0.65rem 7.5rem !important; /* Generous bottom clearance */
+    padding: 1rem 0.65rem 4.5rem !important; /* Generous bottom clearance for FAB */
     width: 100% !important;
     box-sizing: border-box !important;
     overflow-x: hidden !important;
@@ -1292,17 +1251,74 @@ p.active-tts-paragraph {
     overflow: hidden !important;
   }
 
-  /* Mobile floating island sits beautifully above bottom */
+  /* Hide old fixed bottom island on mobile */
   .mobile-floating-island {
+    display: none !important;
+  }
+
+  /* Fixed Mobile Tools Floating Action Button (FAB) */
+  .mobile-tools-fab {
     display: flex !important;
     position: fixed !important;
-    bottom: 0.75rem !important;
-    left: 0.75rem !important;
-    right: 0.75rem !important;
-    z-index: 55 !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22) !important;
-    border-radius: 1.15rem !important;
-    padding: 0.55rem 0.75rem !important;
+    bottom: 1.25rem !important;
+    left: 1.25rem !important;
+    z-index: 70 !important;
+    width: 52px !important;
+    height: 52px !important;
+    border-radius: 50% !important;
+    background: var(--accent-gold) !important;
+    color: #fff !important;
+    border: none !important;
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.45) !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.35rem !important;
+    cursor: pointer !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  .mobile-tools-fab:hover {
+    transform: scale(1.06) !important;
+  }
+
+  .mobile-tools-fab:active {
+    transform: scale(0.92) !important;
+  }
+
+  .mobile-tools-fab.active {
+    background: var(--ink-primary) !important;
+    color: #fff !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
+    transform: rotate(90deg) !important;
+  }
+
+  /* Mobile Tools Bottom Sheet Drawer */
+  .mobile-tools-sheet {
+    display: flex !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    background: var(--card-bg) !important;
+    border-top: 1px solid var(--border-color) !important;
+    border-radius: 1.5rem 1.5rem 0 0 !important;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.25) !important;
+    padding: 1.1rem 1.2rem 1.75rem !important;
+    z-index: 75 !important;
+    flex-direction: column !important;
+    gap: 0.85rem !important;
+    transform: translateY(115%) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease !important;
+    max-height: 85vh !important;
+    overflow-y: auto !important;
+  }
+
+  .mobile-tools-sheet.active {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
   }
 
   .zen-audio-modal {
@@ -1312,3 +1328,53 @@ p.active-tts-paragraph {
     bottom: 6.5rem !important;
   }
 }
+
+/* Base definitions for desktop */
+.mobile-tools-fab {
+  display: none;
+}
+
+.mobile-tools-sheet {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   Enhanced TOC & Oracle Components
+   -------------------------------------------------------------------------- */
+.reader-chip {
+  padding: 0.28rem 0.65rem;
+  font-size: 0.7rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border-color);
+  background: var(--sub-surface);
+  color: var(--ink-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  font-family: inherit;
+}
+
+.reader-chip:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+.reader-chip.active {
+  background: var(--accent-gold);
+  border-color: var(--accent-gold);
+  color: #fff;
+  font-weight: 700;
+}
+
+.toc-group-header:hover {
+  background: var(--accent-gold-subtle) !important;
+}
+
+.toc-item-link.current-active-page {
+  background: var(--accent-teal-subtle);
+  color: var(--accent-teal);
+  font-weight: 700;
+  border-right: 2px solid var(--accent-teal);
+}
+
