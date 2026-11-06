@@ -187,7 +187,7 @@ html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.3s ease, color 0.3s ease;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 ::selection {
@@ -199,13 +199,25 @@ button, input, select {
   font-family: var(--font-family-main) !important;
 }
 
+/* آیکون‌های وکتور پریمیوم (Lucide / Minimalist Standard) */
+.premium-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  flex-shrink: 0;
+  transition: transform 0.2s ease, stroke 0.2s ease;
+}
+
 /* --------------------------------------------------------------------------
-   ۴. هدر شیشه‌ای و کنترل‌های فوقانی (Sticky Glass Header)
+   ۴. هدر شیشه‌ای و کنترل‌های فوقانی (Fixed Top Header)
    -------------------------------------------------------------------------- */
 .reader-header {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 50;
+  left: 0;
+  right: 0;
+  z-index: 60;
   width: 100%;
   height: var(--header-height);
   background: var(--header-bg);
@@ -216,6 +228,7 @@ button, input, select {
   align-items: center;
   justify-content: space-between;
   padding: 0 1.25rem;
+  box-sizing: border-box;
   transition: transform 0.3s ease;
 }
 
@@ -417,24 +430,28 @@ button, input, select {
 }
 
 /* --------------------------------------------------------------------------
-   ۵. نوار کنترل تنظیمات زیرین (Sub-Bar Controls)
+   ۵. نوار کنترل تنظیمات زیرین (Fixed Sub-Bar Controls)
    -------------------------------------------------------------------------- */
 .reader-subbar {
-  position: sticky;
+  position: fixed;
   top: var(--header-height);
-  z-index: 45;
+  left: 0;
+  right: 0;
+  z-index: 55;
   width: 100%;
+  height: 44px;
   background: var(--header-bg);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-color);
-  padding: 0.4rem 1.25rem;
+  padding: 0.35rem 1.25rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-size: 0.781rem;
   color: var(--ink-secondary);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  box-sizing: border-box;
 }
 
 .subbar-right, .subbar-center, .subbar-left {
@@ -515,9 +532,10 @@ button, input, select {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2.25rem 1.25rem 6rem;
+  padding: calc(var(--header-height) + 44px + 1.75rem) 1.25rem 6rem;
   position: relative;
-  min-height: calc(100vh - var(--header-height) - var(--status-bar-height) - 40px);
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
 /* The Adaptive Reading Container */
@@ -539,6 +557,7 @@ button, input, select {
   box-shadow: var(--book-shadow);
   padding: 2.75rem 3rem;
   position: relative;
+  scroll-margin-top: calc(var(--header-height) + 48px + 1rem);
   transition: box-shadow 0.3s ease;
 }
 
@@ -747,21 +766,40 @@ p.active-tts-paragraph {
 /* --------------------------------------------------------------------------
    ۸. استودیو شناور صدا و نوای آرامش (Floating Zen Audio Studio)
    -------------------------------------------------------------------------- */
+.audio-modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 90;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.audio-modal-backdrop.active {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .zen-audio-modal {
   display: none;
   position: fixed;
-  bottom: 4rem;
-  left: 2rem;
-  width: 340px;
+  top: calc(var(--header-height) + 44px + 1rem);
+  left: 1.5rem;
+  width: 360px;
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 1.25rem;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
   padding: 1.25rem;
-  z-index: 60;
+  z-index: 95;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   opacity: 0;
-  transform: translateY(20px) scale(0.95);
+  transform: translateY(-10px) scale(0.97);
   pointer-events: none;
 }
 
@@ -1187,7 +1225,7 @@ p.active-tts-paragraph {
 
   /* Main reading stage on mobile */
   .reader-main-stage {
-    padding: 1rem 0.65rem 4.5rem !important; /* Generous bottom clearance for FAB */
+    padding: calc(var(--header-height) + 1.25rem) 0.65rem 5.5rem !important; /* Generous bottom clearance for FAB */
     width: 100% !important;
     box-sizing: border-box !important;
     overflow-x: hidden !important;
@@ -1205,6 +1243,7 @@ p.active-tts-paragraph {
     box-shadow: 0 4px 18px rgba(45, 35, 20, 0.06) !important;
     width: 100% !important;
     box-sizing: border-box !important;
+    scroll-margin-top: calc(var(--header-height) + 1rem) !important;
   }
 
   .leaf-top-meta-row {
@@ -1322,10 +1361,26 @@ p.active-tts-paragraph {
   }
 
   .zen-audio-modal {
-    left: 0.75rem !important;
-    right: 0.75rem !important;
+    position: fixed !important;
+    top: auto !important;
+    bottom: 2rem !important;
+    left: 1rem !important;
+    right: 1rem !important;
     width: auto !important;
-    bottom: 6.5rem !important;
+    max-width: 440px !important;
+    margin: 0 auto !important;
+    z-index: 100 !important;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 1.25rem !important;
+    transform: translateY(20px) scale(0.95) !important;
+  }
+
+  .zen-audio-modal.active {
+    display: block !important;
+    opacity: 1 !important;
+    transform: translateY(0) scale(1) !important;
+    pointer-events: auto !important;
   }
 }
 
