@@ -1,0 +1,29 @@
+{
+  "1": {
+    "page": 1,
+    "filename": "page-001.mp3",
+    "path": "assets/audio/pages/page-001.mp3",
+    "duration": 8.1,
+    "size_kb": 127.5,
+    "voice": "Bodi",
+    "updated_at": "2026-11-07T11:51:58Z"
+  },
+  "8": {
+    "page": 8,
+    "filename": "page-008.mp3",
+    "path": "assets/audio/pages/page-008.mp3",
+    "duration": 4.4,
+    "size_kb": 70.5,
+    "voice": "Bodi",
+    "updated_at": "2026-11-07T11:52:42Z"
+  },
+  "9": {
+    "page": 9,
+    "filename": "page-009.mp3",
+    "path": "assets/audio/pages/page-009.mp3",
+    "duration": 108.8,
+    "size_kb": 1700.7,
+    "voice": "Bodi",
+    "updated_at": "2026-11-07T11:53:16Z"
+  }
+}

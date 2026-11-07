@@ -375,6 +375,16 @@
       </div>
 
       <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px dashed var(--border-color); padding-top: 0.45rem;">
+        <span style="font-size: 0.72rem; color: var(--ink-muted); font-weight: 600;">سرعت خوانش صوت:</span>
+        <div class="speed-chips-group" id="mAudioSpeedChips">
+          <button class="speed-chip active" data-speed="1.0">۱.۰x</button>
+          <button class="speed-chip" data-speed="1.2">۱.۲x</button>
+          <button class="speed-chip" data-speed="1.5">۱.۵x</button>
+          <button class="speed-chip" data-speed="2.0">۲.۰x</button>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px dashed var(--border-color); padding-top: 0.45rem;">
         <span style="font-size: 0.72rem; color: var(--ink-muted); font-weight: 600;">پالت رنگی:</span>
         <div style="display: flex; gap: 0.3rem;" id="mThemeButtons">
           <button class="m-theme-btn active" data-theme="cream" style="padding: 0.25rem 0.55rem; border-radius: 0.4rem; font-size: 0.68rem; border: 1px solid var(--border-color); background: #FAF7F0; color: #2D2314; cursor: pointer;">کرم</button>
@@ -442,22 +452,58 @@
       </button>
     </div>
 
+    <!-- Dedicated AI Audiobook Player Card -->
+    <div class="audiobook-player-card">
+      <div class="audiobook-status-row">
+        <span class="audio-now-badge">
+          <svg class="premium-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+            <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+          </svg>
+          <span id="audiobookNowPlaying">خوانش با صدای Bodi (Gemini AI)</span>
+        </span>
+        <span id="audioPageNumberBadge" style="font-family: monospace; color: var(--accent-teal); font-weight: 700;">صفحه ۱</span>
+      </div>
+
+      <!-- Scrubber Track -->
+      <div class="audio-progress-track" id="audioProgressTrack" title="کلیک برای پرش به زمان مشخص">
+        <div class="audio-progress-fill" id="audioProgressFill" style="width: 0%;"></div>
+      </div>
+
+      <!-- Time Row -->
+      <div class="audio-time-row">
+        <span id="audioCurrentTime">۰۰:۰۰</span>
+        <span id="audioTotalDuration">۰۰:۰۰</span>
+      </div>
+
+      <!-- Variable Playback Speed Selector (1.0x to 2.0x) -->
+      <div class="speed-controller-row">
+        <span style="font-size: 0.68rem; color: var(--ink-muted); font-weight: 600;">سرعت پخش راوی:</span>
+        <div class="speed-chips-group" id="audioSpeedChips">
+          <button class="speed-chip active" data-speed="1.0">۱.۰x</button>
+          <button class="speed-chip" data-speed="1.1">۱.۱x</button>
+          <button class="speed-chip" data-speed="1.2">۱.۲x</button>
+          <button class="speed-chip" data-speed="1.5">۱.۵x</button>
+          <button class="speed-chip" data-speed="1.7">۱.۷x</button>
+          <button class="speed-chip" data-speed="2.0">۲.۰x</button>
+        </div>
+      </div>
+
+      <!-- Auto Advance Toggle -->
+      <label class="auto-advance-label">
+        <input type="checkbox" id="autoAdvanceCheckbox" checked>
+        <span>پخش خودکار صفحه بعدی همراه با اسکرول نرم</span>
+      </label>
+    </div>
+
     <!-- Sliders -->
     <div class="audio-control-sliders">
       <div class="audio-slider-row">
         <div class="audio-slider-label">
-          <span>بلندی صدای موسیقی متن</span>
+          <span>بلندی صدای موسیقی پس‌زمینه</span>
           <span id="ambientVolumeVal">۴۰٪</span>
         </div>
         <input type="range" class="audio-range-input" id="ambientVolumeSlider" min="0" max="100" value="40">
-      </div>
-
-      <div class="audio-slider-row">
-        <div class="audio-slider-label">
-          <span>سرعت خوانش راوی</span>
-          <span id="speechRateVal">۱.۰x</span>
-        </div>
-        <input type="range" class="audio-range-input" id="speechRateSlider" min="7" max="14" value="10">
       </div>
     </div>
 
@@ -469,7 +515,7 @@
             <polygon points="5 3 19 12 5 21 5 3"></polygon>
           </svg>
         </span>
-        <span id="ambientPlayText">پخش موسیقی زمینه</span>
+        <span id="ambientPlayText">موسیقی زمینه</span>
       </button>
 
       <button class="narration-play-btn" style="background: var(--accent-gold);" id="toggleSpeechBtn">
@@ -480,7 +526,7 @@
             <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
           </svg>
         </span>
-        <span id="speechText">خواندن صفحه جاری</span>
+        <span id="speechText">پخش صدای راوی</span>
       </button>
     </div>
   </div>
@@ -858,62 +904,6 @@
 
       const audioZen = new ZenAudioEngine();
 
-      // 3. Speech Synthesis Engine
-      let isNarrating = false;
-      let speechUtterance = null;
-      let speechSpeed = 1.0;
-
-      function stopNarration() {
-        if ('speechSynthesis' in window) {
-          window.speechSynthesis.cancel();
-        }
-        isNarrating = false;
-        document.querySelectorAll('.active-tts-paragraph').forEach(el => el.classList.remove('active-tts-paragraph'));
-        updateSpeechButtons(false);
-      }
-
-      function narrateCurrentPage() {
-        if (!('speechSynthesis' in window)) {
-          alert('مرورگر شما از قابلیت خوانش صوتی متن پشتیبانی نمی‌کند.');
-          return;
-        }
-
-        if (isNarrating) {
-          stopNarration();
-          return;
-        }
-
-        const pageData = pagesData[currentPage - 1];
-        if (!pageData) return;
-
-        const textToRead = [
-          pageData.title || '',
-          pageData.subtitle || '',
-          ...(pageData.paragraphs || []),
-          pageData.callout || ''
-        ].join(' . ').replace(/<[^>]*>/g, '');
-
-        window.speechSynthesis.cancel();
-        speechUtterance = new SpeechSynthesisUtterance(textToRead);
-        speechUtterance.lang = 'fa-IR';
-        speechUtterance.rate = speechSpeed;
-
-        speechUtterance.onstart = () => {
-          isNarrating = true;
-          updateSpeechButtons(true);
-        };
-
-        speechUtterance.onend = () => {
-          stopNarration();
-        };
-
-        speechUtterance.onerror = () => {
-          stopNarration();
-        };
-
-        window.speechSynthesis.speak(speechUtterance);
-      }
-
       // آیکون‌های وکتور پریمیوم سازگار با تم (بدون ایموجی)
       const ICONS = {
         fabTools: `<svg class="premium-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>`,
@@ -926,12 +916,239 @@
         book: `<svg class="premium-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`
       };
 
-      function updateSpeechButtons(active) {
+      // 3. AI Audiobook & Narration Player Engine (Google Gemini TTS + HTML5 Audio)
+      const bookAudio = new Audio();
+      bookAudio.preload = 'auto';
+      bookAudio.preservesPitch = true;
+
+      let currentAudioPage = 1;
+      let isAudioPlaying = false;
+      let currentPlaybackRate = parseFloat(localStorage.getItem('mojeze_audio_speed') || '1.0');
+      let isSpeechFallback = false;
+      let speechUtterance = null;
+
+      function formatAudioTime(sec) {
+        if (!sec || isNaN(sec) || !isFinite(sec)) return '۰۰:۰۰';
+        const m = Math.floor(sec / 60);
+        const s = Math.floor(sec % 60);
+        const pad = (n) => String(n).padStart(2, '0');
+        return `${pad(m)}:${pad(s)}`;
+      }
+
+      function updateAudioUI(playing) {
+        isAudioPlaying = playing;
         const speechIcon = document.getElementById('speechIcon');
         const speechText = document.getElementById('speechText');
-        if (speechIcon) speechIcon.innerHTML = active ? ICONS.pause : ICONS.speaker;
-        if (speechText) speechText.innerText = active ? 'توقف خوانش' : 'خواندن صفحه جاری';
+        if (speechIcon) speechIcon.innerHTML = playing ? ICONS.pause : ICONS.speaker;
+        if (speechText) speechText.innerText = playing ? 'توقف خوانش' : 'پخش صدای راوی';
+
+        const nowPlayingEl = document.getElementById('audiobookNowPlaying');
+        const badgeEl = document.getElementById('audioPageNumberBadge');
+        if (badgeEl) badgeEl.innerText = `صفحه ${currentAudioPage}`;
+        if (nowPlayingEl) {
+          if (playing) {
+            nowPlayingEl.innerText = isSpeechFallback
+              ? `در حال خوانش صوتی (صفحه ${currentAudioPage})`
+              : `در حال خوانش با صدای Bodi (صفحه ${currentAudioPage})`;
+          } else {
+            nowPlayingEl.innerText = `خوانش با صدای Bodi (Gemini AI)`;
+          }
+        }
+
+        // Reset all leaf audio buttons
+        document.querySelectorAll('.leaf-audio-btn').forEach(btn => {
+          btn.classList.remove('playing');
+          const p = btn.getAttribute('data-page-index');
+          const iconSpan = document.getElementById(`leafAudioIcon-${p}`);
+          const textSpan = document.getElementById(`leafAudioText-${p}`);
+          if (iconSpan) iconSpan.innerHTML = ICONS.speaker;
+          if (textSpan) textSpan.innerText = `صوت ص ${p}`;
+        });
+
+        // Reset all active leaf borders
+        document.querySelectorAll('.scroll-page-leaf').forEach(leaf => {
+          leaf.classList.remove('audio-active-leaf');
+        });
+
+        if (playing) {
+          const currentBtn = document.getElementById(`leafAudioBtn-${currentAudioPage}`);
+          if (currentBtn) {
+            currentBtn.classList.add('playing');
+            const iconSpan = document.getElementById(`leafAudioIcon-${currentAudioPage}`);
+            const textSpan = document.getElementById(`leafAudioText-${currentAudioPage}`);
+            if (iconSpan) iconSpan.innerHTML = ICONS.pause;
+            if (textSpan) textSpan.innerText = 'توقف پخش';
+          }
+          const currentLeaf = document.getElementById(`page-leaf-${currentAudioPage}`);
+          if (currentLeaf) {
+            currentLeaf.classList.add('audio-active-leaf');
+          }
+        }
       }
+
+      function setAudioSpeed(newSpeed) {
+        currentPlaybackRate = parseFloat(newSpeed) || 1.0;
+        localStorage.setItem('mojeze_audio_speed', currentPlaybackRate);
+        bookAudio.playbackRate = currentPlaybackRate;
+        bookAudio.preservesPitch = true;
+
+        if (isSpeechFallback && speechUtterance) {
+          fallbackToSpeechSynthesis(currentAudioPage);
+        }
+
+        document.querySelectorAll('.speed-chip').forEach(chip => {
+          const s = parseFloat(chip.getAttribute('data-speed'));
+          chip.classList.toggle('active', Math.abs(s - currentPlaybackRate) < 0.05);
+        });
+      }
+
+      function stopAudioNarration() {
+        if (bookAudio) {
+          bookAudio.pause();
+        }
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+        }
+        isSpeechFallback = false;
+        updateAudioUI(false);
+      }
+
+      function fallbackToSpeechSynthesis(pageNum) {
+        if (!('speechSynthesis' in window)) {
+          alert('فایل صوتی این صفحه هنوز آماده نشده و مرورگر شما نیز از گفتار صوتی پشتیبانی نمی‌کند.');
+          stopAudioNarration();
+          return;
+        }
+
+        const pageData = pagesData[pageNum - 1];
+        if (!pageData) return;
+
+        isSpeechFallback = true;
+        window.speechSynthesis.cancel();
+
+        const textToRead = [
+          pageData.title || '',
+          pageData.subtitle || '',
+          ...(pageData.paragraphs || []),
+          pageData.callout || ''
+        ].join(' . ').replace(/<[^>]*>/g, '');
+
+        speechUtterance = new SpeechSynthesisUtterance(textToRead);
+        speechUtterance.lang = 'fa-IR';
+        speechUtterance.rate = currentPlaybackRate;
+
+        speechUtterance.onstart = () => {
+          updateAudioUI(true);
+        };
+
+        speechUtterance.onend = () => {
+          handleAudioEnded();
+        };
+
+        speechUtterance.onerror = () => {
+          stopAudioNarration();
+        };
+
+        window.speechSynthesis.speak(speechUtterance);
+      }
+
+      function playPageAudio(pageNum) {
+        pageNum = parseInt(pageNum, 10) || currentPage;
+
+        if (isAudioPlaying && currentAudioPage === pageNum) {
+          stopAudioNarration();
+          return;
+        }
+
+        stopAudioNarration();
+
+        currentAudioPage = pageNum;
+        isSpeechFallback = false;
+
+        const padNum = String(pageNum).padStart(3, '0');
+        const audioPath = `assets/audio/pages/page-${padNum}.mp3`;
+
+        const badgeEl = document.getElementById('audioPageNumberBadge');
+        if (badgeEl) badgeEl.innerText = `صفحه ${pageNum}`;
+        const nowPlayingEl = document.getElementById('audiobookNowPlaying');
+        if (nowPlayingEl) nowPlayingEl.innerText = `در حال بارگذاری صوت صفحه ${pageNum}...`;
+
+        const fillEl = document.getElementById('audioProgressFill');
+        if (fillEl) fillEl.style.width = '0%';
+        const timeCur = document.getElementById('audioCurrentTime');
+        if (timeCur) timeCur.innerText = '۰۰:۰۰';
+
+        bookAudio.src = audioPath;
+        bookAudio.playbackRate = currentPlaybackRate;
+        bookAudio.preservesPitch = true;
+
+        bookAudio.play().then(() => {
+          updateAudioUI(true);
+        }).catch(err => {
+          console.info(`Audio file ${audioPath} not found, falling back to speech synthesis:`, err);
+          fallbackToSpeechSynthesis(pageNum);
+        });
+      }
+
+      function toggleAudioNarration() {
+        if (isAudioPlaying) {
+          stopAudioNarration();
+        } else {
+          playPageAudio(currentPage);
+        }
+      }
+
+      function handleAudioEnded() {
+        updateAudioUI(false);
+        const fillEl = document.getElementById('audioProgressFill');
+        if (fillEl) fillEl.style.width = '100%';
+
+        const autoAdvanceEl = document.getElementById('autoAdvanceCheckbox');
+        const shouldAutoAdvance = autoAdvanceEl ? autoAdvanceEl.checked : true;
+
+        if (shouldAutoAdvance && currentAudioPage < TOTAL_PAGES) {
+          const nextPage = currentAudioPage + 1;
+          scrollToPage(nextPage);
+          setTimeout(() => {
+            playPageAudio(nextPage);
+          }, 600);
+        }
+      }
+
+      // Audio Event Listeners
+      bookAudio.addEventListener('timeupdate', () => {
+        if (!bookAudio.duration || !isFinite(bookAudio.duration)) return;
+        const pct = (bookAudio.currentTime / bookAudio.duration) * 100;
+        const fillEl = document.getElementById('audioProgressFill');
+        if (fillEl) fillEl.style.width = `${pct}%`;
+
+        const curTimeEl = document.getElementById('audioCurrentTime');
+        const totTimeEl = document.getElementById('audioTotalDuration');
+        if (curTimeEl) curTimeEl.innerText = formatAudioTime(bookAudio.currentTime);
+        if (totTimeEl) totTimeEl.innerText = formatAudioTime(bookAudio.duration);
+      });
+
+      bookAudio.addEventListener('loadedmetadata', () => {
+        const totTimeEl = document.getElementById('audioTotalDuration');
+        if (totTimeEl && bookAudio.duration) {
+          totTimeEl.innerText = formatAudioTime(bookAudio.duration);
+        }
+      });
+
+      bookAudio.addEventListener('ended', handleAudioEnded);
+
+      bookAudio.addEventListener('error', (e) => {
+        if (bookAudio.src && !isSpeechFallback) {
+          console.warn('Audio element error, falling back to speech synthesis for page', currentAudioPage);
+          fallbackToSpeechSynthesis(currentAudioPage);
+        }
+      });
+
+      // Expose to window for inline onclick handlers
+      window.playPageAudio = playPageAudio;
+      window.stopAudioNarration = stopAudioNarration;
+      window.toggleAudioNarration = toggleAudioNarration;
+      window.setAudioSpeed = setAudioSpeed;
 
       // 4. DOM Elements Cache
       const body = document.body;
@@ -1183,11 +1400,25 @@
                   <span style="color: var(--ink-muted); font-weight: normal;">• صفحه ${pNum}</span>
                 </div>
 
-                <!-- Per-Page Bookmark Ribbon Tab -->
-                <button class="leaf-bookmark-tab ${isBookmarked ? 'bookmarked' : ''}" data-page-index="${pNum}" onclick="handleLeafBookmarkClick(${pNum})">
-                  ${isBookmarked ? ICONS.bookmarkFill : ICONS.bookmarkOutline}
-                  <span>${isBookmarked ? 'نشانک‌شده' : 'نشانک'}</span>
-                </button>
+                <div class="leaf-meta-actions">
+                  <!-- Audio Playback Button for this leaf -->
+                  <button class="leaf-audio-btn" id="leafAudioBtn-${pNum}" data-page-index="${pNum}" onclick="playPageAudio(${pNum})" title="شنیدن صدای این صفحه با هوش مصنوعی">
+                    <span id="leafAudioIcon-${pNum}">
+                      <svg class="premium-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                      </svg>
+                    </span>
+                    <span id="leafAudioText-${pNum}">صوت ص ${pNum}</span>
+                  </button>
+
+                  <!-- Per-Page Bookmark Ribbon Tab -->
+                  <button class="leaf-bookmark-tab ${isBookmarked ? 'bookmarked' : ''}" data-page-index="${pNum}" onclick="handleLeafBookmarkClick(${pNum})">
+                    ${isBookmarked ? ICONS.bookmarkFill : ICONS.bookmarkOutline}
+                    <span>${isBookmarked ? 'نشانک‌شده' : 'نشانک'}</span>
+                  </button>
+                </div>
               </div>
 
               <!-- Chapter Motif -->
@@ -1550,15 +1781,30 @@
         audioZen.setVolume(val / 100);
       });
 
-      speechRateSlider?.addEventListener('input', (e) => {
-        const val = parseInt(e.target.value, 10) / 10;
-        speechSpeed = val;
-        speechRateVal.innerText = val.toFixed(1) + 'x';
-        if (isNarrating) narrateCurrentPage();
+      // 13.1 Audiobook Scrubber & Seeking
+      const audioProgressTrack = document.getElementById('audioProgressTrack');
+      audioProgressTrack?.addEventListener('click', (e) => {
+        if (!bookAudio.duration || !isFinite(bookAudio.duration)) return;
+        const rect = audioProgressTrack.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const pct = Math.max(0, Math.min(1, clickX / rect.width));
+        bookAudio.currentTime = pct * bookAudio.duration;
       });
 
-      toggleSpeechBtn?.addEventListener('click', narrateCurrentPage);
-      mNarrationTrigger?.addEventListener('click', narrateCurrentPage);
+      // 13.2 Variable Audio Playback Speed (1.0x to 2.0x)
+      document.querySelectorAll('#audioSpeedChips .speed-chip, #mAudioSpeedChips .speed-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          const spd = chip.getAttribute('data-speed');
+          setAudioSpeed(spd);
+        });
+      });
+
+      // 13.3 Narration Toggle Triggers (Desktop Modal + Mobile Sheet)
+      toggleSpeechBtn?.addEventListener('click', toggleAudioNarration);
+      mNarrationTrigger?.addEventListener('click', () => {
+        closeAllDrawers();
+        toggleAudioNarration();
+      });
 
       // 14. Search Modal
       openSearchModalBtn?.addEventListener('click', () => {
@@ -1685,6 +1931,7 @@
       applyTheme(currentTheme);
       applyWidth(currentWidth);
       setFontSize(currentFontSize);
+      setAudioSpeed(currentPlaybackRate);
       renderScrollPages();
 
       // Scroll to previously visited page if > 1
