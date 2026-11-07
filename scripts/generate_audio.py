@@ -107,11 +107,14 @@ def prepare_speech_text(page_data):
         lines = []
         lines.append("فهرست سرفصل‌های کتاب معجزه‌گر خاموش.")
         for p in paragraphs:
-            # Clean "فصل اول: پرواز ... ۱۱" to "فصل اول: پرواز"
             clean_item = re.sub(r'\.{2,}\s*\d+', '', p).strip()
             if clean_item:
                 lines.append(clean_item + "؛")
         return " ".join(lines)
+
+    # Page 3: Preface Title Divider
+    if p_num == 3 or (p_type == "section_start" and chapter == "پیشگفتار" and not paragraphs):
+        return "پیشگفتار کتاب معجزه‌گر خاموش. چرا این اثر به نگارش درآمد؟"
 
     # General Pages
     speech_parts = []
@@ -134,6 +137,11 @@ def prepare_speech_text(page_data):
         if not callout.endswith((".", "!", "؟", "؛")):
             callout += "."
         speech_parts.append(f"نکته کلیدی: {callout}")
+
+    # Fallback if speech_parts is empty
+    if not speech_parts:
+        ch_title = title or chapter or "معجزه‌گر خاموش"
+        speech_parts.append(f"{ch_title}.")
 
     final_text = " ".join(speech_parts).strip()
     return final_text
@@ -166,70 +174,91 @@ def convert_raw_pcm_to_wav(audio_data: bytes, rate=24000, bits_per_sample=16, nu
     return header + audio_data
 
 
-def call_gemini_tts(text, api_key, voice_name="Bodi", model="gemini-3.8-flash-tts", max_retries=3):
-    """Calls Gemini TTS API and returns raw audio bytes."""
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
-    headers = {
-        "Content-Type": "application/json",
-        "X-goog-api-key": api_key
-    }
-    payload = {
-        "contents": [
-            {
-                "parts": [
-                    {
-                        "text": text
-                    }
-                ]
-            }
-        ],
-        "generationConfig": {
-            "responseModalities": ["AUDIO"],
-            "speechConfig": {
-                "voiceConfig": {
-                    "prebuiltVoiceConfig": {
-                        "voiceName": voice_name
+AVAILABLE_TTS_MODELS = [
+    "gemini-3.8-flash-tts",
+    "gemini-3.8-flash-lite-tts"
+]
+
+
+def call_gemini_tts(text, api_key, voice_name="Bodi", preferred_model=None, max_retries=2):
+    """Calls Gemini TTS API with intelligent model fallback on quota limits."""
+    models_to_try = [preferred_model] if preferred_model else list(AVAILABLE_TTS_MODELS)
+    # deduplicate while keeping order
+    seen = set()
+    models_to_try = [m for m in models_to_try if m and not (m in seen or seen.add(m))]
+
+    last_error = None
+    for model in models_to_try:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+        headers = {
+            "Content-Type": "application/json",
+            "X-goog-api-key": api_key
+        }
+        payload = {
+            "contents": [
+                {
+                    "parts": [
+                        {
+                            "text": text
+                        }
+                    ]
+                }
+            ],
+            "generationConfig": {
+                "responseModalities": ["AUDIO"],
+                "speechConfig": {
+                    "voiceConfig": {
+                        "prebuiltVoiceConfig": {
+                            "voiceName": voice_name
+                        }
                     }
                 }
             }
         }
-    }
 
-    req_data = json.dumps(payload).encode("utf-8")
+        req_data = json.dumps(payload).encode("utf-8")
 
-    for attempt in range(1, max_retries + 1):
-        try:
-            req = urllib.request.Request(url, data=req_data, headers=headers, method="POST")
-            with urllib.request.urlopen(req, timeout=90) as response:
-                resp_json = json.loads(response.read().decode("utf-8"))
-            
-            candidates = resp_json.get("candidates", [])
-            if not candidates:
-                raise ValueError("No candidates in Gemini response: " + json.dumps(resp_json))
-            
-            parts = candidates[0].get("content", {}).get("parts", [])
-            for p in parts:
-                if "inlineData" in p:
-                    b64_data = p["inlineData"].get("data", "")
-                    mime_type = p["inlineData"].get("mimeType", "audio/wav")
-                    raw_audio = base64.b64decode(b64_data)
-                    return raw_audio, mime_type
-            
-            raise ValueError("Audio inlineData not found in response: " + json.dumps(resp_json))
+        for attempt in range(1, max_retries + 1):
+            try:
+                req = urllib.request.Request(url, data=req_data, headers=headers, method="POST")
+                with urllib.request.urlopen(req, timeout=90) as response:
+                    resp_json = json.loads(response.read().decode("utf-8"))
 
-        except urllib.error.HTTPError as e:
-            err_body = e.read().decode("utf-8", errors="ignore")
-            print(f"  [Attempt {attempt}/{max_retries}] HTTP Error {e.code}: {err_body}")
-            if attempt < max_retries:
-                time.sleep(2 * attempt)
-            else:
-                raise
-        except Exception as e:
-            print(f"  [Attempt {attempt}/{max_retries}] Error: {e}")
-            if attempt < max_retries:
-                time.sleep(2 * attempt)
-            else:
-                raise
+                candidates = resp_json.get("candidates", [])
+                if not candidates:
+                    raise ValueError(f"No candidates in {model} response: " + json.dumps(resp_json))
+
+                parts = candidates[0].get("content", {}).get("parts", [])
+                for p in parts:
+                    if "inlineData" in p:
+                        b64_data = p["inlineData"].get("data", "")
+                        mime_type = p["inlineData"].get("mimeType", "audio/wav")
+                        raw_audio = base64.b64decode(b64_data)
+                        return raw_audio, mime_type, model
+
+                raise ValueError(f"Audio inlineData not found in {model} response")
+
+            except urllib.error.HTTPError as e:
+                err_body = e.read().decode("utf-8", errors="ignore")
+                last_error = f"{model}: HTTP {e.code} - {err_body[:200]}"
+                if e.code == 429:
+                    if "RESOURCE_EXHAUSTED" in err_body and ("per day" in err_body.lower() or "requests per day" in err_body.lower()):
+                        print(f"  [{model}] Daily limit reached. Trying next available model...")
+                        break
+                    else:
+                        wait_sec = 15 * attempt
+                        print(f"  [{model}] Rate limit pause: waiting {wait_sec}s...")
+                        time.sleep(wait_sec)
+                else:
+                    print(f"  [{model} attempt {attempt}] HTTP Error {e.code}")
+                    if attempt < max_retries:
+                        time.sleep(2 * attempt)
+            except Exception as e:
+                last_error = str(e)
+                if attempt < max_retries:
+                    time.sleep(2 * attempt)
+
+    raise RuntimeError(f"All TTS models failed to generate audio. Last error: {last_error}")
 
 
 def get_audio_duration_seconds(file_path):
@@ -264,7 +293,8 @@ def generate_page_audio(page_data, api_key, voice_name="Bodi", force=False):
     print(f"\n--- Generating Page {p_num:03d} (Voice: {voice_name}) ---")
     print(f"Text snippet: {speech_text[:90]}...")
 
-    raw_audio, mime_type = call_gemini_tts(speech_text, api_key, voice_name=voice_name)
+    raw_audio, mime_type, used_model = call_gemini_tts(speech_text, api_key, voice_name=voice_name)
+    print(f"  [Model: {used_model}] Audio generated ({len(raw_audio)} bytes)")
 
     # Save to temporary WAV
     temp_wav_path = os.path.join(OUTPUT_DIR, f"temp_{p_num:03d}.wav")
@@ -326,6 +356,35 @@ def update_manifest(page_num, filename, duration, size_kb, voice):
         json.dump(manifest, f, indent=2, ensure_ascii=False)
 
 
+def sync_manifest_to_html():
+    """Syncs the latest manifest data into reader.html embedded AUDIO_MANIFEST."""
+    html_path = os.path.join(ROOT_DIR, "reader.html")
+    if not os.path.exists(html_path):
+        return
+    manifest = load_manifest()
+    manifest_entries = []
+    for p_str in sorted(manifest.keys(), key=lambda x: int(x)):
+        item = manifest[p_str]
+        p = item["page"]
+        dur = round(item.get("duration", 0), 1)
+        m = int(dur // 60)
+        s = int(dur % 60)
+        lbl = f"{m}:{s:02d} دقیقه" if m > 0 else f"{s} ثانیه"
+        manifest_entries.append(f'        {p}: {{ page: {p}, duration: {dur}, label: "{lbl}" }}')
+    
+    new_manifest_js = "      const AUDIO_MANIFEST = {\n" + ",\n".join(manifest_entries) + "\n      };"
+    
+    with open(html_path, "r", encoding="utf-8") as f:
+        html = f.read()
+    
+    pattern = r"const AUDIO_MANIFEST = \{.*?\};"
+    if re.search(pattern, html, flags=re.DOTALL):
+        html = re.sub(pattern, new_manifest_js.strip(), html, count=1, flags=re.DOTALL)
+        with open(html_path, "w", encoding="utf-8") as f:
+            f.write(html)
+        print("✓ Synchronized manifest with reader.html")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Generate audiobook pages with Gemini 3.8 Flash TTS")
     parser.add_argument("--page", type=int, help="Specific page number to generate (e.g. 1)")
@@ -372,8 +431,9 @@ def main():
     for idx, p in enumerate(target_pages):
         generate_page_audio(p, api_key, voice_name=args.voice, force=args.force)
         if idx < len(target_pages) - 1:
-            time.sleep(1.0) # gentle pacing between calls
+            time.sleep(3.5) # gentle pacing between calls to respect RPM limit
 
+    sync_manifest_to_html()
     print(f"\n✓ Completed processing {len(target_pages)} page(s). Manifest updated at: {MANIFEST_PATH}")
 
 
