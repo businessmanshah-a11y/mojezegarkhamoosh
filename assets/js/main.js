@@ -266,6 +266,17 @@ function initOracle() {
 
     zenAudio.playTibetanBowl(432, 2.5);
 
+    const cardEl = document.querySelector('.oracle-card');
+    if (cardEl) {
+      cardEl.style.transform = 'scale(0.985)';
+      cardEl.style.filter = 'brightness(1.1)';
+      cardEl.style.transition = 'all 0.22s ease';
+      setTimeout(() => {
+        cardEl.style.transform = 'scale(1)';
+        cardEl.style.filter = 'none';
+      }, 240);
+    }
+
     if (quoteText) {
       quoteText.style.opacity = 0;
       setTimeout(() => {
@@ -651,31 +662,36 @@ const QUIZ_QUESTIONS = [
 const QUIZ_RESULTS = {
   peace: {
     title: "روح در تمنای آرامش و سکوت مطلق",
-    chapter: "فصل ششم: قلمرو سکوت و مراقبه (ص ۹۵) و فصل هفتم: زیستن در آتش کنون (ص ۱۱۰)",
+    chapter: "فصل ششم: قلمرو سکوت و مراقبه (ص ۹۲)",
+    startPage: 92,
     desc: "ذهن شما در این مقطع نیاز به رها کردن ترمزها و آتش‌بس با گذشته دارد. کتاب معجزه‌گر خاموش با آموزش شکاف بین افکار، شما را به سرچشمه آرامش دریاگون هدایت خواهد کرد.",
     advice: "همین امروز ۵ دقیقه تمرین تنفس سکوت را در استودیو زیر انجام دهید و فصل ششم را آغاز کنید."
   },
   destiny: {
     title: "قهرمان در آستانه کشف افسانه شخصی",
-    chapter: "فصل دوم: افسانه شخصی (ص ۱۷) و فصل چهارم: قدرت قلب (ص ۳۸)",
+    chapter: "فصل دوم: افسانه شخصی و رسالت روحی (ص ۱۴)",
+    startPage: 14,
     desc: "شما نشانه‌های تغییر بزرگ را در روح خود دریافت کرده‌اید. زمان بیدار شدن از خواب روزمرگی فرا رسیده است تا رسالتی که برای آن خلق شده‌اید را با اطمینان دنبال کنید.",
     advice: "فصل دوم را با دقت و خط به خط بخوانید و به هیچ وجه تسلیم ترس‌های اطرافیان نشوید."
   },
   wealth: {
     title: "آفریننده بیدار در پی فراوانی و تجلی",
-    chapter: "فصل سوم: آفرینش زندگی (ص ۲۴) و فصل نهم: طلب کنید، داده خواهد شد (ص ۱۵۶)",
+    chapter: "فصل سوم: آفرینش زندگی (ص ۲۱) و هنر تجلی (ص ۱۵۳)",
+    startPage: 21,
     desc: "پتانسیل مالی و تجلی شما سال‌ها در قفل باورهای کمبود خاک خورده است. با یادگیری ارتعاش درخواست و هماهنگی ناخودآگاه با جریان نعمت جهان، شگفتی‌ها آغاز خواهند شد.",
-    advice: "اصول طلب کردن در فصل نهم را تمرین کنید و قبل از خواب شکرگزاری دارایی‌های نامرئی را به جا آورید."
+    advice: "اصول طلب کردن در فصل سوم و نهم را تمرین کنید و قبل از خواب شکرگزاری دارایی‌های نامرئی را به جا آورید."
   },
   love: {
     title: "طالب یگانگی و رهایی از زخم‌های ایگو",
-    chapter: "فصل هشتم: جدال بین نفس و عشق در روابط (ص ۱۲۲)",
+    chapter: "فصل هشتم: جدال بین نفس و عشق در روابط (ص ۱۱۹)",
+    startPage: 119,
     desc: "قلب شما خواهان مهر بی‌قیدوشرط است اما نقاب‌های نفسانی در روابط مانع جریان یافتن آن شده‌اند. با درک تفاوت ایگو و عشق، التیام عمیقی در ارتباطاتتان شکل خواهد گرفت.",
     advice: "به جای تلاش برای اثبات حقانیت خود در روابط، به بخشش و درک عمیق در فصل هشتم متصل شوید."
   },
   freedom: {
     title: "پرنده بلندپرواز در اشتیاق آسمان حقیقت",
-    chapter: "فصل اول: پرواز (ص ۱۱) و فصل پایانی: آگاهی، آزادی، عشق (ص ۲۱۲)",
+    chapter: "فصل اول: پرواز و رهایی (ص ۸)",
+    startPage: 8,
     desc: "چارچوب‌های معمولی جامعه برای روح شما تنگ شده‌اند. شما آمده‌اید تا مرزها را درنوردید و همچون رودخانه‌ای آزاد، به دریای خرد بیکران ملحق گردید.",
     advice: "فصل اول کتاب را همین الان در کتابخوان آنلاین مطالعه کنید تا شوق پرواز در وجودتان شعله‌ور شود."
   }
@@ -689,6 +705,8 @@ function initQuiz() {
   const resultCard = document.getElementById('quizResultCard');
   const progressBar = document.getElementById('quizProgressFill');
   const restartBtn = document.getElementById('quizRestartBtn');
+
+  if (!container) return;
 
   function renderStep() {
     if (!container) return;
@@ -749,6 +767,18 @@ function initQuiz() {
     document.getElementById('resultChapterText').textContent = res.chapter;
     document.getElementById('resultDescText').textContent = res.desc;
     document.getElementById('resultAdviceText').textContent = res.advice;
+
+    const startBtn = document.getElementById('quizStartReadingBtn');
+    if (startBtn) {
+      startBtn.href = `reader.html?page=${res.startPage || 92}`;
+      startBtn.innerHTML = `
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+        </svg>
+        <span>شروع مطالعه در کتابخوان (صفحه ${res.startPage || 92})</span>
+      `;
+    }
 
     zenAudio.playTibetanBowl(288, 4);
   }
@@ -814,87 +844,221 @@ function initBreathingStudio() {
 
 // --- 9. Audio Teaser Player & Waveform Visualizer ---
 function initAudioShowcase() {
+  const audioElement = document.getElementById('showcaseAudio');
   const canvas = document.getElementById('waveformCanvas');
   const playBtn = document.getElementById('audioPlayBtn');
+  const playBtnText = document.getElementById('audioPlayBtnText');
+  const replayBtn = document.getElementById('audioReplayBtn');
+  const progressBarWrap = document.getElementById('audioProgressBarWrap');
   const progressBar = document.getElementById('audioProgress');
   const timeCurrent = document.getElementById('audioTimeCurrent');
   const timeTotal = document.getElementById('audioTimeTotal');
-  const lines = document.querySelectorAll('.transcript-line');
+  const pulseIndicator = document.getElementById('audioPulseIndicator');
+  const trackChips = document.querySelectorAll('#showcaseTrackChips .track-chip');
+  const trackTitle = document.getElementById('showcaseTrackTitle');
+  const quoteText = document.getElementById('showcaseQuoteText');
+  const readerLink = document.getElementById('showcaseReaderLink');
 
-  if (!canvas) return;
+  if (!canvas || !playBtn) return;
+
   const ctx = canvas.getContext('2d');
   let animationId = null;
-  let isPlaying = false;
-  let progress = 0;
-  const totalDuration = 145; // 2:25
+  const activeAudio = audioElement || new Audio('assets/audio/pages/page-013.mp3');
+  let currentExpectedDuration = 147; // Default Page 13: 2:27
+
+  function formatTime(seconds) {
+    if (!seconds || isNaN(seconds) || !isFinite(seconds)) return '0:00';
+    const m = Math.floor(seconds / 60);
+    const s = Math.floor(seconds % 60);
+    return `${m}:${s < 10 ? '0' : ''}${s}`;
+  }
+
+  function setPlayStateUI(isPlaying) {
+    if (playBtnText) {
+      playBtnText.textContent = isPlaying ? '⏸ توقف موقت' : '▶ پخش نمونه خوانش کتاب';
+    } else {
+      playBtn.textContent = isPlaying ? '⏸ توقف موقت' : '▶ پخش نمونه خوانش کتاب';
+    }
+    if (pulseIndicator) {
+      pulseIndicator.classList.toggle('playing', isPlaying);
+    }
+  }
+
+  function updateTimesAndProgress() {
+    const cur = activeAudio.currentTime || 0;
+    const dur = (activeAudio.duration && isFinite(activeAudio.duration) && activeAudio.duration > 0)
+      ? activeAudio.duration
+      : currentExpectedDuration;
+
+    if (timeCurrent) timeCurrent.textContent = formatTime(cur);
+    if (timeTotal) timeTotal.textContent = formatTime(dur);
+
+    const pct = Math.min(100, Math.max(0, (cur / dur) * 100));
+    if (progressBar) progressBar.style.width = `${pct}%`;
+  }
 
   function drawWaveform() {
-    canvas.width = canvas.parentElement.clientWidth || 600;
-    canvas.height = 80;
+    canvas.width = canvas.parentElement.clientWidth || 500;
+    canvas.height = 52;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const bars = Math.floor(canvas.width / 6);
+    const bars = Math.floor(canvas.width / 7);
     const step = canvas.width / bars;
 
-    for (let i = 0; i < bars; i++) {
-      const percent = i / bars;
-      const isPast = percent <= (progress / totalDuration);
-      ctx.fillStyle = isPast ? 'rgba(229, 184, 90, 0.9)' : 'rgba(255, 255, 255, 0.15)';
+    const cur = activeAudio.currentTime || 0;
+    const dur = (activeAudio.duration && isFinite(activeAudio.duration) && activeAudio.duration > 0)
+      ? activeAudio.duration
+      : currentExpectedDuration;
+    const currentFraction = Math.min(1, cur / dur);
+    const isPlaying = !activeAudio.paused && !activeAudio.ended;
 
-      let height = 20 + Math.sin(i * 0.2 + Date.now() * 0.005) * 18;
-      if (!isPlaying) height = 15 + Math.sin(i * 0.3) * 12;
+    for (let i = 0; i < bars; i++) {
+      const barPercent = i / bars;
+      const isPast = barPercent <= currentFraction;
+      ctx.fillStyle = isPast ? 'rgba(229, 184, 90, 0.95)' : 'rgba(255, 255, 255, 0.16)';
+
+      let height;
+      if (isPlaying) {
+        height = 14 + Math.sin(i * 0.28 + Date.now() * 0.007) * 16 + Math.cos(i * 0.5) * 8;
+      } else {
+        height = 10 + Math.sin(i * 0.35) * 10;
+      }
+      height = Math.max(6, Math.min(canvas.height - 8, height));
 
       const y = (canvas.height - height) / 2;
-      ctx.fillRect(i * step, y, 3, height);
+      ctx.fillRect(i * step, y, 3.5, height);
     }
 
     if (isPlaying) {
-      progress += 0.05;
-      if (progress >= totalDuration) {
-        progress = 0;
-        isPlaying = false;
-        if (playBtn) playBtn.innerHTML = '▶ پخش نمونه صوتی';
-      }
-      updateTimeDisplay();
-      updateTranscript();
+      updateTimesAndProgress();
       animationId = requestAnimationFrame(drawWaveform);
     }
   }
 
-  function updateTimeDisplay() {
-    const mins = Math.floor(progress / 60);
-    const secs = Math.floor(progress % 60);
-    if (timeCurrent) timeCurrent.textContent = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-    if (progressBar) progressBar.style.width = `${(progress / totalDuration) * 100}%`;
-  }
+  // Audio Event Listeners
+  activeAudio.addEventListener('play', () => {
+    setPlayStateUI(true);
+    cancelAnimationFrame(animationId);
+    animationId = requestAnimationFrame(drawWaveform);
+  });
 
-  function updateTranscript() {
-    const activeIndex = Math.min(Math.floor(progress / 28), lines.length - 1);
-    lines.forEach((l, i) => {
-      if (i === activeIndex) {
-        l.classList.add('active');
-      } else {
-        l.classList.remove('active');
-      }
-    });
-  }
+  activeAudio.addEventListener('pause', () => {
+    setPlayStateUI(false);
+    cancelAnimationFrame(animationId);
+    drawWaveform();
+  });
 
-  if (playBtn) {
-    playBtn.addEventListener('click', () => {
-      isPlaying = !isPlaying;
-      if (isPlaying) {
-        playBtn.innerHTML = '⏸ توقف موقت';
-        zenAudio.startAmbient('meditation');
+  activeAudio.addEventListener('ended', () => {
+    setPlayStateUI(false);
+    if (playBtnText) playBtnText.textContent = '▶ پخش مجدد نمونه';
+    cancelAnimationFrame(animationId);
+    if (progressBar) progressBar.style.width = '100%';
+    drawWaveform();
+  });
+
+  activeAudio.addEventListener('timeupdate', () => {
+    updateTimesAndProgress();
+  });
+
+  activeAudio.addEventListener('loadedmetadata', () => {
+    if (activeAudio.duration && isFinite(activeAudio.duration)) {
+      currentExpectedDuration = activeAudio.duration;
+      if (timeTotal) timeTotal.textContent = formatTime(activeAudio.duration);
+    }
+    updateTimesAndProgress();
+  });
+
+  // Play / Pause Toggle
+  playBtn.addEventListener('click', () => {
+    if (activeAudio.paused || activeAudio.ended) {
+      activeAudio.play().then(() => {
+        setPlayStateUI(true);
         drawWaveform();
-      } else {
-        playBtn.innerHTML = '▶ ادامه پخش';
-        zenAudio.stopAmbient();
-        cancelAnimationFrame(animationId);
-      }
+      }).catch(err => {
+        console.warn('Audio play error:', err);
+      });
+    } else {
+      activeAudio.pause();
+      setPlayStateUI(false);
+    }
+  });
+
+  // Replay Button
+  if (replayBtn) {
+    replayBtn.addEventListener('click', () => {
+      activeAudio.currentTime = 0;
+      activeAudio.play().then(() => {
+        setPlayStateUI(true);
+        drawWaveform();
+      }).catch(() => {});
     });
   }
 
+  // Interactive Seeking on Progress Bar
+  if (progressBarWrap) {
+    progressBarWrap.addEventListener('click', (e) => {
+      const rect = progressBarWrap.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const pct = Math.max(0, Math.min(1, clickX / rect.width));
+      const dur = (activeAudio.duration && isFinite(activeAudio.duration) && activeAudio.duration > 0)
+        ? activeAudio.duration
+        : currentExpectedDuration;
+
+      activeAudio.currentTime = pct * dur;
+      updateTimesAndProgress();
+      drawWaveform();
+    });
+  }
+
+  // Track Selector Chips
+  trackChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      if (chip.classList.contains('active')) return;
+
+      trackChips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+
+      const src = chip.getAttribute('data-src');
+      const page = chip.getAttribute('data-page');
+      const duration = parseFloat(chip.getAttribute('data-duration') || '147');
+      const title = chip.getAttribute('data-title');
+      const quote = chip.getAttribute('data-quote');
+
+      const wasPlaying = !activeAudio.paused && !activeAudio.ended;
+
+      if (trackTitle && title && page) {
+        trackTitle.textContent = `پیش‌نمایش کتاب صوتی (${title} — صفحه ${page})`;
+      }
+      if (quoteText && quote) {
+        quoteText.textContent = quote;
+      }
+      if (readerLink && page) {
+        readerLink.href = `reader.html?page=${page}`;
+      }
+
+      currentExpectedDuration = duration;
+      if (timeTotal) timeTotal.textContent = formatTime(duration);
+
+      activeAudio.src = src;
+      activeAudio.currentTime = 0;
+      updateTimesAndProgress();
+
+      if (wasPlaying) {
+        activeAudio.play().then(() => {
+          setPlayStateUI(true);
+          drawWaveform();
+        }).catch(() => {});
+      } else {
+        setPlayStateUI(false);
+        drawWaveform();
+      }
+    });
+  });
+
+  // Initial draw & metadata trigger
+  updateTimesAndProgress();
   drawWaveform();
+  window.addEventListener('resize', drawWaveform);
 }
 
 // --- 10. Reviews & Realtime Submission System ---
@@ -928,6 +1092,8 @@ function initReviews() {
   const modal = document.getElementById('reviewModalOverlay');
   const closeBtn = document.getElementById('closeReviewModalBtn');
   const form = document.getElementById('reviewSubmitForm');
+
+  if (!container && !openModalBtn) return;
 
   // Load from LocalStorage
   let stored = JSON.parse(localStorage.getItem('mojeze_reviews') || 'null');
@@ -1009,6 +1175,8 @@ function initCountdown() {
   const hoursEl = document.getElementById('timerHours');
   const minutesEl = document.getElementById('timerMinutes');
   const secondsEl = document.getElementById('timerSeconds');
+
+  if (!hoursEl && !minutesEl && !secondsEl) return;
 
   let remaining = 24 * 3600 - (Date.now() % (24 * 3600 * 1000) / 1000);
 
@@ -1096,31 +1264,158 @@ function showToast(message, duration = 3500) {
   }, duration);
 }
 
-// --- 15. Header Scroll & Mobile Nav ---
+// --- 15. Header Scroll & Mobile Navigation System ---
 function initNavigation() {
   const header = document.querySelector('.site-header');
-  const toggleBtn = document.getElementById('menuToggleBtn');
-  const mainNav = document.getElementById('mainNav');
 
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) {
+    if (window.scrollY > 30) {
       header?.classList.add('scrolled');
     } else {
       header?.classList.remove('scrolled');
     }
+  }, { passive: true });
+}
+
+// --- 16. Luxury Fullscreen Mobile Drawer ---
+function initMobileDrawer() {
+  const toggleBtn = document.getElementById('menuToggleBtn');
+  const overlay = document.getElementById('mobileDrawerOverlay');
+  const closeBtn = document.getElementById('drawerCloseBtn');
+  const drawerLinks = document.querySelectorAll('.drawer-link');
+
+  function openDrawer() {
+    if (overlay && toggleBtn) {
+      overlay.classList.add('active');
+      toggleBtn.classList.add('active');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      zenAudio.playTibetanBowl(360, 1.2);
+    }
+  }
+
+  function closeDrawer() {
+    if (overlay && toggleBtn) {
+      overlay.classList.remove('active');
+      toggleBtn.classList.remove('active');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+  }
+
+  window.closeMobileDrawer = closeDrawer;
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (overlay?.classList.contains('active')) {
+        closeDrawer();
+      } else {
+        openDrawer();
+      }
+    });
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeDrawer);
+  }
+
+  if (overlay) {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        closeDrawer();
+      }
+    });
+  }
+
+  drawerLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      closeDrawer();
+    });
   });
 
-  if (toggleBtn && mainNav) {
-    toggleBtn.addEventListener('click', () => {
-      mainNav.classList.toggle('open');
-    });
-    mainNav.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', () => mainNav.classList.remove('open'));
-    });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay?.classList.contains('active')) {
+      closeDrawer();
+    }
+  });
+}
+
+// --- 17. Mobile Floating Reader Pill ---
+function initFloatingReaderPill() {
+  const pill = document.getElementById('mobileFloatingPill');
+  if (!pill) return;
+
+  window.addEventListener('scroll', () => {
+    if (window.innerWidth <= 768) {
+      if (window.scrollY > 280) {
+        pill.classList.add('visible');
+      } else {
+        pill.classList.remove('visible');
+      }
+    } else {
+      pill.classList.remove('visible');
+    }
+  }, { passive: true });
+}
+
+// --- 18. Spiritual Celestial Preloader ---
+function initPreloader() {
+  const preloader = document.getElementById('spiritualPreloader');
+  const barFill = document.getElementById('preloaderBarFill');
+  const quoteEl = document.getElementById('preloaderQuoteText');
+  if (!preloader) return;
+
+  const quotes = [
+    '«در خاموشی، معجزه رخ می‌دهد...»',
+    '«سکوت تنها صدای خداست...»',
+    '«پرواز را بیاموز و اقیانوس درونت را کشف کن...»',
+    '«در شکاف بین دو اندیشه، معجزه‌ها زاده می‌شوند...»'
+  ];
+
+  let progress = 25;
+  if (barFill) barFill.style.width = '25%';
+
+  const progressInterval = setInterval(() => {
+    progress += Math.floor(Math.random() * 20) + 12;
+    if (progress > 92) progress = 92;
+    if (barFill) barFill.style.width = `${progress}%`;
+  }, 120);
+
+  let qIndex = 0;
+  const quoteInterval = setInterval(() => {
+    qIndex = (qIndex + 1) % quotes.length;
+    if (quoteEl) {
+      quoteEl.style.opacity = '0';
+      setTimeout(() => {
+        quoteEl.textContent = quotes[qIndex];
+        quoteEl.style.opacity = '1';
+      }, 200);
+    }
+  }, 1400);
+
+  const completePreloader = () => {
+    clearInterval(progressInterval);
+    clearInterval(quoteInterval);
+    if (barFill) barFill.style.width = '100%';
+
+    setTimeout(() => {
+      preloader.classList.add('fade-out');
+      setTimeout(() => {
+        preloader.style.display = 'none';
+      }, 650);
+    }, 280);
+  };
+
+  if (document.readyState === 'complete') {
+    completePreloader();
+  } else {
+    window.addEventListener('load', completePreloader);
+    setTimeout(completePreloader, 1600); // Safety fallback
   }
 }
 
-// --- 16. Download Modal Triggers ---
+// --- 19. Download Modal Triggers ---
 function openDownloadModal() {
   const modal = document.getElementById('downloadModalOverlay');
   if (modal) {
@@ -1136,12 +1431,14 @@ function closeDownloadModal() {
 
 // --- Initialize Everything On DOM Ready ---
 document.addEventListener('DOMContentLoaded', () => {
+  initPreloader();
   initTheme();
   initNavigation();
+  initMobileDrawer();
+  initFloatingReaderPill();
   init3DTilt();
   initOracle();
   initChapters();
-  initReaderControls();
   initQuiz();
   initBreathingStudio();
   initAudioShowcase();

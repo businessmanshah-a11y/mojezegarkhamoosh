@@ -52,17 +52,44 @@
   }
   </script>
 
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D4AF37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z'/><path d='M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z'/></svg>">
+
   <!-- CSS Stylesheet -->
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css?v=iransans_v2">
 </head>
 <body>
+
+  <!-- ================= Spiritual Celestial Preloader ================= -->
+  <div class="preloader" id="spiritualPreloader" aria-hidden="true">
+    <div class="preloader-bg-aurora"></div>
+    <div class="preloader-card">
+      <div class="preloader-symbol-wrap">
+        <div class="preloader-outer-ring"></div>
+        <div class="preloader-middle-ring"></div>
+        <div class="preloader-center-orb">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+          </svg>
+        </div>
+      </div>
+      <div class="preloader-title">معجزه‌گر خاموش</div>
+      <div class="preloader-quote" id="preloaderQuoteText">«در خاموشی، معجزه رخ می‌دهد...»</div>
+      <div class="preloader-bar-wrap">
+        <div class="preloader-bar-fill" id="preloaderBarFill"></div>
+      </div>
+      <div class="preloader-subtext">پاراگراف‌های زندگی‌ساز • در حال گشودن دروازه آگاهی</div>
+    </div>
+  </div>
 
   <!-- ================= Site Header ================= -->
   <header class="site-header" id="siteHeader">
     <div class="container header-container">
+      <!-- Right: Brand Logo -->
       <a href="#hero" class="brand-logo" aria-label="صفحه اصلی معجزه‌گر خاموش">
         <div class="brand-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
             <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
             <circle cx="12" cy="9" r="2" fill="currentColor"></circle>
@@ -74,24 +101,33 @@
         </div>
       </a>
 
-      <!-- Main Navigation -->
+      <!-- Center: Streamlined Desktop Navigation -->
       <nav class="main-nav" id="mainNav">
-        <a href="reader.html" class="nav-link" style="color: var(--text-gold); font-weight: 700;"><span style="display:inline-flex;align-items:center;gap:6px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>کتابخوان آنلاین (۲۴۱ صفحه کامل)</span></span></a>
-        <a href="#oracle" class="nav-link">الهام روزانه</a>
-        <a href="#chapters" class="nav-link">سرفصل‌ها</a>
-        <a href="#quiz" class="nav-link">آزمون خودشناسی</a>
-        <a href="#zenStudio" class="nav-link">اتاق سکوت</a>
-        <a href="#audioShowcase" class="nav-link">کتاب صوتی</a>
-        <a href="#reviews" class="nav-link">نظرات خوانندگان</a>
-        <a href="#pricing" class="nav-link">تهیه کتاب</a>
-        <a href="#faq" class="nav-link">پرسش‌ها</a>
+        <a href="#oracle" class="nav-link"><span>الهام روزانه</span></a>
+        <a href="#chapters" class="nav-link"><span>سرفصل‌های کتاب</span></a>
+        <a href="#zenChamber" class="nav-link"><span>اتاق سکوت و صوت</span></a>
+        <a href="#pricing" class="nav-link"><span>تهیه کتاب</span></a>
       </nav>
 
-      <!-- Quick Actions -->
+      <!-- Left: Header Actions -->
       <div class="header-actions">
+        <!-- Prominent Online Reader Pill CTA -->
+        <a href="reader.html" class="reader-pill-cta" title="ورود به کتابخوان آنلاین ۲۴۱ صفحه کامل">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+          <span>کتابخوان آنلاین (۲۴۱ صفحه)</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </a>
+
         <!-- Ambient Sound Toggle -->
         <button class="icon-btn" id="globalAmbientBtn" aria-label="پخش نوای سکوت و مراقبه" title="پخش نوای مراقبه و سکوت">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <span class="ambient-waves-icon" id="headerAmbientWave">
+            <span></span><span></span><span></span>
+          </span>
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
             <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
           </svg>
@@ -99,7 +135,7 @@
 
         <!-- Theme Mode Toggle -->
         <button class="icon-btn" id="themeToggleBtn" aria-label="تغییر حالت پوسته" title="تغییر تم (شب / روز / سپیا)">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="5"></circle>
             <line x1="12" y1="1" x2="12" y2="3"></line>
             <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -112,29 +148,98 @@
           </svg>
         </button>
 
-        <!-- Primary CTA -->
-        <a href="#pricing" class="btn btn-primary btn-sm btn-glow">
-          <span>خرید کتاب</span>
-        </a>
-
-        <!-- Mobile Menu Hamburger -->
-        <button class="menu-toggle" id="menuToggleBtn" aria-label="باز کردن منو">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
+        <!-- Mobile Menu Toggle Button (Morphing) -->
+        <button class="menu-toggle-btn" id="menuToggleBtn" aria-label="باز کردن منو" aria-expanded="false">
+          <span class="hamburger-bar bar-1"></span>
+          <span class="hamburger-bar bar-2"></span>
+          <span class="hamburger-bar bar-3"></span>
         </button>
       </div>
     </div>
   </header>
+
+  <!-- ================= Luxury Fullscreen Mobile Drawer ================= -->
+  <div class="mobile-drawer-overlay" id="mobileDrawerOverlay">
+    <div class="mobile-drawer" id="mobileDrawer">
+      <div class="drawer-header">
+        <div class="brand-logo">
+          <div class="brand-icon small">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+          </div>
+          <span class="brand-name">معجزه‌گر خاموش</span>
+        </div>
+        <button class="drawer-close-btn" id="drawerCloseBtn" aria-label="بستن منو">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="drawer-featured-banner">
+        <div class="drawer-featured-badge">پیشنهاد ویژه</div>
+        <h4 class="drawer-featured-title">کتابخوان آنلاین اختصاصی</h4>
+        <p class="drawer-featured-desc">مطالعه ۲۴۱ صفحه کامل با تنظیم فونت ایران‌سنس و حالت کاغذ کرم</p>
+        <a href="reader.html" class="btn btn-primary btn-sm w-100">
+          <span>ورود به کتابخوان آنلاین</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </a>
+      </div>
+
+      <nav class="drawer-nav">
+        <a href="#oracle" class="drawer-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          <span>فال و الهام روزانه</span>
+        </a>
+        <a href="#chapters" class="drawer-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+          <span>سرفصل‌های ۱۱ گانه کتاب</span>
+        </a>
+        <a href="#zenChamber" class="drawer-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          <span>اتاق سکوت و نوای کتاب</span>
+        </a>
+        <a href="#pricing" class="drawer-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+          <span>تهیه و مطالعه کتاب</span>
+        </a>
+      </nav>
+
+      <div class="drawer-footer">
+        <button class="btn btn-secondary w-100" onclick="openDownloadModal(); closeMobileDrawer();">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>دانلود مستقیم فایل PDF</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Mobile Floating Reader Pill ================= -->
+  <aside class="mobile-floating-pill" id="mobileFloatingPill">
+    <a href="reader.html" class="floating-reader-btn" aria-label="ورود سریع به کتابخوان آنلاین">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span class="float-pulse-dot"></span>
+        <span class="float-text"><strong>کتابخوان آنلاین</strong> • مطالعه ۲۴۱ صفحه کامل</span>
+      </div>
+      <span class="float-arrow">←</span>
+    </a>
+  </aside>
 
   <!-- ================= Hero Section ================= -->
   <section class="hero-section" id="hero">
     <div class="hero-bg-glow"></div>
     <div class="container hero-grid">
       <div class="hero-content">
-        <div class="hero-badge-wrap">
+        <div class="hero-badge-wrap hero-stagger-1">
           <div class="hero-badge">
             <span class="hero-pulse"></span>
             <span>پرفروش‌ترین و دگرگون‌کننده‌ترین کتاب خودشناسی سال</span>
@@ -142,43 +247,45 @@
           <span style="font-size: 0.813rem; color: var(--text-muted);">چاپ سی و دوم • انتشارات سخنوران</span>
         </div>
 
-        <h1 class="hero-title">
-          <span class="gradient-text">معجزه‌گر خاموش</span><br>
-          پاراگراف‌های زندگی‌ساز
+        <h1 class="hero-title hero-stagger-2">
+          معجزه‌گر خاموش<br>
+          <span style="font-size: 0.82em; font-weight: 700; color: var(--text-secondary);">پاراگراف‌های زندگی‌ساز</span>
         </h1>
 
-        <div class="hero-author">
+        <div class="hero-author hero-stagger-3">
           <span>نویسنده:</span>
           <strong>سید رضا حیات‌الغیب</strong>
           <span>•</span>
           <span>الهام گرفته از بیش از ۱۰۰ کتاب برتر جهان</span>
         </div>
 
-        <div class="hero-quote-highlight">
+        <div class="hero-quote-highlight hero-stagger-4">
           «اگر قرار باشد در کل زندگیتان فقط یک کتاب بخوانید، باید این کتاب را انتخاب کنید! کتابی که در خاموشی معجزه می‌کند، پرواز را به شما می‌آموزد و اقیانوس درونتان را آشکار می‌سازد.»
         </div>
 
-        <div class="hero-actions">
-          <button class="btn btn-primary btn-lg btn-glow" onclick="openDownloadModal()">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7 10 12 15 17 10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-            <span>دانلود رایگان فایل PDF کتاب</span>
-          </button>
-
-          <a href="reader.html" class="btn btn-secondary btn-lg">
+        <div class="hero-actions hero-stagger-5">
+          <a href="reader.html" class="btn btn-primary btn-xl hero-main-cta">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
               <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
             </svg>
-            <span>ورود به کتابخوان آنلاین (۲۴۱ صفحه کامل)</span>
+            <span>ورود به کتابخوان آنلاین</span>
+            <span class="btn-sub-badge">۲۴۱ صفحه کامل</span>
           </a>
+
+          <button class="btn btn-secondary btn-xl hero-secondary-cta" onclick="openDownloadModal()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>دانلود رایگان PDF</span>
+            <span class="btn-size-tag">۶۵ مگابایت</span>
+          </button>
         </div>
 
         <!-- Social Proof Metrics -->
-        <div class="hero-metrics">
+        <div class="hero-metrics hero-stagger-6">
           <div class="metric-item">
             <span class="metric-value">۴۵,۰۰۰+</span>
             <span class="metric-label">خواننده تحول‌یافته</span>
@@ -199,7 +306,7 @@
       </div>
 
       <!-- 3D Interactive Book Showcase -->
-      <div class="hero-book-wrap">
+      <div class="hero-book-wrap hero-stagger-4">
         <div class="floating-badge badge-top">
           <div class="badge-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
           <div>
@@ -224,87 +331,61 @@
     </div>
   </section>
 
-  <!-- ================= Daily Miracle & Oracle Section ================= -->
+  <!-- ================= Section 1: Visual Oracle & Daily Wisdom ================= -->
   <section class="section oracle-section" id="oracle">
     <div class="container">
-      <div class="section-header">
-        <span class="section-tag">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-          </svg>
-          فال روزانه و پاراگراف زندگی‌ساز
-        </span>
-        <h2 class="section-title">در این لحظه، جهان چه پیامی برای قلب شما دارد؟</h2>
-        <p class="section-subtitle">
-          بر روی دکمه دریافت الهام کلیک کنید تا یک پاراگراف دگرگون‌کننده از اعماق کتاب معجزه‌گر خاموش، متناسب با حال درونی‌تان برای شما گشوده شود.
-        </p>
-      </div>
-
-      <div class="oracle-card-container">
-        <!-- Topic Filters -->
-        <div class="oracle-filters">
-          <button class="filter-chip active" data-category="all">همه موضوعات</button>
-          <button class="filter-chip" data-category="freedom">پرواز و رهایی</button>
-          <button class="filter-chip" data-category="destiny">افسانه شخصی و رسالت</button>
-          <button class="filter-chip" data-category="wealth">آفرینش و تجلی</button>
-          <button class="filter-chip" data-category="heart">قدرت قلب و شهود</button>
-          <button class="filter-chip" data-category="peace">سکوت و مراقبه</button>
-          <button class="filter-chip" data-category="presence">آتش اکنون</button>
-          <button class="filter-chip" data-category="love">عشق در روابط</button>
-          <button class="filter-chip" data-category="wisdom">اقیانوس آگاهی</button>
+      <div class="visual-split">
+        <!-- Visual Artwork A -->
+        <div class="visual-artwork-wrap">
+          <img src="assets/images/oracle-celestial.jpg" alt="دروازه خرد و الهام معجزه‌گر خاموش" class="visual-artwork-img" loading="lazy">
+          <div class="visual-artwork-overlay"></div>
+          <span class="visual-artwork-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <span>دروازه الهام و آگاهی</span>
+          </span>
         </div>
 
-        <!-- Oracle Display Card -->
+        <!-- Interactive Oracle Card B -->
         <div class="oracle-card">
-          <div class="oracle-icon-glow">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 20px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--text-gold);">
               <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07l14.14-14.14"></path>
             </svg>
+            <h2 class="oracle-title">پیام کائنات برای قلب شما</h2>
           </div>
 
           <p class="oracle-quote-text" id="oracleQuoteText">
-            در حال بارگذاری کلام معجزه‌گر...
+            در حال دریافت الهام...
           </p>
 
-          <div class="oracle-meta" id="oracleMetaText">
-            <span style="display:inline-flex;align-items:center;gap:6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>فصل اول: پرواز</span></span>
+          <div class="oracle-meta" id="oracleMetaText" style="margin-bottom: 24px;">
+            <span>فصل اول: پرواز • صفحه ۸</span>
           </div>
 
-          <div class="oracle-actions">
-            <a href="reader.html?page=8" class="btn btn-primary btn-glow" id="readInReaderBtn" style="text-decoration: none;">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <div class="oracle-actions" style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+            <a href="reader.html?page=8" class="btn btn-primary" id="readInReaderBtn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
                 <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
               </svg>
-              <span id="readInReaderBtnText">مطالعه این بخش در کتابخوان (صفحه ۸)</span>
+              <span id="readInReaderBtnText">مطالعه این صفحه در کتابخوان</span>
             </a>
 
-            <button class="btn btn-secondary" id="rollOracleBtn">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <button class="btn btn-secondary" id="rollOracleBtn" title="دریافت الهام دیگر">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="23 4 23 10 17 10"></polyline>
                 <polyline points="1 20 1 14 7 14"></polyline>
                 <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
               </svg>
-              <span>دریافت الهام دیگر</span>
+              <span>الهام دیگر</span>
             </button>
 
-            <button class="btn btn-secondary" id="copyOracleBtn">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <button class="btn btn-secondary" id="copyOracleBtn" title="کپی متن پاراگراف">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                 <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
               </svg>
-              <span>کپی پاراگراف</span>
-            </button>
-
-            <button class="btn btn-secondary" id="shareOracleBtn">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="18" cy="5" r="3"></circle>
-                <circle cx="6" cy="12" r="3"></circle>
-                <circle cx="18" cy="19" r="3"></circle>
-                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-              </svg>
-              <span>اشتراک در تلگرام</span>
+              <span>کپی</span>
             </button>
           </div>
         </div>
@@ -312,173 +393,294 @@
     </div>
   </section>
 
-  <!-- ================= 11-Chapter Master Explorer ================= -->
+  <!-- ================= Section 2: The 11 Chapters Visual Strip ================= -->
   <section class="section" id="chapters">
     <div class="container">
-      <div class="section-header">
-        <span class="section-tag">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="8" y1="6" x2="21" y2="6"></line>
-            <line x1="8" y1="12" x2="21" y2="12"></line>
-            <line x1="8" y1="18" x2="21" y2="18"></line>
-            <line x1="3" y1="6" x2="3.01" y2="6"></line>
-            <line x1="3" y1="12" x2="3.01" y2="12"></line>
-            <line x1="3" y1="18" x2="3.01" y2="18"></line>
-          </svg>
-          فهرست جامع اثر
-        </span>
-        <h2 class="section-title">کاوشگر ۱۱ فصل کتاب معجزه‌گر خاموش</h2>
+      <div class="section-header" style="text-align: center; max-width: 680px; margin: 0 auto 36px auto;">
+        <h2 class="section-title">سرفصل‌های ۱۱ گانه کتاب معجزه‌گر خاموش</h2>
         <p class="section-subtitle">
-          هر فصل از این کتاب دریچه‌ای است به یک قلمرو شگفت‌انگیز از وجود آدمی؛ از پرواز و رهایی تا کشف افسانه شخصی و ورود به قلمرو سکوت.
-        </p>
-
-        <!-- Chapter Filter and Search Controls -->
-        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 30px;">
-          <input type="text" id="chapterSearchInput" class="form-input" placeholder="جستجو در موضوعات فصول..." style="max-width: 320px; text-align: right;">
-          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <button class="filter-chip chapter-tab active" data-tab="all">همه ۱۱ فصل</button>
-            <button class="filter-chip chapter-tab" data-tab="peace">آرامش و سکوت</button>
-            <button class="filter-chip chapter-tab" data-tab="destiny">افسانه شخصی</button>
-            <button class="filter-chip chapter-tab" data-tab="freedom">پرواز و رهایی</button>
-            <button class="filter-chip chapter-tab" data-tab="wealth">آفرینش و ثروت</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Dynamic Chapters Grid -->
-      <div class="chapters-grid" id="chaptersGrid"></div>
-    </div>
-  </section>
-
-  <!-- ================= Self-Discovery Spiritual Quiz ================= -->
-  <section class="section" id="quiz" style="background: linear-gradient(180deg, transparent 0%, rgba(15, 22, 36, 0.7) 50%, transparent 100%);">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"></circle>
-            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-            <line x1="12" y1="17" x2="12.01" y2="17"></line>
-          </svg>
-          آزمون هوشمند درونی
-        </span>
-        <h2 class="section-title">کدام فصل این کتاب در حال حاضر دوای روح شماست؟</h2>
-        <p class="section-subtitle">
-          با پاسخ به ۴ سوال کوتاه و تامل‌برانگیز، نیاز بنیادین روحی خود را کشف کرده و سفر مطالعه‌تان را از موثرترین نقطه آغاز کنید.
+          روی هر فصل کلیک کنید تا مستقیماً به صفحه آغازین آن در کتابخوان آنلاین هدایت شوید.
         </p>
       </div>
 
-      <div class="quiz-container">
-        <!-- Progress Bar -->
-        <div class="quiz-progress-bar">
-          <div class="quiz-progress-fill" id="quizProgressFill"></div>
-        </div>
-
-        <!-- Dynamic Step Container -->
-        <div id="quizStepContainer"></div>
-
-        <!-- Dynamic Result Card -->
-        <div class="quiz-result-card" id="quizResultCard">
-          <span class="result-badge" id="resultBadgeText">تحلیل ارتعاش درونی شما</span>
-          <h3 class="result-title" id="resultChapterText">فصل ششم: قلمرو سکوت و مراقبه</h3>
-          <p class="result-desc" id="resultDescText"></p>
-          <div style="padding: 16px; background: rgba(229, 184, 90, 0.1); border-radius: var(--radius-md); margin-bottom: 24px;">
-            <strong style="color: var(--text-gold);">توصیه اختصاصی برای شما:</strong>
-            <p id="resultAdviceText" style="margin-top: 6px; font-size: 0.95rem;"></p>
+      <div class="compact-chapters-grid">
+        <a href="reader.html?page=8" class="compact-chapter-card">
+          <div class="compact-ch-top">
+            <span class="compact-ch-num">فصل اول</span>
+            <span class="compact-ch-page">صفحه ۸ تا ۱۳</span>
           </div>
-          <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
-            <button class="btn btn-primary" onclick="openReader(3)">
-              <span>شروع مطالعه این فصل در کتابخوان</span>
-            </button>
-            <button class="btn btn-secondary" id="quizRestartBtn">
-              <span>انجام مجدد آزمون</span>
-            </button>
+          <div class="compact-ch-title">پرواز (رهایی از باورهای محدود)</div>
+          <div class="compact-ch-action">
+            <span>شروع مطالعه در کتابخوان</span>
+            <span>←</span>
           </div>
-        </div>
+        </a>
+
+        <a href="reader.html?page=14" class="compact-chapter-card">
+          <div class="compact-ch-top">
+            <span class="compact-ch-num">فصل دوم</span>
+            <span class="compact-ch-page">صفحه ۱۴ تا ۲۰</span>
+          </div>
+          <div class="compact-ch-title">افسانه شخصی (کشف مأموریت روحی)</div>
+          <div class="compact-ch-action">
+            <span>شروع مطالعه در کتابخوان</span>
+            <span>←</span>
+          </div>
+        </a>
+
+        <a href="reader.html?page=21" class="compact-chapter-card">
+          <div class="compact-ch-top">
+            <span class="compact-ch-num">فصل سوم</span>
+            <span class="compact-ch-page">صفحه ۲۱ تا ۳۴</span>
+          </div>
+          <div class="compact-ch-title">آفرینش زندگی (معماری سرنوشت)</div>
+          <div class="compact-ch-action">
+            <span>شروع مطالعه در کتابخوان</span>
+            <span>←</span>
+          </div>
+        </a>
+
+        <a href="reader.html?page=35" class="compact-chapter-card">
+          <div class="compact-ch-top">
+            <span class="compact-ch-num">فصل چهارم</span>
+            <span class="compact-ch-page">صفحه ۳۵ تا ۴۲</span>
+          </div>
+          <div class="compact-ch-title">قدرت قلب (قطب‌نمای درون)</div>
+          <div class="compact-ch-action">
+            <span>شروع مطالعه در کتابخوان</span>
+            <span>←</span>
+          </div>
+        </a>
+
+        <a href="reader.html?page=43" class="compact-chapter-card">
+          <div class="compact-ch-top">
+            <span class="compact-ch-num">فصل پنجم</span>
+            <span class="compact-ch-page">صفحه ۴۳ تا ۹۱</span>
+          </div>
+          <div class="compact-ch-title">شهود و مکاشفه (ارتباط با خرد کل)</div>
+          <div class="compact-ch-action">
+            <span>شروع مطالعه در کتابخوان</span>
+            <span>←</span>
+          </div>
+        </a>
+
+        <a href="reader.html?page=92" class="compact-chapter-card">
+          <div class="compact-ch-top">
+            <span class="compact-ch-num">فصل ششم</span>
+            <span class="compact-ch-page">صفحه ۹۲ تا ۱۰۰</span>
+          </div>
+          <div class="compact-ch-title">قلمرو سکوت و مراقبه (سرچشمه معجزات)</div>
+          <div class="compact-ch-action">
+            <span>شروع مطالعه در کتابخوان</span>
+            <span>←</span>
+          </div>
+        </a>
+
+        <a href="reader.html?page=101" class="compact-chapter-card">
+          <div class="compact-ch-top">
+            <span class="compact-ch-num">فصل هفتم</span>
+            <span class="compact-ch-page">صفحه ۱۰۱ تا ۱۱۸</span>
+          </div>
+          <div class="compact-ch-title">زیستن در آتش اکنون (رهایی از بار زمان)</div>
+          <div class="compact-ch-action">
+            <span>شروع مطالعه در کتابخوان</span>
+            <span>←</span>
+          </div>
+        </a>
+
+        <a href="reader.html?page=119" class="compact-chapter-card">
+          <div class="compact-ch-top">
+            <span class="compact-ch-num">فصل هشتم</span>
+            <span class="compact-ch-page">صفحه ۱۱۹ تا ۱۵۲</span>
+          </div>
+          <div class="compact-ch-title">جدال نفس و عشق در روابط</div>
+          <div class="compact-ch-action">
+            <span>شروع مطالعه در کتابخوان</span>
+            <span>←</span>
+          </div>
+        </a>
+
+        <a href="reader.html?page=153" class="compact-chapter-card">
+          <div class="compact-ch-top">
+            <span class="compact-ch-num">فصل نهم</span>
+            <span class="compact-ch-page">صفحه ۱۵۳ تا ۱۷۶</span>
+          </div>
+          <div class="compact-ch-title">طلب کنید، داده خواهد شد (هنر تجلی)</div>
+          <div class="compact-ch-action">
+            <span>شروع مطالعه در کتابخوان</span>
+            <span>←</span>
+          </div>
+        </a>
+
+        <a href="reader.html?page=177" class="compact-chapter-card">
+          <div class="compact-ch-top">
+            <span class="compact-ch-num">فصل دهم</span>
+            <span class="compact-ch-page">صفحه ۱۷۷ تا ۲۰۸</span>
+          </div>
+          <div class="compact-ch-title">اقیانوس درون (غواصی در بی‌نهایت)</div>
+          <div class="compact-ch-action">
+            <span>شروع مطالعه در کتابخوان</span>
+            <span>←</span>
+          </div>
+        </a>
+
+        <a href="reader.html?page=209" class="compact-chapter-card">
+          <div class="compact-ch-top">
+            <span class="compact-ch-num">فصل یازدهم</span>
+            <span class="compact-ch-page">صفحه ۲۰۹ تا ۲۴۱</span>
+          </div>
+          <div class="compact-ch-title">آگاهی، آزادی، عشق (پرواز نهایی)</div>
+          <div class="compact-ch-action">
+            <span>شروع مطالعه در کتابخوان</span>
+            <span>←</span>
+          </div>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- ================= Zen Studio & Breathing Chamber ================= -->
-  <section class="section zen-section" id="zenStudio">
+  <!-- ================= Section 3: Sensory Chamber (Silence & Audio) ================= -->
+  <section class="section zen-section" id="zenChamber">
     <div class="container">
-      <div class="section-header">
-        <span class="section-tag">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-          </svg>
-          اتاق سکوت و تمرین تنفس
-        </span>
+      <div class="section-header" style="text-align: center; max-width: 680px; margin: 0 auto 36px auto;">
         <h2 class="section-title">سکوت تنها صدای خداست</h2>
         <p class="section-subtitle">
-          پیش از ورود به پاراگراف‌های کتاب، ذهن مشوش را آرام کنید. در شکاف بین افکار، معجزه‌ها در انتظار شما نشسته‌اند.
+          ذهن مشوش را با تنفس آگاهانه آرام کنید و به نوای دگرگون‌ساز فصل اول کتاب گوش بسپارید.
         </p>
       </div>
 
-      <div class="zen-grid">
-        <!-- Interactive Breathing Studio -->
-        <div class="breathing-studio">
-          <div style="font-size: 0.938rem; color: var(--text-gold); font-weight: 600;">تنفس آگاهانه ۴-۴-۴</div>
+      <div class="sensory-chamber-grid">
+        <!-- Visual Breathing Studio -->
+        <div class="sensory-orb-card">
+          <div class="sensory-mini-banner">
+            <img src="assets/images/zen-silence.jpg" alt="آرامش و سکوت معجزه‌گر خاموش" loading="lazy">
+            <div class="sensory-mini-banner-overlay">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;vertical-align:middle;margin-left:6px;"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg>
+              <span>قلمرو سکوت و مراقبه</span>
+            </div>
+          </div>
+
+          <div style="font-size: 0.9rem; color: var(--text-gold); font-weight: 700; margin-bottom: 12px;">تنفس آگاهانه ۴-۴-۴</div>
+          
           <div class="breathing-circle-wrap">
             <div class="breathing-orb inhale" id="breathingOrb">دم</div>
           </div>
-          <div class="breathing-instruction" id="breathingInstruction">دم عمیق و آگاهانه...</div>
-          <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 10px;">
-            با ریتم دایره نورانی نفس بکشید و ذهن خود را از افکار روزمره خالی کنید.
-          </p>
+          
+          <div class="breathing-instruction" id="breathingInstruction" style="margin-top: 14px;">دم عمیق و آگاهانه...</div>
 
-          <button class="btn btn-secondary btn-sm" id="zenChimeBtn" style="margin-top: 20px;">
-            <span style="display:inline-flex;align-items:center;gap:6px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span>نواختن کاسه تبتی</span></span>
+          <button class="btn btn-secondary btn-sm" id="zenChimeBtn" style="margin-top: 18px;">
+            <span style="display:inline-flex;align-items:center;gap:6px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+              <span>نواختن کاسه تبتی</span>
+            </span>
           </button>
         </div>
 
-        <!-- Ambient Soundscapes Selector -->
-        <div>
-          <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 12px;">نوای محیطی برای غرق شدن در کتاب</h3>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 24px;">
-            موتور صوتی زنده با فرکانس‌های آرامش‌بخش، ساخته شده با تکنولوژی Web Audio API بدون نیاز به دانلود فایل‌های حجیم:
-          </p>
+        <!-- Sensory Audio Player & Ambience -->
+        <div class="sensory-audio-card">
+          <!-- Real Audiobook Audio Element -->
+          <audio id="showcaseAudio" preload="metadata" src="assets/audio/pages/page-013.mp3"></audio>
 
-          <div class="zen-soundscapes">
-            <button class="soundscape-btn" data-sound="meditation">
-              <span style="display:inline-flex;align-items:center;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="2"/><path d="M6 22a6 6 0 0 1 12 0"/><path d="M9 12a3 3 0 0 0 6 0"/></svg></span>
-              <div style="text-align: right;">
-                <div style="font-weight: 700;">فرکانس ۴۳۲ هرتز</div>
-                <div style="font-size: 0.75rem; color: var(--text-muted);">امواج آرامش ذهن</div>
-              </div>
-            </button>
-
-            <button class="soundscape-btn" data-sound="rain">
-              <span style="display:inline-flex;align-items:center;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M16 14v6"/><path d="M8 14v6"/><path d="M12 16v6"/></svg></span>
-              <div style="text-align: right;">
-                <div style="font-weight: 700;">باران ملایم جنگلی</div>
-                <div style="font-size: 0.75rem; color: var(--text-muted);">نویز صورتی تسکین‌بخش</div>
-              </div>
-            </button>
-
-            <button class="soundscape-btn" data-sound="ocean">
-              <span style="display:inline-flex;align-items:center;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12c1.5-1.5 3-1.5 4.5 0s3 1.5 4.5 0 3-1.5 4.5 0 3 1.5 4.5 0"/><path d="M2 18c1.5-1.5 3-1.5 4.5 0s3 1.5 4.5 0 3-1.5 4.5 0 3 1.5 4.5 0"/></svg></span>
-              <div style="text-align: right;">
-                <div style="font-weight: 700;">امواج اقیانوس آرام</div>
-                <div style="font-size: 0.75rem; color: var(--text-muted);">ریتم جزر و مد دریا</div>
-              </div>
-            </button>
-
-            <button class="soundscape-btn" data-sound="bowl">
-              <span style="display:inline-flex;align-items:center;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></span>
-              <div style="text-align: right;">
-                <div style="font-weight: 700;">کاسه تبتی مراقبه</div>
-                <div style="font-size: 0.75rem; color: var(--text-muted);">هارمونیک‌های طنین‌انداز</div>
-              </div>
-            </button>
+          <div class="sensory-mini-banner">
+            <img src="assets/images/audio-atmosphere.jpg" alt="پیش‌نمایش صوتی کتاب معجزه‌گر خاموش" loading="lazy">
+            <div class="sensory-mini-banner-overlay">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;vertical-align:middle;margin-left:6px;"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
+              <span id="showcaseTrackTitle">پیش‌نمایش کتاب صوتی (فصل اول: پرواز — صفحه ۱۳)</span>
+            </div>
           </div>
 
-          <div style="margin-top: 30px; padding: 20px; background: var(--bg-card); border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
-            <div style="display: flex; align-items: center; gap: 12px;">
-              <span style="display:inline-flex;align-items:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7z"/></svg></span>
-              <div style="font-size: 0.875rem; color: var(--text-secondary);">
-                <strong>نکته خواندن:</strong> نویسنده توصیه می‌کند روزانه بیش از یک یا دو صفحه نخوانید؛ بلکه روی همان پاراگراف تأمل و سکوت کنید تا تبدیل به بخشی از ناخودآگاه شما شود.
-              </div>
+          <!-- Track Selector Chips -->
+          <div>
+            <div style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
+              <span>انتخاب نمونه خوانش از سرفصل‌ها:</span>
+              <span style="font-size: 0.72rem; color: var(--text-gold); font-weight: 600;">صوت هوش مصنوعی استودیویی</span>
+            </div>
+            <div class="showcase-track-chips" id="showcaseTrackChips">
+              <button class="track-chip active" data-page="13" data-src="assets/audio/pages/page-013.mp3" data-duration="147" data-title="فصل اول: پرواز — برداشتن نقاب‌ها" data-quote="«برای رسیدن به آزادی باید نقاب‌ها را از چهره بردارید... آزادی نبود نگرانی درباره خودتان است و بهترین راه برای پایان دادن به کسب منافع، به فکر منافع دیگران بودن است... با کسب این آزادی، آفریننده دنیایتان خواهید بود.»">
+                <span class="chip-dot"></span>
+                <span>فصل اول: برداشتن نقاب‌ها (۲:۲۷)</span>
+              </button>
+              <button class="track-chip" data-page="12" data-src="assets/audio/pages/page-012.mp3" data-duration="125" data-title="فصل اول: پرواز — انگاره آزادی" data-quote="«هر کدام از ما در حقیقت انگاره‌ای از خداوند هستیم؛ انگاره‌ای نامحدود از آزادی. تنها قانون حقیقی آن است که به آزادی ختم شود... کسی که بالاتر پرواز کند، دورتر را خواهد دید.»">
+                <span class="chip-dot"></span>
+                <span>فصل اول: انگاره آزادی (۲:۰۵)</span>
+              </button>
+              <button class="track-chip" data-page="19" data-src="assets/audio/pages/page-019.mp3" data-duration="149" data-title="فصل دوم: افسانه شخصی — داستان زندگی" data-quote="«داستان تازه‌ای از زندگی خود بسازید. خداوند با توجه به توانایی‌های هر فرد از او انتظاراتی دارد و او را در مسیرهایی قرار می‌دهد تا توانایی‌هایش شکوفا شود.»">
+                <span class="chip-dot"></span>
+                <span>فصل دوم: داستان زندگی (۲:۲۹)</span>
+              </button>
+              <button class="track-chip" data-page="4" data-src="assets/audio/pages/page-004.mp3" data-duration="164" data-title="پیشگفتار: راز معجزه‌گر خاموش" data-quote="«این کتاب واقعاً در خاموشی معجزه می‌کند. این کتاب پرواز را به شما می‌آموزد... آزادی را به شما یاد می‌دهد... شفا می‌دهد درون و بیرون بیمارتان را...»">
+                <span class="chip-dot"></span>
+                <span>پیشگفتار: راز معجزه‌گر (۲:۴۳)</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Deep Quote / Narration Preview Box -->
+          <div class="showcase-quote-box" id="showcaseQuoteBox">
+            <svg class="quote-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.75-2-2-2H4c-1.25 0-2 .75-2 2v6c0 7 1 8 3 10z"></path><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.75-2-2-2h-4c-1.25 0-2 .75-2 2v6c0 7 1 8 3 10z"></path></svg>
+            <p id="showcaseQuoteText">«برای رسیدن به آزادی باید نقاب‌ها را از چهره بردارید... آزادی نبود نگرانی درباره خودتان است و بهترین راه برای پایان دادن به کسب منافع، به فکر منافع دیگران بودن است... با کسب این آزادی، آفریننده دنیایتان خواهید بود.»</p>
+          </div>
+
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="live-audio-pulse" id="audioPulseIndicator"></span>
+              <span style="font-size: 0.85rem; color: var(--text-muted);" id="showcaseNarratorText">گوینده: خوانش آرامش صوتی • فرکانس ۴۳۲ هرتز</span>
+            </div>
+            <div class="audio-time" style="font-size: 0.85rem; color: var(--text-gold); font-weight: 700; font-family: monospace;">
+              <span id="audioTimeCurrent">0:00</span> / <span id="audioTimeTotal">2:27</span>
+            </div>
+          </div>
+
+          <!-- Waveform Canvas -->
+          <canvas id="waveformCanvas" class="waveform-canvas" style="height: 52px; width: 100%; border-radius: 6px;"></canvas>
+
+          <!-- Interactive Audio Progress -->
+          <div class="audio-progress-bar-wrap" id="audioProgressBarWrap" title="کلیک کنید برای عقب/جلو بردن صوت">
+            <div id="audioProgress" class="audio-progress-bar-fill" style="width: 0%;"></div>
+          </div>
+
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <button class="btn btn-primary" id="audioPlayBtn">
+                <span id="audioPlayBtnText">▶ پخش نمونه خوانش کتاب</span>
+              </button>
+
+              <button class="btn btn-secondary btn-sm" id="audioReplayBtn" title="پخش مجدد از ابتدا" style="padding: 10px 12px;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"></path><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+              </button>
+            </div>
+
+            <a id="showcaseReaderLink" href="reader.html?page=13" class="btn btn-secondary btn-sm" style="font-size: 0.78rem;">
+              <span>مطالعه کامل این صفحه در کتابخوان ←</span>
+            </a>
+          </div>
+
+          <!-- 4 Frequency Soundscape Pills -->
+          <div style="border-top: 1px solid var(--border-subtle); padding-top: 16px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+              <span style="font-size: 0.78rem; color: var(--text-muted);">امواج آرامش‌بخش پس‌زمینه (Web Audio API):</span>
+              <span style="font-size: 0.72rem; color: var(--text-muted);">اختیاری</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+              <button class="soundscape-btn" data-sound="meditation" style="padding: 10px 14px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <span style="font-weight: 600; font-size: 0.85rem;">فرکانس ۴۳۲ هرتز</span>
+              </button>
+
+              <button class="soundscape-btn" data-sound="rain" style="padding: 10px 14px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25"></path><path d="M8 19v2M8 13v2M16 19v2M16 13v2M12 21v2M12 15v2"></path></svg>
+                <span style="font-weight: 600; font-size: 0.85rem;">باران جنگلی</span>
+              </button>
+
+              <button class="soundscape-btn" data-sound="ocean" style="padding: 10px 14px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12c.6.5 1.2 1 2.5 1C7 13 7 11 9.5 11c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 17c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path></svg>
+                <span style="font-weight: 600; font-size: 0.85rem;">امواج اقیانوس</span>
+              </button>
+
+              <button class="soundscape-btn" data-sound="bowl" style="padding: 10px 14px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+                <span style="font-weight: 600; font-size: 0.85rem;">کاسه تبتی</span>
+              </button>
             </div>
           </div>
         </div>
@@ -486,470 +688,80 @@
     </div>
   </section>
 
-  <!-- ================= Audio Showcase & Waveform Visualizer ================= -->
-  <section class="section" id="audioShowcase">
+  <!-- ================= Section 4: Get The Book (Clear & Fast) ================= -->
+  <section class="section" id="pricing">
     <div class="container">
-      <div class="section-header">
-        <span class="section-tag">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M9 18V5l12-2v13"></path>
-            <circle cx="6" cy="18" r="3"></circle>
-            <circle cx="18" cy="16" r="3"></circle>
-          </svg>
-          پیش‌نمایش کتاب صوتی
-        </span>
-        <h2 class="section-title">شنیدن عصاره صوتی و پادکست اختصاصی</h2>
+      <div class="section-header" style="text-align: center; max-width: 680px; margin: 0 auto 36px auto;">
+        <h2 class="section-title">مسیر مطالعه معجزه‌گر خاموش را انتخاب کنید</h2>
         <p class="section-subtitle">
-          با چشمان بسته به نوای دگرگون‌کننده فصل اول کتاب گوش بسپارید و کلمات را با تمام سلول‌های وجودتان لمس کنید.
+          دسترسی آنی رایگان، یا سفارش نسخه فیزیکی نفیس با ۳۰ روز ضمانت بازگشت وجه.
         </p>
       </div>
 
-      <div class="audio-showcase">
-        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+      <div class="compact-pricing-grid">
+        <!-- Tier 1: Online Reader -->
+        <div class="compact-pricing-card">
           <div>
-            <div style="font-weight: 800; font-size: 1.25rem;">قطعه صوتی: پرواز در آسمان آگاهی (فصل اول)</div>
-            <div style="font-size: 0.875rem; color: var(--text-muted);">گوینده: صدای آرامش • تنظیم شده در فرکانس ۴۳۲ هرتز</div>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--text-gold);">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+              </svg>
+              <h3 class="compact-plan-name" style="margin-bottom: 0;">کتابخوان آنلاین</h3>
+            </div>
+            <p class="compact-plan-tag">مطالعه فوری در مرورگر با فونت ایران‌سنس</p>
+            <div class="compact-plan-price">رایگان</div>
           </div>
-          <div class="audio-time">
-            <span id="audioTimeCurrent">0:00</span> / <span id="audioTimeTotal">2:25</span>
-          </div>
+          <a href="reader.html" class="btn btn-primary w-100">
+            <span>شروع مطالعه (۲۴۱ صفحه)</span>
+          </a>
         </div>
 
-        <!-- Animated Waveform Canvas -->
-        <canvas id="waveformCanvas" class="waveform-canvas"></canvas>
-
-        <!-- Progress Track -->
-        <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 99px; overflow: hidden; margin-bottom: 20px;">
-          <div id="audioProgress" style="width: 0%; height: 100%; background: var(--gold-gradient); border-radius: inherit; transition: width 0.1s linear;"></div>
-        </div>
-
-        <!-- Audio Controls -->
-        <div class="audio-controls">
-          <button class="btn btn-primary btn-glow" id="audioPlayBtn">
-            <span>▶ پخش نمونه صوتی</span>
+        <!-- Tier 2: Hardcover Physical Pack (Featured) -->
+        <div class="compact-pricing-card featured">
+          <span class="compact-pricing-badge">پیشنهاد ویژه</span>
+          <div>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--text-gold);">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+              <h3 class="compact-plan-name" style="margin-bottom: 0;">پکیج جامع کیمیاگر</h3>
+            </div>
+            <p class="compact-plan-tag">کتاب چاپی هاردکاور + کتاب صوتی + ارسال رایگان</p>
+            <div class="compact-plan-price">۳۹۰,۰۰۰ <span>تومان</span></div>
+          </div>
+          <button class="btn btn-primary btn-lg w-100" onclick="showToast('در حال انتقال به درگاه امن سفارش...')">
+            <span>سفارش با ۵۰٪ تخفیف</span>
           </button>
+        </div>
 
-          <div style="display: flex; align-items: center; gap: 14px; font-size: 0.875rem; color: var(--text-secondary);">
-            <span style="display:inline-flex;align-items:center;gap:6px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg><span>کیفیت استودیویی ۳۲۰kbps</span></span>
-            <span>•</span>
-            <span>صدای سه‌بعدی ۸D</span>
+        <!-- Tier 3: PDF Download -->
+        <div class="compact-pricing-card">
+          <div>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--text-gold);">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <h3 class="compact-plan-name" style="margin-bottom: 0;">نسخه کامل PDF</h3>
+            </div>
+            <p class="compact-plan-tag">فایل اورجینال ۲۴۱ صفحه (حجم ۶۵.۵ مگابایت)</p>
+            <div class="compact-plan-price">رایگان</div>
           </div>
+          <button class="btn btn-secondary w-100" onclick="openDownloadModal()">
+            <span>دانلود مستقیم فایل PDF</span>
+          </button>
         </div>
+      </div>
 
-        <!-- Synced Transcript Follow-along -->
-        <div class="audio-transcript-box">
-          <div class="transcript-line active">«ابرها نمی‌دانند چرا به سمتی می‌روند و چرا با این سرعت می‌روند... تنها یک انگیزش، این جایی است که اکنون باید رفت.»</div>
-          <div class="transcript-line">«اما آسمان از انگیزه‌ها و انگاره‌های پشت تمامی این ابرها باخبر است. و تو نیز خواهی دانست، وقتی خودت را آن‌قدر بالا بکشی که ورای افق را بنگری.»</div>
-          <div class="transcript-line">«می‌توانیم به فراسوی جهالت گام بگذاریم. می‌توانیم خود را موجوداتی هوشمند با مهارت و برتر ببینیم. می‌توانیم پرواز را بیاموزیم.»</div>
-          <div class="transcript-line">«یک‌نواختی، ترس و خشم دلیل کوتاهی عمر ماست. با بیرون انداختن این پندارها از ذهن، عمری طولانی و مسرت‌بخش برای خود رقم خواهیم زد.»</div>
-        </div>
+      <!-- Trust Badge -->
+      <div style="margin-top: 40px; text-align: center; display: flex; align-items: center; justify-content: center; gap: 12px; color: var(--emerald-400); font-weight: 600; font-size: 0.9rem;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        <span>۱۰۰٪ ضمانت بازگشت وجه تا ۳۰ روز در صورت عدم رضایت</span>
       </div>
     </div>
   </section>
-
-  <!-- ================= Value Pillars & Comparison Table ================= -->
-  <section class="section" style="background: linear-gradient(180deg, transparent 0%, rgba(14, 21, 35, 0.5) 50%, transparent 100%);">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-          </svg>
-          تفاوت بنیادین
-        </span>
-        <h2 class="section-title">چرا معجزه‌گر خاموش با هر کتابی که خوانده‌اید متفاوت است؟</h2>
-        <p class="section-subtitle">
-          برخلاف کتاب‌های زرد انگیزشی که با هیجانات زودگذر شما را فریب می‌دهند، این کتاب مستقیماً به اتاق فرمان ناخودآگاه و روح نفوذ می‌کند.
-        </p>
-      </div>
-
-      <!-- Comparison Table -->
-      <div class="comparison-table-wrap">
-        <table class="comparison-table">
-          <thead>
-            <tr>
-              <th>ویژگی و رویکرد</th>
-              <th class="highlight-col"><span style="display:inline-flex;align-items:center;gap:6px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>معجزه‌گر خاموش</span></span></th>
-              <th>کتاب‌های انگیزشی معمولی</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>شیوه نگارش و ساختار</strong></td>
-              <td class="highlight-col text-gold"><strong>پاراگراف‌های متراکم و مستقل زندگی‌ساز</strong></td>
-              <td>فصل‌های طولانی با حاشیه‌پردازی‌های خسته‌کننده</td>
-            </tr>
-            <tr>
-              <td><strong>میزان اثرگذاری پایدار</strong></td>
-              <td class="highlight-col text-gold"><strong>دگرگونی عمیق ناخودآگاه و آرامش ابدی</strong></td>
-              <td>هیجان زودگذر چند روزه و سپس بازگشت به نقطه صفر</td>
-            </tr>
-            <tr>
-              <td><strong>تمرکز اصلی</strong></td>
-              <td class="highlight-col text-gold"><strong>سکوت درونی، لحظه حال و افسانه شخصی</strong></td>
-              <td>تقلای بی‌پایان ذهن و فرمول‌های سطحی موفقیت مالی</td>
-            </tr>
-            <tr>
-              <td><strong>روش مطالعه</strong></td>
-              <td class="highlight-col text-gold"><strong>یک صفحه در روز با مراقبه و هضم عمیق</strong></td>
-              <td>مطالعه سریع و فراموشی پس از چند هفته</td>
-            </tr>
-            <tr>
-              <td><strong>ریشه محتوایی</strong></td>
-              <td class="highlight-col text-gold"><strong>عصاره بیش از ۱۰۰ کتاب برتر خرد جهانی</strong></td>
-              <td>نظریات تک‌بعدی نویسندگان تجاری</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- 4 Pillars Grid -->
-      <div class="feature-grid">
-        <div class="feature-box">
-          <div class="feature-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/></svg></div>
-          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 10px;">آموختن پرواز</h3>
-          <p style="font-size: 0.938rem; color: var(--text-secondary); line-height: 1.7;">
-            شکستن قفس باورهای شرطی‌شده و خروج از دایره امن تکراری به سوی کمال و آزادی روحی.
-          </p>
-        </div>
-
-        <div class="feature-box">
-          <div class="feature-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></div>
-          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 10px;">کشف افسانه شخصی</h3>
-          <p style="font-size: 0.938rem; color: var(--text-secondary); line-height: 1.7;">
-            پیوند با جریان نیرومندی که شما را به سوی رسالت اصیل و رویای واقعی‌تان رهنمون می‌سازد.
-          </p>
-        </div>
-
-        <div class="feature-box">
-          <div class="feature-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2c.8 1.4 1.5 2.5 1.5 4 0 1.1-.9 2-2 2s-2-.9-2-2c0-1.5.7-2.6 1.5-4z"/><path d="M8 10h8v12H8z"/></svg></div>
-          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 10px;">ورود به قلمرو سکوت</h3>
-          <p style="font-size: 0.938rem; color: var(--text-secondary); line-height: 1.7;">
-            دستیابی به خلاء شفا‌بخش بین دو اندیشه؛ جایی که صدای الهی بی‌واسطه شنیده می‌شود.
-          </p>
-        </div>
-
-        <div class="feature-box">
-          <div class="feature-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12c1.5-1.5 3-1.5 4.5 0s3 1.5 4.5 0 3-1.5 4.5 0 3 1.5 4.5 0"/><path d="M2 18c1.5-1.5 3-1.5 4.5 0s3 1.5 4.5 0 3-1.5 4.5 0 3 1.5 4.5 0"/></svg></div>
-          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 10px;">اقیانوس درون</h3>
-          <p style="font-size: 0.938rem; color: var(--text-secondary); line-height: 1.7;">
-            رهایی از اسارت حد و مرزها و جاری شدن همچون رودخانه‌ای آزاد به سوی اقیانوس ابدیت.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= Readers Community & Impact Wall ================= -->
-  <section class="section" id="reviews">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-          </svg>
-          صدای خوانندگان
-        </span>
-        <h2 class="section-title">تجربیات دگرگون‌کننده دوستداران کتاب</h2>
-        <p class="section-subtitle">
-          هزاران نفر با خواندن خط به خط معجزه‌گر خاموش، زندگی، کسب‌وکار و آرامش روان خود را بازآفریده‌اند.
-        </p>
-
-        <div style="margin-top: 24px;">
-          <button class="btn btn-secondary btn-sm" id="openReviewModalBtn">
-            <span style="display:inline-flex;align-items:center;gap:6px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg><span>ثبت تجربه و دیدگاه شما</span></span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Reviews Grid -->
-      <div class="reviews-grid" id="reviewsGrid"></div>
-    </div>
-  </section>
-
-  <!-- ================= Pricing & Packages ================= -->
-  <section class="section" id="pricing" style="background: radial-gradient(circle at center, rgba(14, 21, 35, 0.95), var(--bg-primary));">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-          </svg>
-          دریافت کتاب
-        </span>
-        <h2 class="section-title">مسیر معجزه خاموش خود را انتخاب کنید</h2>
-        <p class="section-subtitle">
-          سرمایه‌گذاری روی روحتان ارزشمندترین تصمیمی است که امروز می‌توانید بگیرید. همراه با ۳۰ روز ضمانت بازگشت وجه بی‌قیدوشرط.
-        </p>
-      </div>
-
-      <!-- Limited-Time Discount Timer -->
-      <div class="pricing-timer-banner">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <span style="font-size: 1.4rem;">⏳</span>
-          <span style="font-weight: 700; font-size: 0.938rem;">تخفیف ویژه جشنواره بهاره تنها تا پایان امروز:</span>
-        </div>
-        <div class="timer-digits">
-          <div class="digit-box"><span id="timerHours">14</span> س</div>
-          <div class="digit-box"><span id="timerMinutes">35</span> د</div>
-          <div class="digit-box"><span id="timerSeconds">42</span> ث</div>
-        </div>
-      </div>
-
-      <!-- 3 Packages Grid -->
-      <div class="pricing-grid">
-        <!-- Plan 1: Electronic Edition -->
-        <div class="pricing-card">
-          <h3 class="pricing-plan-name">نسخه الکترونیک (PDF)</h3>
-          <p class="pricing-plan-desc">فایل کامل ۲۴۱ صفحه کتاب با کیفیت اورجینال برای موبایل و تبلت</p>
-          <div class="pricing-price-wrap">
-            <span class="pricing-old-price">۱۹۵,۰۰۰</span>
-            <span class="pricing-price">۹۵,۰۰۰</span>
-            <span class="pricing-currency">تومان</span>
-          </div>
-          <ul class="pricing-features-list">
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <span>فایل کامل کتاب با کیفیت عالی (PDF)</span>
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <span>دسترسی آنی به لینک دانلود دائمی</span>
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <span>قابل مطالعه در تمام دستگاه‌ها</span>
-            </li>
-          </ul>
-          <button class="btn btn-secondary" onclick="openDownloadModal()">
-            <span>دانلود و دریافت آنی</span>
-          </button>
-        </div>
-
-        <!-- Plan 2: Best Value Golden Alchemy Bundle -->
-        <div class="pricing-card featured">
-          <div class="pricing-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>محبوب‌ترین انتخاب (پیشنهاد ویژه)</span></div>
-          <h3 class="pricing-plan-name">پکیج جامع کیمیاگر</h3>
-          <p class="pricing-plan-desc">نسخه چاپی نفیس هاردکاور + کتاب صوتی کامل + ژورنال مراقبه</p>
-          <div class="pricing-price-wrap">
-            <span class="pricing-old-price">۷۸۰,۰۰۰</span>
-            <span class="pricing-price">۳۹۰,۰۰۰</span>
-            <span class="pricing-currency">تومان</span>
-          </div>
-          <ul class="pricing-features-list">
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <span><strong>کتاب چاپی نفیس با جلد سخت (هاردکاور)</strong></span>
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <span><strong>کتاب صوتی کامل استودیویی (کیفیت ۳۲۰kbps)</strong></span>
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <span>کتابچه تمرینات روزانه و ژورنال شکرگزاری</span>
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <span>نشان برنجی پر معجزه‌گر به عنوان هدیه</span>
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <span>ارسال رایگان با پست پیشتاز به سراسر کشور</span>
-            </li>
-          </ul>
-          <button class="btn btn-primary btn-lg btn-glow" onclick="showToast('در حال انتقال به درگاه امن پرداخت...')">
-            <span>سفارش پکیج جامع با تخفیف ۵۰٪</span>
-          </button>
-        </div>
-
-        <!-- Plan 3: Audiobook Edition -->
-        <div class="pricing-card">
-          <h3 class="pricing-plan-name">نسخه صوتی استودیویی</h3>
-          <p class="pricing-plan-desc">کتاب صوتی کامل با صدای گوینده ممتاز و تنظیم فرکانس ۴۳۲ هرتز</p>
-          <div class="pricing-price-wrap">
-            <span class="pricing-old-price">۳۴۰,۰۰۰</span>
-            <span class="pricing-price">۱۸۰,۰۰۰</span>
-            <span class="pricing-currency">تومان</span>
-          </div>
-          <ul class="pricing-features-list">
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <span>روایت صوتی تمامی ۱۱ فصل کتاب</span>
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <span>تنظیم با موزیک امواج مغزی تتا و آلفا</span>
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <span>دسترسی به پادکست‌های جانبی تحلیل فصول</span>
-            </li>
-          </ul>
-          <button class="btn btn-secondary" onclick="showToast('در حال آماده‌سازی نسخه صوتی...')">
-            <span>دریافت نسخه صوتی</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Trust & Guarantee Badge -->
-      <div style="margin-top: 50px; text-align: center; display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;">
-        <div style="display: flex; align-items: center; gap: 8px; color: var(--emerald-400); font-weight: 600; font-size: 0.938rem;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-          <span>۱۰۰٪ ضمانت بازگشت وجه تا ۳۰ روز در صورت عدم رضایت</span>
-        </div>
-        <span style="color: var(--border-subtle);">|</span>
-        <div style="color: var(--text-muted); font-size: 0.875rem;">
-          پشتیبانی ۲۴ ساعته در تلگرام و واتساپ
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= Frequently Asked Questions (FAQ) ================= -->
-  <section class="section" id="faq">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"></circle>
-            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-            <line x1="12" y1="17" x2="12.01" y2="17"></line>
-          </svg>
-          پاسخ به ابهامات
-        </span>
-        <h2 class="section-title">پرسش‌های متداول خوانندگان</h2>
-        <p class="section-subtitle">
-          هر آنچه قبل از شروع مطالعه کتاب معجزه‌گر خاموش لازم است بدانید.
-        </p>
-      </div>
-
-      <div class="faq-container">
-        <div class="faq-item active">
-          <button class="faq-question">
-            <span>چرا این کتاب «معجزه‌گر خاموش» نامیده شده است؟</span>
-            <span class="faq-chevron">▼</span>
-          </button>
-          <div class="faq-answer" style="max-height: 200px;">
-            نویسنده در مقدمه کتاب توضیح می‌دهد که این اثر در هیاهوی کلمات ادعایی نمی‌کند؛ بلکه معجزات آن در خاموشی، در آرامش درونی شما، در سکوت بین افکار و در تغییر بنیادی ناخودآگاه رخ می‌دهد. وقتی پاراگراف‌های آن را زندگی کنید، شگفتی‌ها بی‌صدا پدیدار می‌شوند.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question">
-            <span>توصیه بهترین روش مطالعه این کتاب چیست؟</span>
-            <span class="faq-chevron">▼</span>
-          </button>
-          <div class="faq-answer">
-            این کتاب رمانی نیست که یک‌شبه خوانده شود. اکیداً توصیه شده روزانه تنها یک صفحه بخوانید و تمام طول روز روی جملات آن تأمل کنید. هر پاراگراف مانند کدی برای بازنویسی ذهن است و نیاز به درک و سکوت دارد.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question">
-            <span>آیا نسخه PDF موجود همان کتاب کامل است؟</span>
-            <span class="faq-chevron">▼</span>
-          </button>
-          <div class="faq-answer">
-            بله، نسخه الکترونیک موجود شامل تمام ۲۴۱ صفحه کامل کتاب، از پیش‌گفتار تا فصل پایانی با تمام نمودارها و پاراگراف‌های اصلی است.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question">
-            <span>آیا کتاب برای افراد مذهبی یا غیرمذهبی مناسب است؟</span>
-            <span class="faq-chevron">▼</span>
-          </button>
-          <div class="faq-answer">
-            این کتاب فراسوی تعصبات مذهبی است. در فصل ششم آمده است: «خداوند همچون دریاست و همه مذهب‌ها رودخانه‌هایی هستند که به دریا می‌رسند.» آموزه‌های این کتاب جهان‌شمول بوده و بر پایه ارتباط مستقیم روح انسان با آگاهی برتر کیهانی بنا شده است.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question">
-            <span>ضمانت بازگشت وجه چگونه کار می‌کند؟</span>
-            <span class="faq-chevron">▼</span>
-          </button>
-          <div class="faq-answer">
-            اگر تا ۳۰ روز پس از تهیه کتاب احساس کردید این کتاب در نگرش و زندگی شما تاثیری نداشته است، بدون هیچ قید و شرطی کل وجه پرداختی شما به شماره کارت شما بازگردانده خواهد شد.
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= Interactive Online Book Reader Modal ================= -->
-  <div class="modal-overlay" id="readerModalOverlay">
-    <div class="reader-modal">
-      <div class="reader-header">
-        <div class="reader-title-group">
-          <div style="font-weight: 800; color: var(--text-gold);" id="readerPageTitle">پیش‌گفتار کتاب</div>
-          <span style="font-size: 0.813rem; color: var(--text-muted);" id="readerPageSubtitle">پاراگراف‌های زندگی‌ساز</span>
-        </div>
-
-        <div class="reader-controls">
-          <!-- Font Sizing -->
-          <button class="icon-btn" id="fontSmBtn" title="متن کوچک">A-</button>
-          <button class="icon-btn" id="fontMdBtn" title="متن متوسط">A</button>
-          <button class="icon-btn" id="fontLgBtn" title="متن بزرگ">A+</button>
-          
-          <!-- Sepia Reader Mode Toggle -->
-          <button class="icon-btn" id="readerThemeToggle" title="حالت سپیا / کاغذ کهن"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/></svg></button>
-
-          <!-- Close Modal -->
-          <button class="icon-btn" id="readerCloseBtn" title="بستن کتابخوان"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-        </div>
-      </div>
-
-      <!-- Reader Scrollable Body -->
-      <div class="reader-body" id="readerBody"></div>
-
-      <!-- Reader Footer Nav -->
-      <div class="reader-footer">
-        <button class="btn btn-secondary btn-sm" id="readerPrevBtn">
-          <span>صفحه قبلی</span>
-        </button>
-
-        <span class="page-indicator" id="readerPageIndicator">صفحه ۱ از ۵</span>
-
-        <button class="btn btn-primary btn-sm" id="readerNextBtn">
-          <span>صفحه بعدی</span>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ================= Review Submission Modal ================= -->
-  <div class="modal-overlay" id="reviewModalOverlay">
-    <div class="reader-modal" style="height: auto; max-width: 560px; padding: 30px;">
-      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
-        <h3 style="font-size: 1.25rem; font-weight: 800;">ثبت دیدگاه درباره معجزه‌گر خاموش</h3>
-        <button class="icon-btn" id="closeReviewModalBtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-      </div>
-
-      <form id="reviewSubmitForm">
-        <div class="form-group">
-          <label class="form-label" for="reviewerName">نام و نام خانوادگی:</label>
-          <input type="text" id="reviewerName" class="form-input" placeholder="مثال: علی رضایی" required>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="reviewerRole">حرفه یا شهر (اختیاری):</label>
-          <input type="text" id="reviewerRole" class="form-input" placeholder="مثال: مدرس، تهران">
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="reviewerText">تجربه شما از خواندن این کتاب:</label>
-          <textarea id="reviewerText" class="form-textarea" rows="4" placeholder="کدام جمله یا فصل کتاب زندگی شما را تکان داد؟" required></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primary btn-glow" style="width: 100%;">
-          <span>ثبت و انتشار نظر</span>
-        </button>
-      </form>
-    </div>
-  </div>
 
   <!-- ================= Free PDF Download Modal ================= -->
   <div class="modal-overlay" id="downloadModalOverlay">
@@ -975,7 +787,7 @@
 
       <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
         <!-- Direct download link for the PDF -->
-        <a href="assets/docs/mojezegar-khamoosh.pdf" download="معجزه گر خاموش - سید رضا حیات الغیب.pdf" class="btn btn-primary btn-lg btn-glow" onclick="showToast('دانلود آغاز شد... از خواندن کتاب لذت ببرید')">
+        <a href="assets/docs/mojezegar-khamoosh.pdf" download="معجزه گر خاموش - سید رضا حیات الغیب.pdf" class="btn btn-primary btn-lg" onclick="showToast('دانلود آغاز شد... از خواندن کتاب لذت ببرید')">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
             <polyline points="7 10 12 15 17 10"></polyline>
@@ -1013,9 +825,9 @@
           <ul class="footer-links">
             <li><a href="#oracle">الهام و فال روزانه</a></li>
             <li><a href="#chapters">فهرست کامل ۱۱ فصل</a></li>
-            <li><a href="#quiz">آزمون هوشمند خودشناسی</a></li>
-            <li><a href="#zenStudio">اتاق سکوت و تنفس</a></li>
-            <li><a href="#audioShowcase">کتاب صوتی استودیویی</a></li>
+            <li><a href="#zenChamber">اتاق سکوت و نوای کتاب</a></li>
+            <li><a href="reader.html">کتابخوان آنلاین (۲۴۱ صفحه)</a></li>
+            <li><a href="#pricing">تهیه و مطالعه کتاب</a></li>
           </ul>
         </div>
 
@@ -1023,8 +835,8 @@
           <h4>پشتیبانی و سفارش</h4>
           <ul class="footer-links">
             <li><a href="#pricing">سفارش نسخه چاپی نفیس</a></li>
-            <li><a href="javascript:void(0)" onclick="openDownloadModal()">دانلود نسخه PDF</a></li>
-            <li><a href="#faq">پرسش‌های متداول</a></li>
+            <li><a href="javascript:void(0)" onclick="openDownloadModal()">دانلود مستقیم PDF</a></li>
+            <li><a href="reader.html">مطالعه فوری در مرورگر</a></li>
             <li><a href="https://t.me/mojezegarkhamoosh" target="_blank" rel="noopener">کانال تلگرام معجزه‌گر</a></li>
           </ul>
         </div>
