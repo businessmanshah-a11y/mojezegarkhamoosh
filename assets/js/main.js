@@ -849,6 +849,8 @@ function initAudioShowcase() {
   const playBtn = document.getElementById('audioPlayBtn');
   const playBtnText = document.getElementById('audioPlayBtnText');
   const replayBtn = document.getElementById('audioReplayBtn');
+  const rewind10Btn = document.getElementById('audioRewind10Btn');
+  const forward10Btn = document.getElementById('audioForward10Btn');
   const progressBarWrap = document.getElementById('audioProgressBarWrap');
   const progressBar = document.getElementById('audioProgress');
   const timeCurrent = document.getElementById('audioTimeCurrent');
@@ -983,7 +985,28 @@ function initAudioShowcase() {
     }
   });
 
-  // Replay Button
+  // Transport: Rewind 10s
+  if (rewind10Btn) {
+    rewind10Btn.addEventListener('click', () => {
+      activeAudio.currentTime = Math.max(0, (activeAudio.currentTime || 0) - 10);
+      updateTimesAndProgress();
+      drawWaveform();
+    });
+  }
+
+  // Transport: Forward 10s
+  if (forward10Btn) {
+    forward10Btn.addEventListener('click', () => {
+      const dur = (activeAudio.duration && isFinite(activeAudio.duration) && activeAudio.duration > 0)
+        ? activeAudio.duration
+        : currentExpectedDuration;
+      activeAudio.currentTime = Math.min(dur, (activeAudio.currentTime || 0) + 10);
+      updateTimesAndProgress();
+      drawWaveform();
+    });
+  }
+
+  // Transport: Replay from start
   if (replayBtn) {
     replayBtn.addEventListener('click', () => {
       activeAudio.currentTime = 0;
@@ -994,21 +1017,50 @@ function initAudioShowcase() {
     });
   }
 
-  // Interactive Seeking on Progress Bar
-  if (progressBarWrap) {
-    progressBarWrap.addEventListener('click', (e) => {
-      const rect = progressBarWrap.getBoundingClientRect();
-      const clickX = e.clientX - rect.left;
-      const pct = Math.max(0, Math.min(1, clickX / rect.width));
-      const dur = (activeAudio.duration && isFinite(activeAudio.duration) && activeAudio.duration > 0)
-        ? activeAudio.duration
-        : currentExpectedDuration;
+  // Unified Seek Logic for Click & Touch Drag
+  function seekToClientX(clientX, element) {
+    const rect = element.getBoundingClientRect();
+    const clickX = clientX - rect.left;
+    const pct = Math.max(0, Math.min(1, clickX / rect.width));
+    const dur = (activeAudio.duration && isFinite(activeAudio.duration) && activeAudio.duration > 0)
+      ? activeAudio.duration
+      : currentExpectedDuration;
 
-      activeAudio.currentTime = pct * dur;
-      updateTimesAndProgress();
-      drawWaveform();
-    });
+    activeAudio.currentTime = pct * dur;
+    updateTimesAndProgress();
+    drawWaveform();
   }
+
+  let isTouchScrubbing = false;
+
+  function attachInteractiveScrubber(targetEl) {
+    if (!targetEl) return;
+
+    targetEl.addEventListener('click', (e) => {
+      seekToClientX(e.clientX, targetEl);
+    });
+
+    targetEl.addEventListener('touchstart', (e) => {
+      if (e.touches && e.touches.length > 0) {
+        isTouchScrubbing = true;
+        seekToClientX(e.touches[0].clientX, targetEl);
+      }
+    }, { passive: true });
+
+    targetEl.addEventListener('touchmove', (e) => {
+      if (isTouchScrubbing && e.touches && e.touches.length > 0) {
+        e.preventDefault(); // Prevent screen scroll during audio scrubbing
+        seekToClientX(e.touches[0].clientX, targetEl);
+      }
+    }, { passive: false });
+
+    const endTouch = () => { isTouchScrubbing = false; };
+    targetEl.addEventListener('touchend', endTouch, { passive: true });
+    targetEl.addEventListener('touchcancel', endTouch, { passive: true });
+  }
+
+  attachInteractiveScrubber(progressBarWrap);
+  attachInteractiveScrubber(canvas);
 
   // Track Selector Chips
   trackChips.forEach(chip => {
@@ -1055,10 +1107,53 @@ function initAudioShowcase() {
     });
   });
 
-  // Initial draw & metadata trigger
+  // Keyboard Shortcuts for Audio (Desktop)
+  window.addEventListener('keydown', (e) => {
+    const tag = document.activeElement ? document.activeElement.tagName : '';
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || (document.activeElement && document.activeElement.isContentEditable)) {
+      return;
+    }
+
+    if (e.code === 'Space') {
+      const cardRect = document.querySelector('.sensory-audio-card')?.getBoundingClientRect();
+      if (cardRect && cardRect.top < window.innerHeight && cardRect.bottom > 0) {
+        e.preventDefault();
+        if (activeAudio.paused || activeAudio.ended) {
+          activeAudio.play().then(() => setPlayStateUI(true)).catch(() => {});
+        } else {
+          activeAudio.pause();
+          setPlayStateUI(false);
+        }
+        drawWaveform();
+      }
+    } else if (e.code === 'ArrowRight' && !activeAudio.paused) {
+      e.preventDefault();
+      const dur = (activeAudio.duration && isFinite(activeAudio.duration) && activeAudio.duration > 0)
+        ? activeAudio.duration
+        : currentExpectedDuration;
+      activeAudio.currentTime = Math.min(dur, (activeAudio.currentTime || 0) + 10);
+      updateTimesAndProgress();
+      drawWaveform();
+    } else if (e.code === 'ArrowLeft' && !activeAudio.paused) {
+      e.preventDefault();
+      activeAudio.currentTime = Math.max(0, (activeAudio.currentTime || 0) - 10);
+      updateTimesAndProgress();
+      drawWaveform();
+    }
+  });
+
+  // Initial draw & metadata trigger with ResizeObserver
   updateTimesAndProgress();
   drawWaveform();
-  window.addEventListener('resize', drawWaveform);
+
+  if (window.ResizeObserver && canvas.parentElement) {
+    const ro = new ResizeObserver(() => {
+      drawWaveform();
+    });
+    ro.observe(canvas.parentElement);
+  } else {
+    window.addEventListener('resize', drawWaveform);
+  }
 }
 
 // --- 10. Reviews & Realtime Submission System ---

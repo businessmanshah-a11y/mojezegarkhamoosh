@@ -930,13 +930,15 @@ p.active-tts-paragraph {
 
 .audio-progress-track {
   width: 100%;
-  height: 6px;
+  height: 8px;
   background: var(--border-color);
   border-radius: 9999px;
   cursor: pointer;
   position: relative;
   overflow: hidden;
   direction: ltr;
+  touch-action: none;
+  user-select: none;
 }
 
 .audio-progress-fill {
@@ -945,40 +947,113 @@ p.active-tts-paragraph {
   border-radius: 9999px;
   width: 0%;
   transition: width 0.1s linear;
+  pointer-events: none;
 }
 
 .audio-time-row {
   display: flex;
   justify-content: space-between;
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   color: var(--ink-muted);
   font-family: monospace;
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+/* Modal Audio Transport Toolbar (-10s / Play / +10s) */
+.modal-transport-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  margin: 0.75rem 0 0.5rem;
+}
+
+.modal-seek-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  min-height: 40px;
+  min-width: 44px;
+  padding: 0.4rem 0.75rem;
+  border-radius: 0.5rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--ink-secondary);
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.modal-seek-btn:hover, .modal-seek-btn:active {
+  background: var(--accent-gold-subtle);
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+.modal-main-play-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 44px;
+  padding: 0.5rem 1.15rem;
+  border-radius: 0.5rem;
+  background: var(--accent-gold);
+  color: #FFFFFF;
+  border: none;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.35);
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.modal-main-play-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(212, 175, 55, 0.45);
+}
+
+.modal-main-play-btn:active {
+  transform: scale(0.97);
 }
 
 .speed-controller-row {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
-  margin-top: 0.25rem;
+  gap: 0.45rem;
+  margin-top: 0.45rem;
 }
 
 .speed-chips-group {
   display: flex;
-  gap: 0.35rem;
+  gap: 0.45rem;
   flex-wrap: wrap;
 }
 
 .speed-chip {
-  padding: 0.22rem 0.55rem;
+  min-height: 34px;
+  min-width: 38px;
+  padding: 0.25rem 0.6rem;
   border-radius: 9999px;
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   color: var(--ink-secondary);
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   font-family: monospace;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
 }
 
 .speed-chip:hover {
@@ -997,11 +1072,11 @@ p.active-tts-paragraph {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   color: var(--ink-muted);
   cursor: pointer;
   user-select: none;
-  margin-top: 0.25rem;
+  margin-top: 0.45rem;
 }
 
 .auto-advance-label input {
@@ -1617,9 +1692,9 @@ p.active-tts-paragraph {
     max-width: 100vw !important;
   }
 
-  /* Header clean-up: clean single row, no wrap */
+  /* Header: 56px standard height, ergonomic >=44px touch targets */
   .reader-header {
-    height: 52px !important;
+    height: 56px !important;
     padding: 0 0.75rem !important;
     gap: 0.5rem;
   }
@@ -1638,14 +1713,21 @@ p.active-tts-paragraph {
   }
 
   .header-right {
-    gap: 0.4rem;
+    gap: 0.5rem;
     flex-shrink: 1;
     min-width: 0;
   }
 
   .back-to-home-btn {
-    padding: 0.35rem !important;
-    gap: 0;
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    border-radius: 0.5rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    gap: 0 !important;
   }
 
   .book-meta-info {
@@ -1665,14 +1747,20 @@ p.active-tts-paragraph {
   }
 
   .header-left {
-    gap: 0.3rem !important;
+    gap: 0.4rem !important;
     flex-shrink: 0;
   }
 
   .ambient-pill-btn {
-    padding: 0.35rem 0.5rem !important;
-    font-size: 0.75rem !important;
-    gap: 0.2rem !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    padding: 0 0.85rem !important;
+    font-size: 0.82rem !important;
+    gap: 0.35rem !important;
+    border-radius: 0.5rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
   .ambient-dot {
@@ -1680,9 +1768,28 @@ p.active-tts-paragraph {
   }
 
   .header-action-btn {
-    padding: 0.35rem 0.5rem !important;
-    font-size: 0.8rem !important;
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    border-radius: 0.5rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
     gap: 0 !important;
+  }
+
+  .drawer-close-btn, .audio-close-btn {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    border-radius: 0.5rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    cursor: pointer !important;
   }
 
   /* Subbar is hidden on mobile to maximize reading space; all tools inside FAB sheet */
@@ -1690,12 +1797,16 @@ p.active-tts-paragraph {
     display: none !important;
   }
 
-  /* Main reading stage on mobile */
+  /* Main reading stage on mobile with safe-area clearance */
   .reader-main-stage {
-    padding: calc(var(--header-height) + 1.25rem) 0.65rem 5.5rem !important; /* Generous bottom clearance for FAB */
+    padding: calc(var(--header-height) + 1rem) 0.65rem calc(6.5rem + env(safe-area-inset-bottom, 0px)) !important;
     width: 100% !important;
     box-sizing: border-box !important;
     overflow-x: hidden !important;
+  }
+
+  body.audio-dock-active .reader-main-stage {
+    padding-bottom: calc(10.5rem + env(safe-area-inset-bottom, 0px)) !important;
   }
 
   .book-codex-container {
@@ -1762,11 +1873,11 @@ p.active-tts-paragraph {
     display: none !important;
   }
 
-  /* Fixed Mobile Tools Floating Action Button (FAB) */
+  /* Fixed Mobile Tools Floating Action Button (FAB) with safe-area */
   .mobile-tools-fab {
     display: flex !important;
     position: fixed !important;
-    bottom: 1.25rem !important;
+    bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px)) !important;
     left: 1.25rem !important;
     z-index: 70 !important;
     width: 52px !important;
@@ -1800,18 +1911,18 @@ p.active-tts-paragraph {
 
   /* When floating audio dock is active on mobile, lift FAB comfortably above it */
   body.audio-dock-active .mobile-tools-fab {
-    bottom: 9.5rem !important;
+    bottom: calc(8.5rem + env(safe-area-inset-bottom, 0px)) !important;
   }
 
-  /* Mobile floating audio dock */
+  /* Mobile floating audio dock with safe-area-inset */
   .floating-audio-dock {
-    bottom: 0.65rem !important;
+    bottom: calc(0.65rem + env(safe-area-inset-bottom, 0px)) !important;
     left: 0.5rem !important;
     right: 0.5rem !important;
     width: auto !important;
     max-width: none !important;
     transform: translateY(140%) !important;
-    padding: 0.65rem 0.85rem !important;
+    padding: 0.75rem 0.85rem !important;
     border-radius: 1rem !important;
   }
 
@@ -1824,15 +1935,63 @@ p.active-tts-paragraph {
     gap: 0.5rem !important;
   }
 
+  .dock-btn-icon {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    border-radius: 0.5rem !important;
+  }
+
+  .dock-main-play-btn {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+  }
+
   .dock-speed-section {
     width: 100% !important;
     justify-content: center !important;
     border-top: 1px dashed var(--border-color) !important;
-    padding-top: 0.4rem !important;
-    margin-top: 0.15rem !important;
+    padding-top: 0.5rem !important;
+    margin-top: 0.25rem !important;
   }
 
-  /* Mobile Tools Bottom Sheet Drawer */
+  .speed-chips-group {
+    gap: 0.5rem !important;
+    justify-content: center !important;
+  }
+
+  .speed-chip {
+    min-height: 40px !important;
+    min-width: 44px !important;
+    padding: 0.35rem 0.65rem !important;
+    font-size: 0.78rem !important;
+    border-radius: 0.5rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .m-action-btn {
+    min-height: 54px !important;
+    padding: 0.55rem 0.35rem !important;
+    border-radius: 0.65rem !important;
+    background: var(--sub-surface) !important;
+    border: 1px solid var(--border-color) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .m-action-btn:active {
+    background: var(--accent-teal-subtle) !important;
+    border-color: var(--accent-teal) !important;
+    transform: scale(0.96) !important;
+  }
+
+  /* Mobile Tools Bottom Sheet Drawer using dvh */
   .mobile-tools-sheet {
     display: flex !important;
     position: fixed !important;
@@ -1843,7 +2002,7 @@ p.active-tts-paragraph {
     border-top: 1px solid var(--border-color) !important;
     border-radius: 1.5rem 1.5rem 0 0 !important;
     box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.25) !important;
-    padding: 1.1rem 1.2rem 1.75rem !important;
+    padding: 1.1rem 1.2rem calc(1.75rem + env(safe-area-inset-bottom, 0px)) !important;
     z-index: 75 !important;
     flex-direction: column !important;
     gap: 0.85rem !important;
@@ -1851,7 +2010,7 @@ p.active-tts-paragraph {
     opacity: 0 !important;
     pointer-events: none !important;
     transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease !important;
-    max-height: 85vh !important;
+    max-height: 85dvh !important;
     overflow-y: auto !important;
   }
 
@@ -1864,12 +2023,14 @@ p.active-tts-paragraph {
   .zen-audio-modal {
     position: fixed !important;
     top: auto !important;
-    bottom: 2rem !important;
-    left: 1rem !important;
-    right: 1rem !important;
+    bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px)) !important;
+    left: 0.75rem !important;
+    right: 0.75rem !important;
     width: auto !important;
     max-width: 440px !important;
     margin: 0 auto !important;
+    max-height: 90dvh !important;
+    overflow-y: auto !important;
     z-index: 100 !important;
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45) !important;
     border: 1px solid var(--border-color) !important;

@@ -593,7 +593,7 @@
           <div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
               <span>انتخاب نمونه خوانش از سرفصل‌ها:</span>
-              <span style="font-size: 0.72rem; color: var(--text-gold); font-weight: 600;">صوت هوش مصنوعی استودیویی</span>
+              <span style="font-size: 0.78rem; color: var(--text-gold); font-weight: 600;">صوت هوش مصنوعی استودیویی</span>
             </div>
             <div class="showcase-track-chips" id="showcaseTrackChips">
               <button class="track-chip active" data-page="13" data-src="assets/audio/pages/page-013.mp3" data-duration="147" data-title="فصل اول: پرواز — برداشتن نقاب‌ها" data-quote="«برای رسیدن به آزادی باید نقاب‌ها را از چهره بردارید... آزادی نبود نگرانی درباره خودتان است و بهترین راه برای پایان دادن به کسب منافع، به فکر منافع دیگران بودن است... با کسب این آزادی، آفریننده دنیایتان خواهید بود.»">
@@ -639,18 +639,28 @@
             <div id="audioProgress" class="audio-progress-bar-fill" style="width: 0%;"></div>
           </div>
 
-          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
-            <div style="display: flex; align-items: center; gap: 10px;">
+          <div class="audio-transport-toolbar">
+            <div class="audio-transport-group">
+              <button class="btn btn-secondary btn-sm transport-seek-btn" id="audioRewind10Btn" title="۱۰ ثانیه به عقب" aria-label="۱۰ ثانیه به عقب">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"></path><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+                <span class="seek-label">۱۰-</span>
+              </button>
+
               <button class="btn btn-primary" id="audioPlayBtn">
                 <span id="audioPlayBtnText">▶ پخش نمونه خوانش کتاب</span>
               </button>
 
-              <button class="btn btn-secondary btn-sm" id="audioReplayBtn" title="پخش مجدد از ابتدا" style="padding: 10px 12px;">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"></path><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+              <button class="btn btn-secondary btn-sm transport-seek-btn" id="audioForward10Btn" title="۱۰ ثانیه به جلو" aria-label="۱۰ ثانیه به جلو">
+                <span class="seek-label">۱۰+</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"></path><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+              </button>
+
+              <button class="btn btn-secondary btn-sm transport-seek-btn" id="audioReplayBtn" title="پخش مجدد از ابتدا" aria-label="پخش مجدد از ابتدا">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
               </button>
             </div>
 
-            <a id="showcaseReaderLink" href="reader.html?page=13" class="btn btn-secondary btn-sm" style="font-size: 0.78rem;">
+            <a id="showcaseReaderLink" href="reader.html?page=13" class="btn btn-secondary btn-sm reader-link-btn" style="font-size: 0.78rem;">
               <span>مطالعه کامل این صفحه در کتابخوان ←</span>
             </a>
           </div>
@@ -659,9 +669,9 @@
           <div style="border-top: 1px solid var(--border-subtle); padding-top: 16px;">
             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
               <span style="font-size: 0.78rem; color: var(--text-muted);">امواج آرامش‌بخش پس‌زمینه (Web Audio API):</span>
-              <span style="font-size: 0.72rem; color: var(--text-muted);">اختیاری</span>
+              <span style="font-size: 0.78rem; color: var(--text-muted);">اختیاری</span>
             </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div class="sensory-soundscape-grid">
               <button class="soundscape-btn" data-sound="meditation" style="padding: 10px 14px;">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                 <span style="font-weight: 600; font-size: 0.85rem;">فرکانس ۴۳۲ هرتز</span>
