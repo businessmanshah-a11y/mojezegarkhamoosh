@@ -29,7 +29,8 @@ from generate_audio import (
     get_api_key,
     generate_page_audio,
     sync_manifest_to_html,
-    load_manifest
+    load_manifest,
+    ContentFilteredException
 )
 
 
@@ -119,6 +120,10 @@ def run_batch(batch_size=50, max_page=241, push=True, voice="Bodi"):
             res = generate_page_audio(page_data, voice_name=voice)
             if res:
                 generated_pages.append(p_num)
+        except ContentFilteredException as cfe:
+            print(f"\n🚫 Generation halted at Page {p_num:03d}: {cfe}")
+            print("🛡 Quota Protected: Other keys kept intact without burning tokens.")
+            break
         except Exception as e:
             err_msg = str(e)
             print(f"\n⚠ Generation stopped at Page {p_num:03d}: {err_msg}")
