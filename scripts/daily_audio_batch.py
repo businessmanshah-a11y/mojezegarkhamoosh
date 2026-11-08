@@ -120,13 +120,12 @@ def run_batch(batch_size=20, max_page=241, push=True, voice="Bodi"):
         except Exception as e:
             err_msg = str(e)
             print(f"\n⚠ Generation stopped at Page {p_num:03d}: {err_msg}")
-            if "limit" in err_msg.lower() or "429" in err_msg or "exhausted" in err_msg.lower():
+            if "limit" in err_msg.lower() or "429" in err_msg or "exhausted" in err_msg.lower() or "quota" in err_msg.lower():
                 print("Daily quota ceiling reached for today. Safely saving progress...")
                 stopped_due_to_quota = True
                 break
             else:
                 print(f"Unexpected error: {err_msg}")
-                stopped_due_to_quota = True
                 break
 
         # Gentle throttle between calls to maintain well under 15 RPM

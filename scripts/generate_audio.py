@@ -94,6 +94,7 @@ def prepare_speech_text(page_data):
     p_type = page_data.get("type", "normal")
     title = clean_html(page_data.get("title", ""))
     subtitle = clean_html(page_data.get("subtitle", ""))
+    section_badge = clean_html(page_data.get("sectionBadge", ""))
     paragraphs = [clean_html(p) for p in page_data.get("paragraphs", []) if p.strip()]
     callout = clean_html(page_data.get("callout", ""))
     chapter = clean_html(page_data.get("chapter", ""))
@@ -119,9 +120,15 @@ def prepare_speech_text(page_data):
     # General Pages
     speech_parts = []
 
+    header_added = False
     # If new title or chapter beginning
     if title and title != "معجزه‌گر خاموش" and title != chapter:
         speech_parts.append(f"{title}.")
+        header_added = True
+
+    if section_badge and not header_added and section_badge != chapter:
+        speech_parts.append(f"{section_badge}.")
+        header_added = True
 
     if subtitle:
         speech_parts.append(f"{subtitle}.")
@@ -140,7 +147,7 @@ def prepare_speech_text(page_data):
 
     # Fallback if speech_parts is empty
     if not speech_parts:
-        ch_title = title or chapter or "معجزه‌گر خاموش"
+        ch_title = title or section_badge or chapter or "معجزه‌گر خاموش"
         speech_parts.append(f"{ch_title}.")
 
     final_text = " ".join(speech_parts).strip()
@@ -228,7 +235,19 @@ def call_gemini_tts(text, api_key, voice_name="Bodi", preferred_model=None, max_
                 if not candidates:
                     raise ValueError(f"No candidates in {model} response: " + json.dumps(resp_json))
 
-                parts = candidates[0].get("content", {}).get("parts", [])
+                cand = candidates[0]
+                finish_reason = cand.get("finishReason")
+                if finish_reason and finish_reason not in ("STOP", "MAX_TOKENS"):
+                    finish_msg = cand.get("finishMessage", finish_reason)
+                    print(f"  [{model} attempt {attempt}] Filtered (finishReason: {finish_reason}): {finish_msg}")
+                    # If copyright recitation filter triggered, try adding gentle contextual prefix
+                    if finish_reason == "OTHER" and attempt < max_retries:
+                        payload["contents"][0]["parts"][0]["text"] = f"روایت صوتی: {text}"
+                        req_data = json.dumps(payload).encode("utf-8")
+                        time.sleep(2)
+                        continue
+
+                parts = cand.get("content", {}).get("parts", [])
                 for p in parts:
                     if "inlineData" in p:
                         b64_data = p["inlineData"].get("data", "")
@@ -236,7 +255,7 @@ def call_gemini_tts(text, api_key, voice_name="Bodi", preferred_model=None, max_
                         raw_audio = base64.b64decode(b64_data)
                         return raw_audio, mime_type, model
 
-                raise ValueError(f"Audio inlineData not found in {model} response")
+                raise ValueError(f"Audio inlineData not found in {model} response (finishReason: {finish_reason})")
 
             except urllib.error.HTTPError as e:
                 err_body = e.read().decode("utf-8", errors="ignore")
@@ -255,6 +274,7 @@ def call_gemini_tts(text, api_key, voice_name="Bodi", preferred_model=None, max_
                         time.sleep(2 * attempt)
             except Exception as e:
                 last_error = str(e)
+                print(f"  [{model} attempt {attempt}] Error: {e}")
                 if attempt < max_retries:
                     time.sleep(2 * attempt)
 
