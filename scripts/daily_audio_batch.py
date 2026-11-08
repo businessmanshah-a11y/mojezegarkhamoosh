@@ -79,7 +79,7 @@ def git_commit_and_push(start_p, end_p, count):
         return False
 
 
-def run_batch(batch_size=20, max_page=241, push=True, voice="Bodi"):
+def run_batch(batch_size=50, max_page=241, push=True, voice="Bodi"):
     pages = load_book_pages()
     completed = get_completed_pages()
     total_pages = len(pages)
@@ -163,7 +163,7 @@ def run_batch(batch_size=20, max_page=241, push=True, voice="Bodi"):
 
 def main():
     parser = argparse.ArgumentParser(description="Run daily audio batch generation")
-    parser.add_argument("--batch-size", type=int, default=20, help="Number of pages per batch (default: 20)")
+    parser.add_argument("--batch-size", type=int, default=50, help="Number of pages per batch (default: 50)")
     parser.add_argument("--voice", type=str, default="Bodi", help="Prebuilt voice name (default: Bodi)")
     parser.add_argument("--no-push", action="store_true", help="Do not commit or push to git")
     args = parser.parse_args()
