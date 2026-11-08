@@ -367,5 +367,248 @@
     "size_kb": 2239.5,
     "voice": "Bodi",
     "updated_at": "2026-11-08T14:40:20Z"
+  },
+  "42": {
+    "page": 42,
+    "filename": "page-042.mp3",
+    "path": "assets/audio/pages/page-042.mp3",
+    "duration": 110.1,
+    "size_kb": 1721.3,
+    "voice": "Bodi",
+    "updated_at": "2026-11-08T14:43:50Z"
+  },
+  "43": {
+    "page": 43,
+    "filename": "page-043.mp3",
+    "path": "assets/audio/pages/page-043.mp3",
+    "duration": 19.0,
+    "size_kb": 297.4,
+    "voice": "Bodi",
+    "updated_at": "2026-11-08T14:44:00Z"
+  },
+  "44": {
+    "page": 44,
+    "filename": "page-044.mp3",
+    "path": "assets/audio/pages/page-044.mp3",
+    "duration": 177.6,
+    "size_kb": 2776.2,
+    "voice": "Bodi",
+    "updated_at": "2026-11-08T14:46:11Z"
+  },
+  "45": {
+    "page": 45,
+    "filename": "page-045.mp3",
+    "path": "assets/audio/pages/page-045.mp3",
+    "duration": 162.3,
+    "size_kb": 2536.9,
+    "voice": "Bodi",
+    "updated_at": "2026-11-08T14:46:47Z"
+  },
+  "46": {
+    "page": 46,
+    "filename": "page-046.mp3",
+    "path": "assets/audio/pages/page-046.mp3",
+    "duration": 131.0,
+    "size_kb": 2048.7,
+    "voice": "Bodi",
+    "updated_at": "2026-11-08T14:47:19Z"
+  },
+  "47": {
+    "page": 47,
+    "filename": "page-047.mp3",
+    "path": "assets/audio/pages/page-047.mp3",
+    "duration": 125.7,
+    "size_kb": 1965.0,
+    "voice": "Bodi",
+    "updated_at": "2026-11-08T14:47:48Z"
+  },
+  "48": {
+    "page": 48,
+    "filename": "page-048.mp3",
+    "path": "assets/audio/pages/page-048.mp3",
+    "duration": 106.3,
+    "size_kb": 1662.4,
+    "voice": "Bodi",
+    "updated_at": "2026-11-08T14:48:26Z"
+  },
+  "49": {
+    "page": 49,
+    "filename": "page-049.mp3",
+    "path": "assets/audio/pages/page-049.mp3",
+    "duration": 166.0,
+    "size_kb": 2595.0,
+    "voice": "Bodi",
+    "updated_at": "2026-11-08T14:48:59Z"
+  },
+  "50": {
+    "page": 50,
+    "filename": "page-050.mp3",
+    "path": "assets/audio/pages/page-050.mp3",
+    "duration": 172.6,
+    "size_kb": 2698.2,
+    "voice": "Bodi",
+    "updated_at": "2026-11-08T14:49:33Z"
+  },
+  "51": {
+    "page": 51,
+    "filename": "page-051.mp3",
+    "path": "assets/audio/pages/page-051.mp3",
+    "duration": 152.8,
+    "size_kb": 2388.8,
+    "voice": "Bodi",
+    "updated_at": "2026-11-08T14:50:04Z"
+  },
+  "52": {
+    "page": 52,
+    "filename": "page-052.mp3",
+    "path": "assets/audio/pages/page-052.mp3",
+    "duration": 124.4,
+    "size_kb": 1944.4,
+    "voice": "Bodi",
+    "updated_at": "2026-11-08T14:50:38Z"
+  },
+  "53": {
+    "page": 53,
+    "filename": "page-053.mp3",
+    "path": "assets/audio/pages/page-053.mp3",
+    "duration": 181.2,
+    "size_kb": 2833.2,
+    "voice": "Bodi",
+    "updated_at": "2026-11-08T14:51:15Z"
+  },
+  "54": {
+    "page": 54,
+    "filename": "page-054.mp3",
+    "path": "assets/audio/pages/page-054.mp3",
+    "duration": 136.3,
+    "size_kb": 2131.2,
+    "voice": "Bodi",
+    "updated_at": "2026-11-08T14:51:45Z"
+  },
+  "55": {
+    "page": 55,
+    "filename": "page-055.mp3",
+    "path": "assets/audio/pages/page-055.mp3",
+    "duration": 159.9,
+    "size_kb": 2500.2,
+    "voice": "Bodi",
+    "updated_at": "2026-11-08T14:52:18Z"
+  },
+  "56": {
+    "page": 56,
+    "filename": "page-056.mp3",
+    "path": "assets/audio/pages/page-056.mp3",
+    "duration": 174.1,
+    "size_kb": 2721.8,
+    "voice": "Bodi",
+    "updated_at": "2026-11-08T14:52:53Z"
+  },
+  "57": {
+    "page": 57,
+    "filename": "page-057.mp3",
+    "path": "assets/audio/pages/page-057.mp3",
+    "duration": 100.3,
+    "size_kb": 1568.7,
+    "voice": "Bodi",
+    "updated_at": "2026-11-08T14:53:22Z"
+  },
+  "58": {
+    "page": 58,
+    "filename": "page-058.mp3",
+    "path": "assets/audio/pages/page-058.mp3",
+    "duration": 118.2,
+    "size_kb": 1848.0,
+    "voice": "Bodi",
+    "updated_at": "2026-11-08T14:53:50Z"
+  },
+  "59": {
+    "page": 59,
+    "filename": "page-059.mp3",
+    "path": "assets/audio/pages/page-059.mp3",
+    "duration": 163.3,
+    "size_kb": 2553.0,
+    "voice": "Bodi",
+    "updated_at": "2026-11-08T14:54:21Z"
+  },
+  "60": {
+    "page": 60,
+    "filename": "page-060.mp3",
+    "path": "assets/audio/pages/page-060.mp3",
+    "duration": 182.6,
+    "size_kb": 2854.9,
+    "voice": "Bodi",
+    "updated_at": "2026-11-08T14:54:55Z"
+  },
+  "61": {
+    "page": 61,
+    "filename": "page-061.mp3",
+    "path": "assets/audio/pages/page-061.mp3",
+    "duration": 148.3,
+    "size_kb": 2318.3,
+    "voice": "Bodi",
+    "updated_at": "2026-11-08T14:55:27Z"
+  },
+  "62": {
+    "page": 62,
+    "filename": "page-062.mp3",
+    "path": "assets/audio/pages/page-062.mp3",
+    "duration": 181.0,
+    "size_kb": 2828.7,
+    "voice": "Bodi",
+    "updated_at": "2026-11-08T14:56:01Z"
+  },
+  "63": {
+    "page": 63,
+    "filename": "page-063.mp3",
+    "path": "assets/audio/pages/page-063.mp3",
+    "duration": 162.3,
+    "size_kb": 2536.9,
+    "voice": "Bodi",
+    "updated_at": "2026-11-08T14:56:34Z"
+  },
+  "64": {
+    "page": 64,
+    "filename": "page-064.mp3",
+    "path": "assets/audio/pages/page-064.mp3",
+    "duration": 121.3,
+    "size_kb": 1896.8,
+    "voice": "Bodi",
+    "updated_at": "2026-11-08T14:57:05Z"
+  },
+  "65": {
+    "page": 65,
+    "filename": "page-065.mp3",
+    "path": "assets/audio/pages/page-065.mp3",
+    "duration": 161.9,
+    "size_kb": 2531.3,
+    "voice": "Bodi",
+    "updated_at": "2026-11-08T14:57:38Z"
+  },
+  "66": {
+    "page": 66,
+    "filename": "page-066.mp3",
+    "path": "assets/audio/pages/page-066.mp3",
+    "duration": 162.5,
+    "size_kb": 2539.9,
+    "voice": "Bodi",
+    "updated_at": "2026-11-08T14:58:11Z"
+  },
+  "67": {
+    "page": 67,
+    "filename": "page-067.mp3",
+    "path": "assets/audio/pages/page-067.mp3",
+    "duration": 129.5,
+    "size_kb": 2025.0,
+    "voice": "Bodi",
+    "updated_at": "2026-11-08T14:58:41Z"
+  },
+  "68": {
+    "page": 68,
+    "filename": "page-068.mp3",
+    "path": "assets/audio/pages/page-068.mp3",
+    "duration": 146.6,
+    "size_kb": 2292.0,
+    "voice": "Bodi",
+    "updated_at": "2026-11-08T14:59:13Z"
   }
 }
