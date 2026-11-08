@@ -1205,24 +1205,23 @@
           const info = AUDIO_MANIFEST[p];
           btn.classList.toggle('has-audio', has);
           btn.classList.toggle('no-audio', !has);
+          const iconSpan = document.getElementById(`leafAudioIcon-${p}`);
+          const tagSpan = document.getElementById(`leafAudioTag-${p}`);
+
+          const isCurrentPlaying = (has && currentAudioPage === p && isAudioPlaying && !bookAudio.paused);
+          btn.classList.toggle('playing', isCurrentPlaying);
           if (has) {
             btn.setAttribute('onclick', `playPageAudio(${p})`);
-            btn.setAttribute('title', `شنیدن صوت هوش مصنوعی صفحه ${p} (${info?.label || ''})`);
-            const iconSpan = document.getElementById(`leafAudioIcon-${p}`);
-            const textSpan = document.getElementById(`leafAudioText-${p}`);
-            const tagSpan = document.getElementById(`leafAudioTag-${p}`);
-            if (iconSpan && !btn.classList.contains('playing')) iconSpan.innerHTML = ICONS.sparkleAudio;
-            if (textSpan && !btn.classList.contains('playing')) textSpan.innerText = 'شنیدن صوت هوش مصنوعی';
+            btn.setAttribute('title', `پخش / توقف صوت صفحه ${p} (${info?.label || ''})`);
+            if (iconSpan) {
+              iconSpan.innerHTML = isCurrentPlaying ? ICONS.pause : ICONS.play;
+            }
             if (tagSpan) tagSpan.innerText = info?.label || '';
           } else {
             btn.setAttribute('onclick', `handleNoAudioClick(${p})`);
             btn.setAttribute('title', `صوت هوش مصنوعی این صفحه هنوز تولید نشده است`);
-            const iconSpan = document.getElementById(`leafAudioIcon-${p}`);
-            const textSpan = document.getElementById(`leafAudioText-${p}`);
-            const tagSpan = document.getElementById(`leafAudioTag-${p}`);
             if (iconSpan) iconSpan.innerHTML = ICONS.mutedAudio;
-            if (textSpan) textSpan.innerText = 'فاقد صوت AI';
-            if (tagSpan) tagSpan.innerText = '';
+            if (tagSpan) tagSpan.innerText = 'بدون صوت';
           }
         });
       }
@@ -1295,14 +1294,12 @@
         }
         if (dockPageBadge) dockPageBadge.innerText = `صفحه ${currentAudioPage}`;
 
-        // Reset all leaf audio buttons
+        // Reset all leaf audio buttons to Play icon (▶)
         document.querySelectorAll('.leaf-audio-btn.has-audio').forEach(btn => {
           btn.classList.remove('playing');
           const p = btn.getAttribute('data-page-index');
           const iconSpan = document.getElementById(`leafAudioIcon-${p}`);
-          const textSpan = document.getElementById(`leafAudioText-${p}`);
-          if (iconSpan) iconSpan.innerHTML = ICONS.sparkleAudio;
-          if (textSpan) textSpan.innerText = 'شنیدن صوت هوش مصنوعی';
+          if (iconSpan) iconSpan.innerHTML = ICONS.play;
         });
 
         // Reset all active leaf borders
@@ -1310,14 +1307,13 @@
           leaf.classList.remove('audio-active-leaf');
         });
 
+        // If playing, switch active page button to Pause/Stop icon (⏸)
         if (playing) {
           const currentBtn = document.getElementById(`leafAudioBtn-${currentAudioPage}`);
           if (currentBtn) {
             currentBtn.classList.add('playing');
             const iconSpan = document.getElementById(`leafAudioIcon-${currentAudioPage}`);
-            const textSpan = document.getElementById(`leafAudioText-${currentAudioPage}`);
             if (iconSpan) iconSpan.innerHTML = ICONS.pause;
-            if (textSpan) textSpan.innerText = 'توقف پخش';
           }
           const currentLeaf = document.getElementById(`page-leaf-${currentAudioPage}`);
           if (currentLeaf) {
@@ -1392,21 +1388,12 @@
         window.speechSynthesis.speak(speechUtterance);
       }
 
-      function playPageAudio(pageNum) {
-        pageNum = parseInt(pageNum, 10) || currentPage;
-
-        if (isAudioPlaying && currentAudioPage === pageNum) {
-          stopAudioNarration();
-          return;
+      function loadAndPlayAudio(pageNum, audioPath) {
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
         }
-
-        stopAudioNarration();
-
-        currentAudioPage = pageNum;
         isSpeechFallback = false;
-
-        const padNum = String(pageNum).padStart(3, '0');
-        const audioPath = `assets/audio/pages/page-${padNum}.mp3`;
+        currentAudioPage = pageNum;
 
         const badgeEl = document.getElementById('audioPageNumberBadge');
         if (badgeEl) badgeEl.innerText = `صفحه ${pageNum}`;
@@ -1442,11 +1429,58 @@
         });
       }
 
+      function playPageAudio(pageNum) {
+        pageNum = parseInt(pageNum, 10) || currentPage;
+        const padNum = String(pageNum).padStart(3, '0');
+        const targetSrc = `assets/audio/pages/page-${padNum}.mp3`;
+
+        // If this page's audio is already loaded: toggle play / pause seamlessly
+        if (currentAudioPage === pageNum && bookAudio.src && bookAudio.src.includes(`page-${padNum}.mp3`)) {
+          if (!bookAudio.paused && !bookAudio.ended) {
+            bookAudio.pause();
+          } else {
+            bookAudio.play().catch(err => {
+              console.warn('Resume error, reloading page audio:', err);
+              loadAndPlayAudio(pageNum, targetSrc);
+            });
+          }
+          return;
+        }
+
+        // If speech fallback was active on this page, toggle it
+        if (isSpeechFallback && currentAudioPage === pageNum) {
+          if ('speechSynthesis' in window && window.speechSynthesis.speaking) {
+            window.speechSynthesis.cancel();
+            updateAudioUI(false);
+          } else {
+            fallbackToSpeechSynthesis(pageNum);
+          }
+          return;
+        }
+
+        // Otherwise load and play the newly requested page
+        loadAndPlayAudio(pageNum, targetSrc);
+      }
+
       function toggleAudioNarration() {
-        if (isAudioPlaying) {
-          stopAudioNarration();
+        if (isSpeechFallback) {
+          if ('speechSynthesis' in window && window.speechSynthesis.speaking) {
+            window.speechSynthesis.cancel();
+            updateAudioUI(false);
+          } else {
+            fallbackToSpeechSynthesis(currentAudioPage || currentPage);
+          }
+          return;
+        }
+
+        if (!bookAudio.paused && !bookAudio.ended && isAudioPlaying) {
+          bookAudio.pause();
         } else {
-          playPageAudio(currentPage);
+          if (bookAudio.src) {
+            bookAudio.play().catch(() => playPageAudio(currentAudioPage || currentPage));
+          } else {
+            playPageAudio(currentAudioPage || currentPage);
+          }
         }
       }
 
@@ -1472,7 +1506,14 @@
         }
       }
 
-      // Audio Event Listeners
+      // Audio Event Listeners (Single Source of Truth)
+      bookAudio.addEventListener('play', () => {
+        updateAudioUI(true);
+      });
+
+      bookAudio.addEventListener('pause', () => {
+        updateAudioUI(false);
+      });
       bookAudio.addEventListener('timeupdate', () => {
         if (!bookAudio.duration || !isFinite(bookAudio.duration)) return;
         const pct = (bookAudio.currentTime / bookAudio.duration) * 100;
@@ -1761,17 +1802,16 @@
 
           const hasAudio = AUDIO_AVAILABLE_PAGES.has(pNum);
           const audioInfo = AUDIO_MANIFEST[pNum];
+          const isCurrentActivePlaying = (hasAudio && currentAudioPage === pNum && isAudioPlaying && !bookAudio.paused);
           const audioBtnHtml = hasAudio ? `
-            <button class="leaf-audio-btn has-audio" id="leafAudioBtn-${pNum}" data-page-index="${pNum}" onclick="playPageAudio(${pNum})" title="شنیدن صوت هوش مصنوعی صفحه ${pNum} (${audioInfo?.label || ''})">
-              <span id="leafAudioIcon-${pNum}">${ICONS.sparkleAudio}</span>
-              <span id="leafAudioText-${pNum}">شنیدن صوت هوش مصنوعی</span>
+            <button class="leaf-audio-btn has-audio ${isCurrentActivePlaying ? 'playing' : ''}" id="leafAudioBtn-${pNum}" data-page-index="${pNum}" onclick="playPageAudio(${pNum})" title="پخش / توقف صوت صفحه ${pNum} (${audioInfo?.label || ''})" aria-label="پخش صوت صفحه ${pNum}">
+              <span class="leaf-audio-play-icon" id="leafAudioIcon-${pNum}">${isCurrentActivePlaying ? ICONS.pause : ICONS.play}</span>
               <span class="leaf-audio-duration-tag" id="leafAudioTag-${pNum}">${audioInfo?.label || ''}</span>
             </button>
           ` : `
-            <button class="leaf-audio-btn no-audio" id="leafAudioBtn-${pNum}" data-page-index="${pNum}" onclick="handleNoAudioClick(${pNum})" title="صوت هوش مصنوعی این صفحه هنوز تولید نشده است">
-              <span id="leafAudioIcon-${pNum}">${ICONS.mutedAudio}</span>
-              <span id="leafAudioText-${pNum}">فاقد صوت AI</span>
-              <span class="leaf-audio-duration-tag" id="leafAudioTag-${pNum}"></span>
+            <button class="leaf-audio-btn no-audio" id="leafAudioBtn-${pNum}" data-page-index="${pNum}" onclick="handleNoAudioClick(${pNum})" title="صوت هوش مصنوعی این صفحه هنوز آماده نشده است" aria-label="فاقد صوت صفحه ${pNum}">
+              <span class="leaf-audio-play-icon" id="leafAudioIcon-${pNum}">${ICONS.mutedAudio}</span>
+              <span class="leaf-audio-duration-tag" id="leafAudioTag-${pNum}">بدون صوت</span>
             </button>
           `;
 
@@ -2234,17 +2274,7 @@
       });
 
       const dockMainPlayBtn = document.getElementById('dockMainPlayBtn');
-      dockMainPlayBtn?.addEventListener('click', () => {
-        if (isAudioPlaying) {
-          bookAudio.pause();
-        } else {
-          if (bookAudio.src) {
-            bookAudio.play().then(() => updateAudioUI(true)).catch(() => playPageAudio(currentAudioPage));
-          } else {
-            playPageAudio(currentAudioPage);
-          }
-        }
-      });
+      dockMainPlayBtn?.addEventListener('click', toggleAudioNarration);
 
       const dockPrevPageBtn = document.getElementById('dockPrevPageBtn');
       dockPrevPageBtn?.addEventListener('click', () => {

@@ -587,10 +587,13 @@ button, input, select {
 
 /* Bookmark Ribbon Button on each page */
 .leaf-bookmark-tab {
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.35rem;
-  padding: 0.3rem 0.65rem;
+  height: 34px;
+  min-height: 34px;
+  padding: 0 0.75rem;
   border-radius: 9999px;
   background: var(--sub-surface);
   border: 1px solid var(--border-color);
@@ -598,6 +601,7 @@ button, input, select {
   font-size: 0.72rem;
   cursor: pointer;
   transition: all 0.2s ease;
+  box-sizing: border-box;
 }
 
 .leaf-bookmark-tab:hover {
@@ -1094,13 +1098,30 @@ p.active-tts-paragraph {
 .leaf-audio-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.35rem;
-  padding: 0.28rem 0.65rem;
+  height: 34px;
+  min-height: 34px;
+  padding: 0 0.75rem;
   border-radius: 9999px;
   font-size: 0.72rem;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   user-select: none;
+  box-sizing: border-box;
+}
+
+.leaf-audio-play-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+
+.leaf-audio-play-icon svg {
+  display: block;
 }
 
 /* Page HAS AI Audio Ready */
@@ -1120,15 +1141,22 @@ p.active-tts-paragraph {
 }
 
 .leaf-audio-btn.has-audio .leaf-audio-duration-tag {
-  font-size: 0.62rem;
-  font-family: monospace;
-  padding: 0.1rem 0.35rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.12rem 0.45rem;
   background: rgba(0, 0, 0, 0.08);
   border-radius: 9999px;
-  margin-right: 0.2rem;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.2;
 }
 
-.leaf-audio-btn.has-audio:hover .leaf-audio-duration-tag {
+.theme-dark .leaf-audio-btn.has-audio .leaf-audio-duration-tag {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.leaf-audio-btn.has-audio:hover .leaf-audio-duration-tag,
+.leaf-audio-btn.has-audio.playing .leaf-audio-duration-tag {
   background: rgba(255, 255, 255, 0.25);
   color: #FFFFFF;
 }
@@ -1148,6 +1176,14 @@ p.active-tts-paragraph {
   color: var(--ink-muted);
   opacity: 0.65;
   cursor: pointer;
+}
+
+.leaf-audio-btn.no-audio .leaf-audio-duration-tag {
+  font-size: 0.62rem;
+  font-weight: 500;
+  padding: 0.1rem 0.35rem;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 9999px;
 }
 
 .leaf-audio-btn.no-audio:hover {
@@ -1752,11 +1788,12 @@ p.active-tts-paragraph {
   }
 
   .ambient-pill-btn {
+    width: 44px !important;
     height: 44px !important;
     min-width: 44px !important;
-    padding: 0 0.85rem !important;
-    font-size: 0.82rem !important;
-    gap: 0.35rem !important;
+    min-height: 44px !important;
+    padding: 0 !important;
+    gap: 0 !important;
     border-radius: 0.5rem !important;
     display: inline-flex !important;
     align-items: center !important;
@@ -1825,9 +1862,36 @@ p.active-tts-paragraph {
   }
 
   .leaf-top-meta-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: wrap !important;
+    gap: 0.5rem !important;
     margin-bottom: 1.15rem !important;
     padding-bottom: 0.65rem !important;
     font-size: 0.72rem !important;
+  }
+
+  .leaf-chapter-tag {
+    font-size: 0.72rem !important;
+    gap: 0.35rem !important;
+    max-width: 100% !important;
+  }
+
+  .leaf-meta-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.4rem !important;
+    flex-shrink: 0 !important;
+  }
+
+  .leaf-audio-btn,
+  .leaf-bookmark-tab {
+    height: 38px !important;
+    min-height: 38px !important;
+    padding: 0 0.85rem !important;
+    font-size: 0.75rem !important;
+    border-radius: 9999px !important;
   }
 
   .page-chapter-motif {
@@ -1951,23 +2015,39 @@ p.active-tts-paragraph {
 
   .dock-speed-section {
     width: 100% !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
     justify-content: center !important;
+    gap: 0.4rem !important;
     border-top: 1px dashed var(--border-color) !important;
     padding-top: 0.5rem !important;
     margin-top: 0.25rem !important;
   }
 
-  .speed-chips-group {
-    gap: 0.5rem !important;
-    justify-content: center !important;
+  .dock-speed-label {
+    width: 100% !important;
+    text-align: center !important;
+    font-size: 0.68rem !important;
+    margin-bottom: 0.15rem !important;
   }
 
+  .dock-speed-chips,
+  .speed-chips-group {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 0.35rem !important;
+    width: 100% !important;
+  }
+
+  .dock-speed-chips .speed-chip,
   .speed-chip {
-    min-height: 40px !important;
-    min-width: 44px !important;
-    padding: 0.35rem 0.65rem !important;
-    font-size: 0.78rem !important;
-    border-radius: 0.5rem !important;
+    min-height: 36px !important;
+    min-width: 40px !important;
+    padding: 0.25rem 0.55rem !important;
+    font-size: 0.74rem !important;
+    border-radius: 0.45rem !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
