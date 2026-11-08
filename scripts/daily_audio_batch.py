@@ -23,6 +23,7 @@ MANIFEST_PATH = os.path.join(OUTPUT_DIR, "manifest.json")
 
 # Import generator functions
 sys.path.insert(0, SCRIPT_DIR)
+from key_manager import key_manager
 from generate_audio import (
     load_book_pages,
     get_api_key,
@@ -89,6 +90,8 @@ def run_batch(batch_size=20, max_page=241, push=True, voice="Bodi"):
     print(f"Total Book Pages   : {total_pages}")
     print(f"Completed So Far   : {len(completed)} pages ({len(completed) / total_pages * 100:.1f}%)")
 
+    key_manager.print_pool_status()
+
     # Find the next continuous sequence of ungenerated pages
     target_pages = []
     for p in pages:
@@ -107,21 +110,20 @@ def run_batch(batch_size=20, max_page=241, push=True, voice="Bodi"):
     print(f"Target Batch Today : Pages {first_page:03d} to {last_page:03d} ({len(target_pages)} pages)")
     print("=" * 65)
 
-    api_key = get_api_key()
     generated_pages = []
     stopped_due_to_quota = False
 
     for idx, page_data in enumerate(target_pages):
         p_num = page_data.get("pageIndex")
         try:
-            res = generate_page_audio(page_data, api_key, voice_name=voice)
+            res = generate_page_audio(page_data, voice_name=voice)
             if res:
                 generated_pages.append(p_num)
         except Exception as e:
             err_msg = str(e)
             print(f"\n⚠ Generation stopped at Page {p_num:03d}: {err_msg}")
-            if "limit" in err_msg.lower() or "429" in err_msg or "exhausted" in err_msg.lower() or "quota" in err_msg.lower():
-                print("Daily quota ceiling reached for today. Safely saving progress...")
+            if "quota" in err_msg.lower() or "keys" in err_msg.lower() or "429" in err_msg.lower():
+                print("All active API keys in pool reached daily quota. Safely saving progress...")
                 stopped_due_to_quota = True
                 break
             else:
@@ -147,8 +149,10 @@ def run_batch(batch_size=20, max_page=241, push=True, voice="Bodi"):
     print(f"Pages Remaining             : {remaining} pages")
     print(f"Estimated Days Left         : ~{est_days} days (at {batch_size} pages/day)")
 
+    key_manager.print_pool_status()
+
     if stopped_due_to_quota:
-        print("\nℹ Daily quota ceiling was reached. Quota will reset tonight at 00:00 UTC (03:30 AM Iran).")
+        print("\nℹ Key pool reached daily quota ceiling. Quotas reset at 11:30 AM Iran (00:00 Pacific Time / 08:00 UTC).")
 
     # If new pages were generated and push is requested, commit and push to git
     if generated_pages and push:

@@ -24,6 +24,9 @@ MANIFEST_PATH = os.path.join(OUTPUT_DIR, "manifest.json")
 ENV_FILE = os.path.join(ROOT_DIR, ".env")
 PAGES_JSON = os.path.join(ROOT_DIR, "data", "transcription_cache.json")
 
+sys.path.insert(0, SCRIPT_DIR)
+from key_manager import key_manager, QuotaExhaustedException
+
 
 def load_env():
     """Load environment variables from .env file if present."""
@@ -261,9 +264,8 @@ def call_gemini_tts(text, api_key, voice_name="Bodi", preferred_model=None, max_
                 err_body = e.read().decode("utf-8", errors="ignore")
                 last_error = f"{model}: HTTP {e.code} - {err_body[:200]}"
                 if e.code == 429:
-                    if "RESOURCE_EXHAUSTED" in err_body and ("per day" in err_body.lower() or "requests per day" in err_body.lower()):
-                        print(f"  [{model}] Daily limit reached. Trying next available model...")
-                        break
+                    if "RESOURCE_EXHAUSTED" in err_body and ("per day" in err_body.lower() or "requests per day" in err_body.lower() or "quota" in err_body.lower()):
+                        raise QuotaExhaustedException(api_key, f"Daily limit exceeded for key {key_manager.mask_key(api_key)} on {model}")
                     else:
                         wait_sec = 15 * attempt
                         print(f"  [{model}] Rate limit pause: waiting {wait_sec}s...")
@@ -272,6 +274,8 @@ def call_gemini_tts(text, api_key, voice_name="Bodi", preferred_model=None, max_
                     print(f"  [{model} attempt {attempt}] HTTP Error {e.code}")
                     if attempt < max_retries:
                         time.sleep(2 * attempt)
+            except QuotaExhaustedException:
+                raise
             except Exception as e:
                 last_error = str(e)
                 print(f"  [{model} attempt {attempt}] Error: {e}")
@@ -295,8 +299,8 @@ def get_audio_duration_seconds(file_path):
         return 0.0
 
 
-def generate_page_audio(page_data, api_key, voice_name="Bodi", force=False):
-    """Generates and encodes MP3 audio for a specific book page."""
+def generate_page_audio(page_data, api_key=None, voice_name="Bodi", force=False):
+    """Generates and encodes MP3 audio for a specific book page using active key pool."""
     p_num = page_data.get("pageIndex")
     mp3_filename = f"page-{p_num:03d}.mp3"
     mp3_path = os.path.join(OUTPUT_DIR, mp3_filename)
@@ -313,8 +317,29 @@ def generate_page_audio(page_data, api_key, voice_name="Bodi", force=False):
     print(f"\n--- Generating Page {p_num:03d} (Voice: {voice_name}) ---")
     print(f"Text snippet: {speech_text[:90]}...")
 
-    raw_audio, mime_type, used_model = call_gemini_tts(speech_text, api_key, voice_name=voice_name)
-    print(f"  [Model: {used_model}] Audio generated ({len(raw_audio)} bytes)")
+    candidate_keys = [api_key] if api_key else key_manager.get_active_keys()
+    if not candidate_keys:
+        raise RuntimeError("No active Gemini API keys available in the pool. Daily quota exhausted across all keys.")
+
+    raw_audio, mime_type, used_model = None, None, None
+
+    for k in list(candidate_keys):
+        masked_kid = key_manager.mask_key(k)
+        try:
+            raw_audio, mime_type, used_model = call_gemini_tts(speech_text, k, voice_name=voice_name)
+            key_manager.mark_success(k)
+            print(f"  [Model: {used_model} | Key: {masked_kid}] Audio generated ({len(raw_audio)} bytes)")
+            break
+        except QuotaExhaustedException:
+            key_manager.mark_exhausted(k)
+            print(f"  🔄 Key {masked_kid} exhausted today's quota. Seamlessly rotating to next active key in pool...")
+            continue
+        except Exception as e:
+            print(f"  ⚠ Key {masked_kid} failed: {e}")
+            continue
+
+    if not raw_audio:
+        raise RuntimeError(f"All available API keys failed to generate audio for Page {p_num:03d}")
 
     # Save to temporary WAV
     temp_wav_path = os.path.join(OUTPUT_DIR, f"temp_{p_num:03d}.wav")
@@ -348,6 +373,7 @@ def generate_page_audio(page_data, api_key, voice_name="Bodi", force=False):
 
     # Update manifest record
     update_manifest(p_num, mp3_filename, duration_sec, file_size_kb, voice_name)
+    return mp3_path
     return mp3_path
 
 

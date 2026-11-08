@@ -32,6 +32,7 @@ venv/
 scratch/
 temp/
 .cache/
+.keys_status.json
 
 # Node
 node_modules/
