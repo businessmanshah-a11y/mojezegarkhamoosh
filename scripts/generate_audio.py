@@ -369,59 +369,78 @@ def generate_page_audio(page_data, api_key=None, voice_name="Bodi", force=False)
         return None
 
     print(f"\n--- Generating Page {p_num:03d} (Voice: {voice_name}) ---")
-    print(f"Text snippet: {speech_text[:90]}...")
+    print(f"Text snippet: {speech_text[:90]}... (Total {len(speech_text)} chars)")
 
-    candidate_keys = [api_key] if api_key else key_manager.get_active_keys()
-    if not candidate_keys:
-        raise RuntimeError("No active Gemini API keys available in the pool. Daily quota exhausted across all keys.")
-
-    chunks = split_text_into_verbatim_chunks(speech_text, max_chunk_len=450)
-    if len(chunks) > 1:
-        print(f"  [VerbatimChunking] Page {p_num:03d} has {len(speech_text)} chars. Split into {len(chunks)} exact sentence chunks to guarantee 100% word-for-word fidelity without cloud recitation blocks.")
+    # -------------------------------------------------------------
+    # ADAPTIVE RECITATION & QUOTA OPTIMIZATION STRATEGY
+    # -------------------------------------------------------------
+    # 1. OPTIMAL PATH (Default): Send entire page in 1 single API request.
+    #    Maximizes throughput: 1 page = 1 request (~60-70 pages/day across 7 keys).
+    # 2. ADAPTIVE FALLBACK (Only on recitation/copyright filter):
+    #    If Google returns finishReason: OTHER (ContentFilteredException),
+    #    dynamically fall back to sentence-level verbatim chunking (<450 chars).
+    #    Preserves 100% verbatim printed text without burning extra requests on normal pages.
+    # -------------------------------------------------------------
 
     temp_wav_files = []
     total_audio_bytes = 0
     used_model = None
 
-    for c_idx, chunk in enumerate(chunks):
-        chunk_raw = None
+    def execute_chunk_request(chunk_text, chunk_desc=""):
         active_keys = [api_key] if api_key else key_manager.get_active_keys()
         if not active_keys:
             raise RuntimeError("No active Gemini API keys available in the pool. Daily quota exhausted across all keys.")
         for k in list(active_keys):
             masked_kid = key_manager.mask_key(k)
             try:
-                chunk_raw, mime_type, used_model = call_gemini_tts(chunk, k, voice_name=voice_name, page_num=p_num)
+                raw_bytes, mime_type, model_used = call_gemini_tts(chunk_text, k, voice_name=voice_name, page_num=p_num)
                 key_manager.mark_success(k)
-                break
+                return raw_bytes, model_used
             except QuotaExhaustedException:
                 key_manager.mark_exhausted(k)
                 print(f"  🔄 Key {masked_kid} exhausted today's quota. Seamlessly rotating to next active key in pool...")
                 continue
-            except ContentFilteredException as cfe:
-                print(f"\n🚫 [ContentGuard] {cfe}")
-                print(f"🛡 Quota Protected: Halting generation on Page {p_num:03d} to prevent wasting other active keys!")
-                raise cfe
+            except ContentFilteredException:
+                # Bubble up filter exception so Adaptive Fallback can activate
+                raise
             except Exception as e:
-                print(f"  ⚠ Key {masked_kid} failed: {e}")
+                print(f"  ⚠ Key {masked_kid} failed on {chunk_desc}: {e}")
                 continue
+        raise RuntimeError(f"All available API keys failed to generate audio for {chunk_desc}")
 
-        if not chunk_raw:
-            for tw in temp_wav_files:
-                if os.path.exists(tw):
-                    os.remove(tw)
-            raise RuntimeError(f"All available API keys failed to generate audio for Page {p_num:03d} (chunk {c_idx+1}/{len(chunks)})")
-
-        temp_wav_path = os.path.join(OUTPUT_DIR, f"temp_{p_num:03d}_{c_idx}.wav")
-        wav_bytes = chunk_raw if chunk_raw.startswith(b"RIFF") else convert_raw_pcm_to_wav(chunk_raw)
+    # Step 1: Optimal Path - Try single request for the whole page
+    use_chunk_fallback = False
+    try:
+        single_raw, model_used = execute_chunk_request(speech_text, chunk_desc=f"Page {p_num:03d} full text")
+        temp_wav_path = os.path.join(OUTPUT_DIR, f"temp_{p_num:03d}_0.wav")
+        wav_bytes = single_raw if single_raw.startswith(b"RIFF") else convert_raw_pcm_to_wav(single_raw)
         with open(temp_wav_path, "wb") as f:
             f.write(wav_bytes)
         temp_wav_files.append(temp_wav_path)
-        total_audio_bytes += len(chunk_raw)
-        if c_idx < len(chunks) - 1:
-            time.sleep(2.0)
+        total_audio_bytes = len(single_raw)
+        used_model = model_used
+        print(f"  ⚡ [OptimalPath] Page {p_num:03d} successfully generated in 1 single request ({total_audio_bytes} bytes)")
+    except ContentFilteredException as cfe:
+        print(f"  🛡 [AdaptiveFallback] Full page {p_num:03d} flagged by recitation filter ({cfe.reason}).")
+        print(f"  Engaging verbatim sentence chunking (<450 chars) to bypass filter with 100% word fidelity...")
+        use_chunk_fallback = True
 
-    print(f"  [Model: {used_model}] Audio generated ({total_audio_bytes} bytes across {len(temp_wav_files)} chunk(s))")
+    # Step 2: Adaptive Fallback - Verbatim sentence chunking (<450 chars) only when filtered
+    if use_chunk_fallback:
+        chunks = split_text_into_verbatim_chunks(speech_text, max_chunk_len=450)
+        print(f"  [VerbatimChunking] Split into {len(chunks)} exact sentence chunks for Page {p_num:03d}.")
+        for c_idx, chunk in enumerate(chunks):
+            chunk_raw, chunk_model = execute_chunk_request(chunk, chunk_desc=f"Page {p_num:03d} chunk {c_idx+1}/{len(chunks)}")
+            temp_wav_path = os.path.join(OUTPUT_DIR, f"temp_{p_num:03d}_{c_idx}.wav")
+            wav_bytes = chunk_raw if chunk_raw.startswith(b"RIFF") else convert_raw_pcm_to_wav(chunk_raw)
+            with open(temp_wav_path, "wb") as f:
+                f.write(wav_bytes)
+            temp_wav_files.append(temp_wav_path)
+            total_audio_bytes += len(chunk_raw)
+            used_model = chunk_model
+            if c_idx < len(chunks) - 1:
+                time.sleep(2.0)
+        print(f"  [Model: {used_model}] Audio generated across {len(temp_wav_files)} fallback chunks ({total_audio_bytes} bytes)")
 
     # Combine chunks via ffmpeg
     if len(temp_wav_files) == 1:
