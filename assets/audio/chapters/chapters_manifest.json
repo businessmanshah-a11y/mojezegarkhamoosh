@@ -13,7 +13,7 @@
     "duration": 464.6,
     "duration_formatted": "7:44 دقیقه",
     "size_mb": 7.09,
-    "status": "stitched"
+    "status": "cached"
   },
   "chapter_01_parvaz": {
     "track": 2,
@@ -29,7 +29,7 @@
     "duration": 568.6,
     "duration_formatted": "9:28 دقیقه",
     "size_mb": 8.68,
-    "status": "stitched"
+    "status": "cached"
   },
   "chapter_02_afsaneh_shakhsi": {
     "track": 3,
@@ -45,7 +45,7 @@
     "duration": 706.3,
     "duration_formatted": "11:46 دقیقه",
     "size_mb": 10.78,
-    "status": "stitched"
+    "status": "cached"
   },
   "chapter_03_afarinesh_zendegi": {
     "track": 4,
@@ -61,7 +61,7 @@
     "duration": 1771.8,
     "duration_formatted": "29:31 دقیقه",
     "size_mb": 27.04,
-    "status": "stitched"
+    "status": "cached"
   },
   "chapter_04_ghodrat_ghalb": {
     "track": 5,
@@ -77,12 +77,12 @@
     "duration": 965.0,
     "duration_formatted": "16:05 دقیقه",
     "size_mb": 14.73,
-    "status": "stitched"
+    "status": "cached"
   },
   "chapter_05_shohood_va_mokashefeh": {
     "track": 6,
     "id": "chapter_05_shohood_va_mokashefeh",
-    "title": "فصل پنجم: شهود و مکاشفه (صفحات 43 تا 69)",
+    "title": "فصل پنجم: شهود و مکاشفه (بخش تکمیل‌شده)",
     "filename": "05_chapter_05_shohood_va_mokashefeh_partial_p043-069.mp3",
     "path": "assets/audio/chapters/05_chapter_05_shohood_va_mokashefeh_partial_p043-069.mp3",
     "start_page": 43,
@@ -93,6 +93,6 @@
     "duration": 3865.1,
     "duration_formatted": "1 ساعت و 4 دقیقه",
     "size_mb": 58.98,
-    "status": "stitched"
+    "status": "cached"
   }
 }

@@ -60,8 +60,8 @@ def git_commit_and_push(start_p, end_p, count):
             print("No changes to commit in git.")
             return True
 
-        # Stage only assets/audio/pages and reader.html
-        subprocess.run(["git", "add", "assets/audio/pages/", "reader.html"], cwd=ROOT_DIR, check=True)
+        # Stage audio, chapters, and reader.html
+        subprocess.run(["git", "add", "assets/audio/", "reader.html"], cwd=ROOT_DIR, check=True)
         
         commit_msg = f"feat(audiobook): batch generate audio pages {start_p:03d}-{end_p:03d} ({count} pages) [automated]"
         subprocess.run(["git", "commit", "-m", commit_msg], cwd=ROOT_DIR, check=True)
@@ -158,6 +158,14 @@ def run_batch(batch_size=50, max_page=241, push=True, voice="Bodi"):
 
     if stopped_due_to_quota:
         print("\nℹ Key pool reached daily quota ceiling. Quotas reset at 11:30 AM Iran (00:00 Pacific Time / 08:00 UTC).")
+
+    # Stitch chapters with newly generated pages
+    if generated_pages:
+        try:
+            from stitch_chapters import stitch_all_chapters
+            stitch_all_chapters(force=False, allow_partial=True)
+        except Exception as se:
+            print(f"⚠ Chapter stitching warning: {se}")
 
     # If new pages were generated and push is requested, commit and push to git
     if generated_pages and push:

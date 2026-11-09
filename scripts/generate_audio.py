@@ -193,7 +193,7 @@ def convert_raw_pcm_to_wav(audio_data: bytes, rate=24000, bits_per_sample=16, nu
     return header + audio_data
 
 
-def split_text_into_verbatim_chunks(text, max_chunk_len=850):
+def split_text_into_verbatim_chunks(text, max_chunk_len=450):
     """
     Splits long Persian text at sentence boundaries into smaller verbatim chunks
     to avoid cloud recitation filters while maintaining 100% strict word-for-word fidelity.
@@ -271,7 +271,14 @@ def call_gemini_tts(text, api_key, voice_name="Bodi", preferred_model=None, max_
                         }
                     }
                 }
-            }
+            },
+            "safetySettings": [
+                {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
+                {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
+                {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"},
+                {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"},
+                {"category": "HARM_CATEGORY_CIVIC_INTEGRITY", "threshold": "BLOCK_NONE"}
+            ]
         }
 
         req_data = json.dumps(payload).encode("utf-8")
@@ -368,7 +375,7 @@ def generate_page_audio(page_data, api_key=None, voice_name="Bodi", force=False)
     if not candidate_keys:
         raise RuntimeError("No active Gemini API keys available in the pool. Daily quota exhausted across all keys.")
 
-    chunks = split_text_into_verbatim_chunks(speech_text, max_chunk_len=850)
+    chunks = split_text_into_verbatim_chunks(speech_text, max_chunk_len=450)
     if len(chunks) > 1:
         print(f"  [VerbatimChunking] Page {p_num:03d} has {len(speech_text)} chars. Split into {len(chunks)} exact sentence chunks to guarantee 100% word-for-word fidelity without cloud recitation blocks.")
 
@@ -378,7 +385,10 @@ def generate_page_audio(page_data, api_key=None, voice_name="Bodi", force=False)
 
     for c_idx, chunk in enumerate(chunks):
         chunk_raw = None
-        for k in list(candidate_keys):
+        active_keys = [api_key] if api_key else key_manager.get_active_keys()
+        if not active_keys:
+            raise RuntimeError("No active Gemini API keys available in the pool. Daily quota exhausted across all keys.")
+        for k in list(active_keys):
             masked_kid = key_manager.mask_key(k)
             try:
                 chunk_raw, mime_type, used_model = call_gemini_tts(chunk, k, voice_name=voice_name, page_num=p_num)
@@ -408,6 +418,8 @@ def generate_page_audio(page_data, api_key=None, voice_name="Bodi", force=False)
             f.write(wav_bytes)
         temp_wav_files.append(temp_wav_path)
         total_audio_bytes += len(chunk_raw)
+        if c_idx < len(chunks) - 1:
+            time.sleep(2.0)
 
     print(f"  [Model: {used_model}] Audio generated ({total_audio_bytes} bytes across {len(temp_wav_files)} chunk(s))")
 
@@ -508,12 +520,13 @@ def main():
     parser.add_argument("--all", action="store_true", help="Generate audio for all 241 pages")
     parser.add_argument("--voice", type=str, default="Bodi", help="Prebuilt voice name (default: Bodi)")
     parser.add_argument("--force", action="store_true", help="Overwrite existing audio files")
+    parser.add_argument("--api-key", type=str, default=None, help="Specific Gemini API key (defaults to dynamic pool rotation)")
     parser.add_argument("--dry-run", action="store_true", help="Print texts without invoking API")
 
     args = parser.parse_args()
 
     pages = load_book_pages()
-    api_key = get_api_key() if not args.dry_run else None
+    api_key = args.api_key
 
     # Determine pages to process
     target_pages = []
