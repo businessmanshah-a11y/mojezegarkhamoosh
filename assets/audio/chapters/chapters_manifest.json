@@ -82,17 +82,17 @@
   "chapter_05_shohood_va_mokashefeh": {
     "track": 6,
     "id": "chapter_05_shohood_va_mokashefeh",
-    "title": "فصل پنجم: شهود و مکاشفه (بخش تکمیل‌شده)",
-    "filename": "05_chapter_05_shohood_va_mokashefeh_partial_p043-069.mp3",
-    "path": "assets/audio/chapters/05_chapter_05_shohood_va_mokashefeh_partial_p043-069.mp3",
+    "title": "فصل پنجم: شهود و مکاشفه (صفحات 43 تا 80)",
+    "filename": "05_chapter_05_shohood_va_mokashefeh_partial_p043-080.mp3",
+    "path": "assets/audio/chapters/05_chapter_05_shohood_va_mokashefeh_partial_p043-080.mp3",
     "start_page": 43,
-    "end_page": 69,
-    "pages_count": 27,
+    "end_page": 80,
+    "pages_count": 38,
     "total_pages": 49,
     "is_complete": false,
-    "duration": 3865.1,
-    "duration_formatted": "1 ساعت و 4 دقیقه",
-    "size_mb": 58.98,
-    "status": "cached"
+    "duration": 5857.0,
+    "duration_formatted": "1 ساعت و 37 دقیقه",
+    "size_mb": 89.37,
+    "status": "stitched"
   }
 }
