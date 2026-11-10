@@ -250,7 +250,7 @@ def stitch_chapter(ch_def, available_pages, force=False, allow_partial=True):
         "-f", "concat", "-safe", "0",
         "-i", concat_list_path,
         "-c:a", "libmp3lame",
-        "-b:a", "128k",
+        "-b:a", "64k",
         "-ar", "24000",
         "-ac", "1",
         "-metadata", f"title={ch_title}",
@@ -269,6 +269,15 @@ def stitch_chapter(ch_def, available_pages, force=False, allow_partial=True):
 
     if os.path.exists(concat_list_path):
         os.remove(concat_list_path)
+
+    # Clean up superseded partial files for this chapter
+    for old_f in os.listdir(CHAPTERS_AUDIO_DIR):
+        if old_f.startswith(f"{ch_def['track']:02d}_") and old_f.endswith(".mp3") and old_f != out_filename:
+            old_path = os.path.join(CHAPTERS_AUDIO_DIR, old_f)
+            try:
+                os.remove(old_path)
+            except OSError:
+                pass
 
     dur = get_audio_duration_seconds(out_path)
     size_mb = round(os.path.getsize(out_path) / (1024 * 1024), 2)
