@@ -13,7 +13,7 @@
     "duration": 464.6,
     "duration_formatted": "7:44 دقیقه",
     "size_mb": 3.55,
-    "status": "stitched"
+    "status": "cached"
   },
   "chapter_01_parvaz": {
     "track": 2,
@@ -29,7 +29,7 @@
     "duration": 568.6,
     "duration_formatted": "9:28 دقیقه",
     "size_mb": 4.34,
-    "status": "stitched"
+    "status": "cached"
   },
   "chapter_02_afsaneh_shakhsi": {
     "track": 3,
@@ -45,7 +45,7 @@
     "duration": 706.3,
     "duration_formatted": "11:46 دقیقه",
     "size_mb": 5.39,
-    "status": "stitched"
+    "status": "cached"
   },
   "chapter_03_afarinesh_zendegi": {
     "track": 4,
@@ -61,7 +61,7 @@
     "duration": 1771.8,
     "duration_formatted": "29:31 دقیقه",
     "size_mb": 13.52,
-    "status": "stitched"
+    "status": "cached"
   },
   "chapter_04_ghodrat_ghalb": {
     "track": 5,
@@ -77,7 +77,7 @@
     "duration": 965.0,
     "duration_formatted": "16:05 دقیقه",
     "size_mb": 7.36,
-    "status": "stitched"
+    "status": "cached"
   },
   "chapter_05_shohood_va_mokashefeh": {
     "track": 6,
@@ -93,7 +93,7 @@
     "duration": 7723.9,
     "duration_formatted": "2 ساعت و 8 دقیقه",
     "size_mb": 58.93,
-    "status": "stitched"
+    "status": "cached"
   },
   "chapter_06_ghalamro_sokoot": {
     "track": 7,
@@ -109,7 +109,7 @@
     "duration": 1358.5,
     "duration_formatted": "22:38 دقیقه",
     "size_mb": 10.37,
-    "status": "stitched"
+    "status": "cached"
   },
   "chapter_07_zistan_dar_atash_aknoon": {
     "track": 8,
@@ -125,22 +125,22 @@
     "duration": 2537.6,
     "duration_formatted": "42:17 دقیقه",
     "size_mb": 19.36,
-    "status": "stitched"
+    "status": "cached"
   },
   "chapter_08_jedal_nafs_va_eshgh": {
     "track": 9,
     "id": "chapter_08_jedal_nafs_va_eshgh",
-    "title": "فصل هشتم: جدال بین نفس و عشق در روابط (صفحات 119 تا 141)",
-    "filename": "08_chapter_08_jedal_nafs_va_eshgh_partial_p119-141.mp3",
-    "path": "assets/audio/chapters/08_chapter_08_jedal_nafs_va_eshgh_partial_p119-141.mp3",
+    "title": "فصل هشتم: جدال بین نفس و عشق در روابط (صفحات 119 تا 144)",
+    "filename": "08_chapter_08_jedal_nafs_va_eshgh_partial_p119-144.mp3",
+    "path": "assets/audio/chapters/08_chapter_08_jedal_nafs_va_eshgh_partial_p119-144.mp3",
     "start_page": 119,
-    "end_page": 141,
-    "pages_count": 23,
+    "end_page": 144,
+    "pages_count": 26,
     "total_pages": 34,
     "is_complete": false,
-    "duration": 3504.6,
-    "duration_formatted": "58:24 دقیقه",
-    "size_mb": 26.74,
+    "duration": 3995.4,
+    "duration_formatted": "1 ساعت و 6 دقیقه",
+    "size_mb": 30.48,
     "status": "stitched"
   }
 }
