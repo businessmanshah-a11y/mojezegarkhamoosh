@@ -141,7 +141,7 @@
     "duration": 5249.0,
     "duration_formatted": "1 ساعت و 27 دقیقه",
     "size_mb": 40.05,
-    "status": "stitched"
+    "status": "cached"
   },
   "chapter_09_talab_konid": {
     "track": 10,
@@ -157,7 +157,7 @@
     "duration": 2975.3,
     "duration_formatted": "49:35 دقیقه",
     "size_mb": 22.7,
-    "status": "stitched"
+    "status": "cached"
   },
   "chapter_10_rahayi_va_paziresh": {
     "track": 11,
@@ -173,22 +173,22 @@
     "duration": 770.8,
     "duration_formatted": "12:50 دقیقه",
     "size_mb": 5.88,
-    "status": "stitched"
+    "status": "cached"
   },
   "chapter_11_mojezeye_khamoosh": {
     "track": 12,
     "id": "chapter_11_mojezeye_khamoosh",
-    "title": "فصل یازدهم: معجزه‌گر خاموش و حقیقت حضور (صفحات 209 تا 214)",
-    "filename": "11_chapter_11_mojezeye_khamoosh_partial_p209-214.mp3",
-    "path": "assets/audio/chapters/11_chapter_11_mojezeye_khamoosh_partial_p209-214.mp3",
+    "title": "فصل یازدهم: معجزه‌گر خاموش و حقیقت حضور (صفحات 209 تا 218)",
+    "filename": "11_chapter_11_mojezeye_khamoosh_partial_p209-218.mp3",
+    "path": "assets/audio/chapters/11_chapter_11_mojezeye_khamoosh_partial_p209-218.mp3",
     "start_page": 209,
-    "end_page": 214,
-    "pages_count": 6,
+    "end_page": 218,
+    "pages_count": 10,
     "total_pages": 33,
     "is_complete": false,
-    "duration": 151.6,
-    "duration_formatted": "2:31 دقیقه",
-    "size_mb": 1.16,
+    "duration": 247.2,
+    "duration_formatted": "4:07 دقیقه",
+    "size_mb": 1.89,
     "status": "stitched"
   }
 }
