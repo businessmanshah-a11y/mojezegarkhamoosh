@@ -178,17 +178,17 @@
   "chapter_11_mojezeye_khamoosh": {
     "track": 12,
     "id": "chapter_11_mojezeye_khamoosh",
-    "title": "فصل یازدهم: معجزه‌گر خاموش و حقیقت حضور (صفحات 209 تا 238)",
-    "filename": "11_chapter_11_mojezeye_khamoosh_partial_p209-238.mp3",
-    "path": "assets/audio/chapters/11_chapter_11_mojezeye_khamoosh_partial_p209-238.mp3",
+    "title": "فصل یازدهم: معجزه‌گر خاموش و حقیقت حضور",
+    "filename": "11_chapter_11_mojezeye_khamoosh.mp3",
+    "path": "assets/audio/chapters/11_chapter_11_mojezeye_khamoosh.mp3",
     "start_page": 209,
-    "end_page": 238,
-    "pages_count": 30,
+    "end_page": 241,
+    "pages_count": 33,
     "total_pages": 33,
-    "is_complete": false,
-    "duration": 755.0,
-    "duration_formatted": "12:35 دقیقه",
-    "size_mb": 5.76,
+    "is_complete": true,
+    "duration": 832.4,
+    "duration_formatted": "13:52 دقیقه",
+    "size_mb": 6.35,
     "status": "stitched"
   }
 }

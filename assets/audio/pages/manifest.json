@@ -2140,5 +2140,32 @@
     "size_kb": 439.5,
     "voice": "Bodi",
     "updated_at": "2026-11-12T12:33:46Z"
+  },
+  "239": {
+    "page": 239,
+    "filename": "page-239.mp3",
+    "path": "assets/audio/pages/page-239.mp3",
+    "duration": 25.0,
+    "size_kb": 392.7,
+    "voice": "Bodi",
+    "updated_at": "2026-11-12T13:24:13Z"
+  },
+  "240": {
+    "page": 240,
+    "filename": "page-240.mp3",
+    "path": "assets/audio/pages/page-240.mp3",
+    "duration": 28.3,
+    "size_kb": 443.3,
+    "voice": "Bodi",
+    "updated_at": "2026-11-12T13:24:25Z"
+  },
+  "241": {
+    "page": 241,
+    "filename": "page-241.mp3",
+    "path": "assets/audio/pages/page-241.mp3",
+    "duration": 22.3,
+    "size_kb": 349.9,
+    "voice": "Bodi",
+    "updated_at": "2026-11-12T13:24:36Z"
   }
 }
