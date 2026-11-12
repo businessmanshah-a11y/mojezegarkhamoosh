@@ -353,7 +353,7 @@ def stitch_all_chapters(force=False, allow_partial=True):
 def main():
     parser = argparse.ArgumentParser(description="Stitch page audio files into complete chapter audio tracks")
     parser.add_argument("--force", action="store_true", help="Force re-stitching of existing chapter files")
-    parser.add_argument("--no-partial", action="store_true", help="Only stitch 100% complete chapters")
+    parser.add_argument("--no-partial", action="store_true", help="Only stitch 100%% complete chapters")
     args = parser.parse_args()
 
     stitch_all_chapters(force=args.force, allow_partial=not args.no_partial)
