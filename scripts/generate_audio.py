@@ -107,7 +107,10 @@ def prepare_speech_text(page_data):
     title = clean_html(page_data.get("title", ""))
     subtitle = clean_html(page_data.get("subtitle", ""))
     section_badge = clean_html(page_data.get("sectionBadge", ""))
-    paragraphs = [clean_html(p) for p in page_data.get("paragraphs", []) if p.strip()]
+    raw_paras = page_data.get("paragraphs")
+    if not raw_paras and page_data.get("content"):
+        raw_paras = [p.strip() for p in re.split(r'\n\s*\n', page_data["content"]) if p.strip()]
+    paragraphs = [clean_html(p) for p in (raw_paras or []) if p.strip()]
     callout = clean_html(page_data.get("callout", ""))
     chapter = clean_html(page_data.get("chapter", ""))
 
@@ -128,6 +131,25 @@ def prepare_speech_text(page_data):
     # Page 3: Preface Title Divider
     if p_num == 3 or (p_type == "section_start" and chapter == "پیشگفتار" and not paragraphs):
         return "پیشگفتار کتاب معجزه‌گر خاموش. چرا این اثر به نگارش درآمد؟"
+
+    # Chapter Cover Dividers
+    if p_type == "chapter-cover":
+        parts = []
+        if title:
+            parts.append(f"{title}.")
+        if subtitle and clean_html(subtitle).strip('«»"\' .') != clean_html(title).strip('«»"\' .'):
+            sub_c = clean_html(subtitle)
+            if not sub_c.endswith((".", "!", "؟", "؛")):
+                sub_c += "."
+            parts.append(sub_c)
+        elif paragraphs:
+            for p in paragraphs:
+                p_c = clean_html(p).strip('«»"\' .')
+                if p_c and p_c != clean_html(title).strip('«»"\' .'):
+                    if not p.endswith((".", "!", "؟", "؛")):
+                        p += "."
+                    parts.append(p)
+        return " ".join(parts)
 
     # General Pages
     speech_parts = []
@@ -153,9 +175,12 @@ def prepare_speech_text(page_data):
             speech_parts.append(p)
 
     if callout:
-        if not callout.endswith((".", "!", "؟", "؛")):
-            callout += "."
-        speech_parts.append(f"نکته کلیدی: {callout}")
+        callout_clean = clean_html(callout).strip('«»"\' ')
+        # Only add callout if not already contained in paragraphs
+        if not any(callout_clean in p for p in paragraphs):
+            if not callout.endswith((".", "!", "؟", "؛")):
+                callout += "."
+            speech_parts.append(f"نکته کلیدی: {callout}")
 
     # Fallback if speech_parts is empty
     if not speech_parts:

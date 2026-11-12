@@ -1934,8 +1934,12 @@
           const isBookmarked = bookmarks.includes(pNum);
 
           let paragraphsHtml = '';
+          const pageParas = (pData.paragraphs && pData.paragraphs.length > 0)
+            ? pData.paragraphs
+            : (pData.content ? pData.content.split(/\n\s*\n/).filter(Boolean) : []);
+
           if (pData.type === 'toc') {
-            paragraphsHtml = (pData.paragraphs || []).map(p => {
+            paragraphsHtml = pageParas.map(p => {
               const parts = p.split(/\s*\.{2,}\s*/);
               if (parts.length === 2) {
                 return `
@@ -1949,7 +1953,7 @@
               return `<p>${p}</p>`;
             }).join('');
           } else {
-            paragraphsHtml = (pData.paragraphs || []).map(p => `<p>${p}</p>`).join('');
+            paragraphsHtml = pageParas.map(p => `<p>${p}</p>`).join('');
           }
 
           const calloutHtml = pData.callout ? `
