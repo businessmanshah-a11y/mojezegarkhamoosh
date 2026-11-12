@@ -235,17 +235,31 @@ const BOOK_QUOTES = (typeof window !== 'undefined' && window.ORACLE_QUOTES && wi
       }
     ];
 
-// --- 4. Oracle Interaction Controller ---
+// --- 4. Oracle Interaction Controller (All 241 Pages & Cosmic Intuition) ---
 let currentQuote = BOOK_QUOTES[0];
+let homeOracleAudio = null;
+let lastHomeDrawnPage = null;
+
+function getCryptoRandom(max) {
+  if (window.crypto && window.crypto.getRandomValues) {
+    const arr = new Uint32Array(1);
+    window.crypto.getRandomValues(arr);
+    return arr[0] % max;
+  }
+  return Math.floor(Math.random() * max);
+}
 
 function initOracle() {
   const quoteText = document.getElementById('oracleQuoteText');
+  const revelationText = document.getElementById('oracleRevelationText');
   const metaText = document.getElementById('oracleMetaText');
   const rollBtn = document.getElementById('rollOracleBtn');
   const copyBtn = document.getElementById('copyOracleBtn');
   const shareBtn = document.getElementById('shareOracleBtn');
   const readInReaderBtn = document.getElementById('readInReaderBtn');
   const readInReaderBtnText = document.getElementById('readInReaderBtnText');
+  const playAudioBtn = document.getElementById('playHomeOracleAudioBtn');
+  const playAudioBtnText = document.getElementById('playHomeOracleAudioText');
   const filterChips = document.querySelectorAll('.filter-chip');
 
   let activeCategory = 'all';
@@ -261,15 +275,34 @@ function initOracle() {
     }
     if (pool.length === 0) pool = poolData;
 
-    const randomIndex = Math.floor(Math.random() * pool.length);
-    currentQuote = pool[randomIndex];
+    // Cryptographic non-repeating draw
+    let pick = null;
+    let attempts = 0;
+    do {
+      const randIdx = getCryptoRandom(pool.length);
+      pick = pool[randIdx];
+      attempts++;
+    } while (pool.length > 1 && pick.page === lastHomeDrawnPage && attempts < 10);
 
-    zenAudio.playTibetanBowl(432, 2.5);
+    currentQuote = pick;
+    lastHomeDrawnPage = pick.page;
+
+    // If audio is playing from previous draw, pause it
+    if (homeOracleAudio && !homeOracleAudio.paused) {
+      homeOracleAudio.pause();
+    }
+    if (playAudioBtnText) {
+      playAudioBtnText.textContent = `شنیدن صوت صفحه ${currentQuote.page}`;
+    }
+
+    try {
+      zenAudio.playTibetanBowl(432, 2.5);
+    } catch(e) {}
 
     const cardEl = document.querySelector('.oracle-card');
     if (cardEl) {
       cardEl.style.transform = 'scale(0.985)';
-      cardEl.style.filter = 'brightness(1.1)';
+      cardEl.style.filter = 'brightness(1.12)';
       cardEl.style.transition = 'all 0.22s ease';
       setTimeout(() => {
         cardEl.style.transform = 'scale(1)';
@@ -279,10 +312,16 @@ function initOracle() {
 
     if (quoteText) {
       quoteText.style.opacity = 0;
+      if (revelationText) revelationText.style.opacity = 0;
+
       setTimeout(() => {
         quoteText.textContent = `«${currentQuote.quote}»`;
+        if (revelationText) {
+          revelationText.textContent = currentQuote.revelation || "آرام بگیر؛ کائنات از نیازهای قلبت آگاه است و راه را پیش پایت می‌گشاید.";
+          revelationText.style.opacity = 1;
+        }
         if (metaText) {
-          metaText.innerHTML = `<span>📖 ${currentQuote.chapter} • ${currentQuote.title || ''}</span> • <span style="color: var(--text-gold); font-weight: 700;">صفحه ${currentQuote.page}</span> • <span>✨ ${currentQuote.categoryLabel || currentQuote.theme}</span>`;
+          metaText.innerHTML = `<span>📖 ${currentQuote.chapter} • ${currentQuote.title || ''}</span> • <span style="color: var(--text-gold); font-weight: 700;">صفحه ${currentQuote.page} از ۲۴۱</span> • <span>✨ ${currentQuote.categoryLabel || currentQuote.theme}</span>`;
         }
         if (readInReaderBtn) {
           readInReaderBtn.href = `reader.html?page=${currentQuote.page}`;
@@ -299,12 +338,41 @@ function initOracle() {
     rollBtn.addEventListener('click', () => displayRandomQuote(activeCategory));
   }
 
+  if (playAudioBtn) {
+    playAudioBtn.addEventListener('click', () => {
+      if (!currentQuote || !currentQuote.page) return;
+      const padNum = String(currentQuote.page).padStart(3, '0');
+      const audioSrc = `assets/audio/pages/page-${padNum}.mp3`;
+
+      if (!homeOracleAudio) {
+        homeOracleAudio = new Audio();
+        homeOracleAudio.addEventListener('ended', () => {
+          if (playAudioBtnText) playAudioBtnText.textContent = `شنیدن صوت صفحه ${currentQuote.page}`;
+        });
+      }
+
+      if (homeOracleAudio.src.includes(audioSrc) && !homeOracleAudio.paused) {
+        homeOracleAudio.pause();
+        if (playAudioBtnText) playAudioBtnText.textContent = `شنیدن صوت صفحه ${currentQuote.page}`;
+      } else {
+        homeOracleAudio.src = audioSrc;
+        homeOracleAudio.play().then(() => {
+          if (playAudioBtnText) playAudioBtnText.textContent = `توقف پخش (صفحه ${currentQuote.page})`;
+        }).catch(err => {
+          console.warn('Audio playback error:', err);
+          window.location.href = `reader.html?page=${currentQuote.page}`;
+        });
+      }
+    });
+  }
+
   if (copyBtn) {
     copyBtn.addEventListener('click', () => {
       const pageTag = currentQuote.page ? `، صفحه ${currentQuote.page}` : '';
-      const textToCopy = `«${currentQuote.quote}»\n\n— برگرفته از کتاب معجزه‌گر خاموش (${currentQuote.chapter}${pageTag})`;
+      const revPart = currentQuote.revelation ? `\n\n👁️ پیام شهودی کائنات برای اکنون شما:\n${currentQuote.revelation}` : '';
+      const textToCopy = `«${currentQuote.quote}»${revPart}\n\n— برگرفته از کتاب معجزه‌گر خاموش (${currentQuote.chapter}${pageTag})`;
       navigator.clipboard.writeText(textToCopy).then(() => {
-        showToast('پاراگراف معجزه‌گر در حافظه کپی شد ✨');
+        showToast('پاراگراف معجزه‌گر و پیام شهودی در حافظه کپی شد ✨');
       });
     });
   }
@@ -319,8 +387,16 @@ function initOracle() {
 
   filterChips.forEach(chip => {
     chip.addEventListener('click', () => {
-      filterChips.forEach(c => c.classList.remove('active'));
+      filterChips.forEach(c => {
+        c.classList.remove('active');
+        c.style.background = 'var(--bg-surface)';
+        c.style.color = 'var(--text-muted)';
+        c.style.borderColor = 'var(--border-color)';
+      });
       chip.classList.add('active');
+      chip.style.background = 'var(--text-gold)';
+      chip.style.color = '#000';
+      chip.style.borderColor = 'var(--text-gold)';
       activeCategory = chip.dataset.category || 'all';
       displayRandomQuote(activeCategory);
     });

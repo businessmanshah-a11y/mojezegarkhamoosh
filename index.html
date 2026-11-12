@@ -346,19 +346,41 @@
         </div>
 
         <!-- Interactive Oracle Card B -->
-        <div class="oracle-card">
-          <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 20px;">
+        <div class="oracle-card" id="homeOracleCard">
+          <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 14px;">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--text-gold);">
               <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07l14.14-14.14"></path>
             </svg>
-            <h2 class="oracle-title">پیام کائنات برای قلب شما</h2>
+            <h2 class="oracle-title">تَفَأُل به معجزه‌گر خاموش • الهام روز (۲۴۱ صفحه)</h2>
+          </div>
+
+          <!-- Oracle Category Filter Chips -->
+          <div class="oracle-filters" style="display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px;">
+            <button class="filter-chip active" data-category="all" style="padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; border: 1px solid var(--text-gold); background: var(--text-gold); color: #000; cursor: pointer; font-weight: 600;">✨ تفأل آزاد</button>
+            <button class="filter-chip" data-category="freedom" style="padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; border: 1px solid var(--border-color); background: var(--bg-surface); color: var(--text-muted); cursor: pointer;">🕊️ پرواز</button>
+            <button class="filter-chip" data-category="destiny" style="padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; border: 1px solid var(--border-color); background: var(--bg-surface); color: var(--text-muted); cursor: pointer;">🧭 رسالت</button>
+            <button class="filter-chip" data-category="wealth" style="padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; border: 1px solid var(--border-color); background: var(--bg-surface); color: var(--text-muted); cursor: pointer;">💎 تجلی</button>
+            <button class="filter-chip" data-category="heart" style="padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; border: 1px solid var(--border-color); background: var(--bg-surface); color: var(--text-muted); cursor: pointer;">🫀 قلب</button>
+            <button class="filter-chip" data-category="peace" style="padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; border: 1px solid var(--border-color); background: var(--bg-surface); color: var(--text-muted); cursor: pointer;">🤫 سکوت</button>
+            <button class="filter-chip" data-category="presence" style="padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; border: 1px solid var(--border-color); background: var(--bg-surface); color: var(--text-muted); cursor: pointer;">🔥 اکنون</button>
+            <button class="filter-chip" data-category="love" style="padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; border: 1px solid var(--border-color); background: var(--bg-surface); color: var(--text-muted); cursor: pointer;">🤍 عشق</button>
+            <button class="filter-chip" data-category="wisdom" style="padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; border: 1px solid var(--border-color); background: var(--bg-surface); color: var(--text-muted); cursor: pointer;">🌊 آگاهی</button>
           </div>
 
           <p class="oracle-quote-text" id="oracleQuoteText">
             در حال دریافت الهام...
           </p>
 
-          <div class="oracle-meta" id="oracleMetaText" style="margin-bottom: 24px;">
+          <!-- Cosmic Revelation Box -->
+          <div id="oracleRevelationBox" style="background: rgba(212, 175, 55, 0.08); border: 1px dashed var(--text-gold); border-radius: 10px; padding: 12px 16px; margin: 16px auto; max-width: 600px; font-size: 0.88rem; line-height: 1.8; color: var(--text-gold); text-align: right; display: flex; align-items: flex-start; gap: 8px;">
+            <span style="font-size: 1.2rem; line-height: 1;">👁️</span>
+            <div>
+              <strong style="display: block; font-size: 0.78rem; margin-bottom: 2px; opacity: 0.95;">پیام شهودی برای اکنون شما:</strong>
+              <span id="oracleRevelationText" style="color: var(--text-main); font-weight: 500;">در حال کشف راز...</span>
+            </div>
+          </div>
+
+          <div class="oracle-meta" id="oracleMetaText" style="margin-bottom: 20px;">
             <span>فصل اول: پرواز • صفحه ۸</span>
           </div>
 
@@ -371,13 +393,22 @@
               <span id="readInReaderBtnText">مطالعه این صفحه در کتابخوان</span>
             </a>
 
+            <button class="btn btn-secondary" id="playHomeOracleAudioBtn" title="شنیدن صوت این صفحه">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+              </svg>
+              <span id="playHomeOracleAudioText">شنیدن صوت این صفحه</span>
+            </button>
+
             <button class="btn btn-secondary" id="rollOracleBtn" title="دریافت الهام دیگر">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="23 4 23 10 17 10"></polyline>
                 <polyline points="1 20 1 14 7 14"></polyline>
                 <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
               </svg>
-              <span>الهام دیگر</span>
+              <span>تفأل مجدد (شانسی)</span>
             </button>
 
             <button class="btn btn-secondary" id="copyOracleBtn" title="کپی متن پاراگراف">
@@ -385,7 +416,7 @@
                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                 <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
               </svg>
-              <span>کپی</span>
+              <span>کپی پیام</span>
             </button>
           </div>
         </div>
@@ -877,9 +908,9 @@
   </footer>
 
   <!-- 241 Pages Book & Oracle Structured Datasets -->
-  <script src="assets/js/oracle-quotes-data.js?v=241pages"></script>
+  <script src="assets/js/oracle-quotes-data.js?v=241-oracle-v2"></script>
   <script src="assets/js/book-pages-data.js"></script>
   <!-- Main JavaScript File -->
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/main.js?v=241-oracle-v2"></script>
 </body>
 </html>
