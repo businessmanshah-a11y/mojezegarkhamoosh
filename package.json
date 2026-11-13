@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite index.source.html",
-    "build": "vite build && cp dist/index.source.html index.html && cp dist/index.source.html dist/index.html && cp -r dist/build_assets . && cp -r assets dist/ && cp reader.html dist/",
+    "build": "vite build && cp dist/index.source.html index.html && cp dist/index.source.html dist/index.html && cp -r dist/build_assets . && cp -r assets dist/ && cp reader.html dist/ && touch dist/.nojekyll",
     "preview": "vite preview"
   },
   "dependencies": {
