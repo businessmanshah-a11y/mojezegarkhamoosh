@@ -30,13 +30,16 @@ from generate_audio import (
     generate_page_audio,
     sync_manifest_to_html,
     load_manifest,
+    prepare_speech_text,
     ContentFilteredException
 )
 
 
 def get_completed_pages():
-    """Return set of integer page numbers already present and valid in manifest."""
+    """Return set of integer page numbers already present, valid, and fully verbatim in manifest."""
     manifest = load_manifest()
+    pages = load_book_pages()
+    pages_dict = {p.get("pageIndex"): p for p in pages}
     completed = set()
     for p_str, item in manifest.items():
         try:
@@ -44,8 +47,18 @@ def get_completed_pages():
             # Check if file actually exists
             filename = item.get("filename", f"page-{p_num:03d}.mp3")
             filepath = os.path.join(OUTPUT_DIR, filename)
-            if os.path.exists(filepath) and os.path.getsize(filepath) > 1024:
-                completed.add(p_num)
+            if not (os.path.exists(filepath) and os.path.getsize(filepath) > 1024):
+                continue
+
+            # Verify full verbatim coverage (e.g. pages 224-241 generated during previous run before paragraph parsing fix)
+            page_data = pages_dict.get(p_num)
+            if page_data:
+                speech_text = prepare_speech_text(page_data)
+                dur = item.get("duration", 0)
+                if (len(speech_text) > 300 and dur < len(speech_text) / 25) or (p_num >= 224 and item.get("updated_at", "") < "2026-11-12T14:00:00Z"):
+                    continue
+
+            completed.add(p_num)
         except (ValueError, TypeError):
             continue
     return completed
@@ -60,8 +73,8 @@ def git_commit_and_push(start_p, end_p, count):
             print("No changes to commit in git.")
             return True
 
-        # Stage audio, chapters, and reader.html
-        subprocess.run(["git", "add", "assets/audio/", "reader.html"], cwd=ROOT_DIR, check=True)
+        # Stage audio, chapters, reader.html, and batch script
+        subprocess.run(["git", "add", "assets/audio/", "reader.html", "scripts/daily_audio_batch.py"], cwd=ROOT_DIR, check=True)
         
         commit_msg = f"feat(audiobook): batch generate audio pages {start_p:03d}-{end_p:03d} ({count} pages) [automated]"
         subprocess.run(["git", "commit", "-m", commit_msg], cwd=ROOT_DIR, check=True)
@@ -117,7 +130,7 @@ def run_batch(batch_size=50, max_page=241, push=True, voice="Bodi"):
     for idx, page_data in enumerate(target_pages):
         p_num = page_data.get("pageIndex")
         try:
-            res = generate_page_audio(page_data, voice_name=voice)
+            res = generate_page_audio(page_data, voice_name=voice, force=True)
             if res:
                 generated_pages.append(p_num)
         except ContentFilteredException as cfe:
@@ -163,7 +176,7 @@ def run_batch(batch_size=50, max_page=241, push=True, voice="Bodi"):
     if generated_pages:
         try:
             from stitch_chapters import stitch_all_chapters
-            stitch_all_chapters(force=False, allow_partial=True)
+            stitch_all_chapters(force=True, allow_partial=True)
         except Exception as se:
             print(f"⚠ Chapter stitching warning: {se}")
 
