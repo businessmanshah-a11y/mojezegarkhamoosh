@@ -22,5 +22,10 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'build_assets',
     sourcemap: false,
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.source.html'),
+      },
+    },
   }
 });

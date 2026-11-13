@@ -4,8 +4,8 @@
   "description": "وب‌سایت رسمی و مدرن کتاب و کتاب صوتی «معجزه‌گر خاموش» اثر سید رضا حیات‌الغیب",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build && cp -r assets dist/ && cp reader.html dist/",
+    "dev": "vite index.source.html",
+    "build": "vite build && cp dist/index.source.html index.html && cp dist/index.source.html dist/index.html && cp -r dist/build_assets . && cp -r assets dist/ && cp reader.html dist/",
     "preview": "vite preview"
   },
   "dependencies": {
