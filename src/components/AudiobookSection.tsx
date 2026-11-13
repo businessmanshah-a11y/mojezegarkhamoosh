@@ -105,31 +105,31 @@ export const AudiobookSection: React.FC = () => {
       <div className="max-w-5xl mx-auto relative z-10">
         {/* Section Header (Minimalist & Powerful) */}
         <div className="text-center mb-10">
-          <motion.span
+          <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
             transition={{ duration: 0.6 }}
-            className="text-gold-400 text-xs font-semibold tracking-wider block mb-2"
+            className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-3 bg-gold-500/10 border border-gold-500/30 text-gold-400 text-xs font-bold"
           >
-            کتاب صوتی رسمی و کامل
-          </motion.span>
+            <span>مدت کل اثر: ۹ ساعت و ۳۶ دقیقه (کلمه‌به‌کلمه و پیوسته)</span>
+          </motion.div>
 
           <motion.h2
             initial={{ opacity: 0, y: 25 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 25 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-2xl sm:text-4xl md:text-5xl text-white font-bold tracking-tight mb-3"
+            className="text-2xl sm:text-4xl md:text-5xl text-white font-extrabold tracking-tight mb-3"
           >
-            ۱۲ فصل صوتی • ۹ ساعت و ۳۶ دقیقه
+            کتاب صوتی کامل در ۱۲ فصل
           </motion.h2>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-white/60 text-xs sm:text-sm max-w-xl mx-auto font-light"
+            className="text-white/70 text-xs sm:text-sm max-w-xl mx-auto font-light leading-relaxed"
           >
-            تمامی ۲۴۱ صفحه کتاب چاپی با وفاداری ۱۰۰٪ کلمه‌به‌کلمه و با گویندگی شیوا ضبط شده است.
+            تمامی ۲۴۱ صفحه کتاب چاپی با کیفیت استودیویی و وفاداری ۱۰۰٪ به متن کتاب ضبط شده است.
           </motion.p>
         </div>
 
@@ -211,10 +211,10 @@ export const AudiobookSection: React.FC = () => {
               <div
                 key={chapter.id}
                 onClick={() => selectChapter(chapter, true)}
-                className={`liquid-glass rounded-2xl p-4 flex items-center justify-between gap-3 cursor-pointer transition-all duration-200 ${
+                className={`rounded-2xl p-4 flex items-center justify-between gap-3 cursor-pointer transition-all duration-200 border ${
                   isCurrent
-                    ? 'bg-white/[0.08] border-gold-500/40 shadow-lg'
-                    : 'hover:bg-white/[0.04]'
+                    ? 'bg-zinc-900/95 border-gold-500/60 shadow-lg shadow-gold-500/10'
+                    : 'bg-zinc-950/80 border-white/10 hover:border-white/25 hover:bg-zinc-900/60'
                 }`}
               >
                 <div className="flex items-center gap-3 flex-1 min-w-0">

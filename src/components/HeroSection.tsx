@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowLeft, Headphones, BookOpen, Check, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { AmbientVideo } from './AmbientVideo';
 
 export const HeroSection: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -37,14 +38,9 @@ export const HeroSection: React.FC = () => {
 
   return (
     <section id="hero" className="min-h-screen overflow-hidden relative flex flex-col justify-between bg-black pt-28 md:pt-36 pb-12">
-      {/* Background Ambient Video with Stable Native Looping & High Visibility */}
-      <video
-        className="absolute inset-0 w-full h-full object-cover object-bottom pointer-events-none opacity-85 md:opacity-90 transition-opacity duration-700"
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
+      {/* Background Ambient Video with Guaranteed Infinite Loop & High Visibility */}
+      <AmbientVideo
+        className="absolute inset-0 w-full h-full object-cover object-bottom pointer-events-none opacity-85 md:opacity-90"
         poster="assets/images/hero-poster.jpg"
         src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_074625_a81f018a-956b-43fb-9aee-4d1508e30e6a.mp4"
       />

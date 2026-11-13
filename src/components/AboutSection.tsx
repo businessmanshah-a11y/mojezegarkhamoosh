@@ -64,8 +64,8 @@ export const AboutSection: React.FC = () => {
             <span className="text-xs text-white/50">وفاداری کلمه‌به‌کلمه</span>
           </div>
           <div className="liquid-glass rounded-2xl p-4 text-center">
-            <span className="text-xl md:text-2xl font-bold text-white block mb-0.5">۹:۳۶</span>
-            <span className="text-xs text-white/50">ساعت روایت ناب</span>
+            <span className="text-xl md:text-2xl font-bold text-white block mb-0.5">۹ ساعت</span>
+            <span className="text-xs text-white/50">و ۳۶ دقیقه صوت کامل</span>
           </div>
         </motion.div>
       </div>

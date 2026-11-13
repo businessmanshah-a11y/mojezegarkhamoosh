@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { AmbientVideo } from './AmbientVideo';
 
 export const PhilosophySection: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -37,13 +38,8 @@ export const PhilosophySection: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="rounded-3xl overflow-hidden aspect-[4/3] relative border border-white/10 shadow-2xl"
           >
-            <video
+            <AmbientVideo
               className="w-full h-full object-cover"
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="auto"
               src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260307_083826_e938b29f-a43a-41ec-a153-3d4730578ab8.mp4"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
