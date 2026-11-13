@@ -1,0 +1,31 @@
+{
+  "name": "mojezegarkhamoosh",
+  "version": "2.0.0",
+  "description": "وب‌سایت رسمی و مدرن کتاب و کتاب صوتی «معجزه‌گر خاموش» اثر سید رضا حیات‌الغیب",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && cp -r assets dist/ && cp reader.html dist/",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@barba/core": "^2.10.3",
+    "framer-motion": "^12.4.7",
+    "gsap": "^3.12.7",
+    "lenis": "^1.1.20",
+    "lucide-react": "^1.16.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.6.2",
+    "postcss": "^8.5.32",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.3",
+    "vite": "^6.1.0"
+  }
+}

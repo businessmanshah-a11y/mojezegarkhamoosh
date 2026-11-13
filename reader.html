@@ -66,9 +66,58 @@
       font-display: swap;
     }
 
-    /* اعمال سراسری فونت ایران‌سنس */
+    /* ================= بارگذاری فونت رسمی پیدا (Peyda) ================= */
+    @font-face {
+      font-family: 'PeydaWebFaNum';
+      font-style: normal;
+      font-weight: 300;
+      src: url('assets/fonts/peyda/PeydaWebFaNum-Light.woff2') format('woff2');
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'PeydaWebFaNum';
+      font-style: normal;
+      font-weight: 400;
+      font-weight: normal;
+      src: url('assets/fonts/peyda/PeydaWebFaNum-Regular.woff2') format('woff2');
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'PeydaWebFaNum';
+      font-style: normal;
+      font-weight: 500;
+      src: url('assets/fonts/peyda/PeydaWebFaNum-Medium.woff2') format('woff2');
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'PeydaWebFaNum';
+      font-style: normal;
+      font-weight: 600;
+      src: url('assets/fonts/peyda/PeydaWebFaNum-SemiBold.woff2') format('woff2');
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'PeydaWebFaNum';
+      font-style: normal;
+      font-weight: 700;
+      font-weight: bold;
+      src: url('assets/fonts/peyda/PeydaWebFaNum-Bold.woff2') format('woff2');
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'PeydaWebFaNum';
+      font-style: normal;
+      font-weight: 800;
+      src: url('assets/fonts/peyda/PeydaWebFaNum-ExtraBold.woff2') format('woff2');
+      font-display: swap;
+    }
+
+    /* اعمال سراسری متغیر فونت مطالعه */
+    :root {
+      --font-reading-family: 'PeydaWebFaNum', 'IRANSans', system-ui, -apple-system, sans-serif;
+    }
     * {
-      font-family: 'IRANSans', system-ui, -apple-system, sans-serif !important;
+      font-family: var(--font-reading-family) !important;
     }
   </style>
 
@@ -180,9 +229,18 @@
 
       <span class="subbar-sep" style="color: var(--border-color);">|</span>
 
+      <!-- Font Family Switcher (Peyda / IranSans) -->
+      <div class="font-family-control" style="display: inline-flex; align-items: center; gap: 4px;">
+        <button class="font-family-toggle-btn" id="btnFontFamilyToggle" style="background: var(--card-bg); border: 1px solid var(--border-color); color: var(--ink-primary); font-size: 0.73rem; padding: 3px 8px; border-radius: 6px; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 4px;" title="تغییر فونت مطالعه (پیدا / ایران‌سنس)">
+          <span id="fontFamilyBadgeText">فونت: پیدا (Peyda)</span>
+        </button>
+      </div>
+
+      <span class="subbar-sep" style="color: var(--border-color);">|</span>
+
       <!-- Font Sizer (A- / A+) -->
-      <div class="font-sizer-control" title="تنظیم آنی اندازه قلم (ایران‌سنس)">
-        <span class="font-sizer-label" style="font-size: 0.72rem; color: var(--ink-muted); margin-left: 2px;">قلم:</span>
+      <div class="font-sizer-control" title="تنظیم آنی اندازه قلم">
+        <span class="font-sizer-label" style="font-size: 0.72rem; color: var(--ink-muted); margin-left: 2px;">اندازه:</span>
         <button class="font-size-step-btn" id="btnFontDecr" title="کوچک‌تر کردن قلم">A−</button>
         <span class="font-size-value-badge" id="fontSizeBadge">18px</span>
         <button class="font-size-step-btn" id="btnFontIncr" title="بزرگ‌تر کردن قلم">A+</button>
@@ -369,6 +427,14 @@
 
     <!-- 3. Reading Typography & Theme Settings -->
     <div style="background: var(--sub-surface); border: 1px solid var(--border-color); border-radius: 0.75rem; padding: 0.65rem 0.85rem; display: flex; flex-direction: column; gap: 0.5rem;">
+      <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px dashed var(--border-color); padding-bottom: 0.45rem;">
+        <span style="font-size: 0.72rem; color: var(--ink-muted); font-weight: 600;">فونت مطالعه:</span>
+        <div style="display: flex; gap: 0.4rem;">
+          <button id="mBtnFontPeyda" style="padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer; border: 1px solid var(--accent-teal); background: var(--card-bg); color: var(--ink-primary);">پیدا (Peyda)</button>
+          <button id="mBtnFontIransans" style="padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--ink-primary);">ایران‌سنس</button>
+        </div>
+      </div>
+
       <div style="display: flex; align-items: center; justify-content: space-between;">
         <span style="font-size: 0.72rem; color: var(--ink-muted); font-weight: 600;">اندازه قلم:</span>
         <div style="display: flex; align-items: center; gap: 0.6rem;">
@@ -1868,6 +1934,30 @@
           applyWidth(btn.getAttribute('data-width'));
         });
       });
+
+      // 7.0 Font Family Switcher (Peyda / IranSans)
+      let currentFontFamily = localStorage.getItem('mojeze_reader_font') || 'PeydaWebFaNum';
+      function setFontFamily(font) {
+        currentFontFamily = font;
+        const fontCss = font === 'IRANSans' ? "'IRANSans', system-ui, sans-serif" : "'PeydaWebFaNum', 'IRANSans', system-ui, sans-serif";
+        document.documentElement.style.setProperty('--font-reading-family', fontCss);
+        localStorage.setItem('mojeze_reader_font', font);
+
+        const badge = document.getElementById('fontFamilyBadgeText');
+        if (badge) badge.innerText = font === 'IRANSans' ? 'فونت: ایران‌سنس' : 'فونت: پیدا (Peyda)';
+
+        const mPeyda = document.getElementById('mBtnFontPeyda');
+        const mIransans = document.getElementById('mBtnFontIransans');
+        if (mPeyda) mPeyda.style.borderColor = font === 'PeydaWebFaNum' ? 'var(--accent-teal)' : 'var(--border-color)';
+        if (mIransans) mIransans.style.borderColor = font === 'IRANSans' ? 'var(--accent-teal)' : 'var(--border-color)';
+      }
+      setFontFamily(currentFontFamily);
+
+      document.getElementById('btnFontFamilyToggle')?.addEventListener('click', () => {
+        setFontFamily(currentFontFamily === 'PeydaWebFaNum' ? 'IRANSans' : 'PeydaWebFaNum');
+      });
+      document.getElementById('mBtnFontPeyda')?.addEventListener('click', () => setFontFamily('PeydaWebFaNum'));
+      document.getElementById('mBtnFontIransans')?.addEventListener('click', () => setFontFamily('IRANSans'));
 
       // 7. Direct Font Sizer Logic (کنترل مستقیم اندازه قلم)
       function setFontSize(newSize) {
