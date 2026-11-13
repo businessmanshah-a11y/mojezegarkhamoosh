@@ -81,7 +81,7 @@
   --line-reading-height: 2.25;
 
   /* Universal Font Family */
-  --font-family-main: 'IRANSans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-main: var(--font-reading-family, 'PeydaWebFaNum', 'IRANSans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
 
   /* Theme 1: Cream Codex (کاغذ کرم اعلا - پیش‌فرض استیچ) */
   --app-bg: #F5F1E8;

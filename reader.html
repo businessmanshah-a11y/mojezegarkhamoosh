@@ -115,9 +115,16 @@
     /* اعمال سراسری متغیر فونت مطالعه */
     :root {
       --font-reading-family: 'PeydaWebFaNum', 'IRANSans', system-ui, -apple-system, sans-serif;
+      --font-family-main: var(--font-reading-family);
     }
     * {
-      font-family: var(--font-reading-family) !important;
+      font-family: var(--font-reading-family);
+    }
+    html.font-peyda, html.font-peyda *, body.font-peyda, body.font-peyda * {
+      font-family: 'PeydaWebFaNum', 'IRANSans', system-ui, -apple-system, sans-serif !important;
+    }
+    html.font-iransans, html.font-iransans *, body.font-iransans, body.font-iransans * {
+      font-family: 'IRANSans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
     }
   </style>
 
@@ -1939,17 +1946,42 @@
       let currentFontFamily = localStorage.getItem('mojeze_reader_font') || 'PeydaWebFaNum';
       function setFontFamily(font) {
         currentFontFamily = font;
-        const fontCss = font === 'IRANSans' ? "'IRANSans', system-ui, sans-serif" : "'PeydaWebFaNum', 'IRANSans', system-ui, sans-serif";
+        const isIransans = font === 'IRANSans';
+        const fontCss = isIransans 
+          ? "'IRANSans', system-ui, -apple-system, sans-serif" 
+          : "'PeydaWebFaNum', 'IRANSans', system-ui, -apple-system, sans-serif";
+        
         document.documentElement.style.setProperty('--font-reading-family', fontCss);
+        document.documentElement.style.setProperty('--font-family-main', fontCss);
+        if (document.body) {
+          document.body.style.setProperty('font-family', fontCss, 'important');
+        }
+        
+        if (isIransans) {
+          document.documentElement.classList.remove('font-peyda');
+          document.documentElement.classList.add('font-iransans');
+          if (document.body) {
+            document.body.classList.remove('font-peyda');
+            document.body.classList.add('font-iransans');
+          }
+        } else {
+          document.documentElement.classList.remove('font-iransans');
+          document.documentElement.classList.add('font-peyda');
+          if (document.body) {
+            document.body.classList.remove('font-iransans');
+            document.body.classList.add('font-peyda');
+          }
+        }
+
         localStorage.setItem('mojeze_reader_font', font);
 
         const badge = document.getElementById('fontFamilyBadgeText');
-        if (badge) badge.innerText = font === 'IRANSans' ? 'فونت: ایران‌سنس' : 'فونت: پیدا (Peyda)';
+        if (badge) badge.innerText = isIransans ? 'فونت: ایران‌سنس' : 'فونت: پیدا (Peyda)';
 
         const mPeyda = document.getElementById('mBtnFontPeyda');
         const mIransans = document.getElementById('mBtnFontIransans');
-        if (mPeyda) mPeyda.style.borderColor = font === 'PeydaWebFaNum' ? 'var(--accent-teal)' : 'var(--border-color)';
-        if (mIransans) mIransans.style.borderColor = font === 'IRANSans' ? 'var(--accent-teal)' : 'var(--border-color)';
+        if (mPeyda) mPeyda.style.borderColor = !isIransans ? 'var(--accent-teal)' : 'var(--border-color)';
+        if (mIransans) mIransans.style.borderColor = isIransans ? 'var(--accent-teal)' : 'var(--border-color)';
       }
       setFontFamily(currentFontFamily);
 

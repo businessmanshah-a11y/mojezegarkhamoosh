@@ -37,20 +37,22 @@ export const HeroSection: React.FC = () => {
 
   return (
     <section id="hero" className="min-h-screen overflow-hidden relative flex flex-col justify-between bg-black pt-28 md:pt-36 pb-12">
-      {/* Background Ambient Video with Stable Native Looping */}
+      {/* Background Ambient Video with Stable Native Looping & High Visibility */}
       <video
-        className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none opacity-45"
+        className="absolute inset-0 w-full h-full object-cover object-bottom pointer-events-none opacity-85 md:opacity-90 transition-opacity duration-700"
         autoPlay
         loop
         muted
         playsInline
         preload="auto"
+        poster="assets/images/hero-poster.jpg"
         src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_074625_a81f018a-956b-43fb-9aee-4d1508e30e6a.mp4"
       />
 
-      {/* Atmospheric Dark Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black pointer-events-none z-0" />
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gold-500/[0.04] blur-[120px] pointer-events-none rounded-full" />
+      {/* Atmospheric Soft Vignette (Preserves the Golden Statue and Celestial Light) */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/15 to-transparent pointer-events-none z-0" />
+      <div className="absolute bottom-0 inset-x-0 h-44 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none z-0" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gold-500/[0.06] blur-[140px] pointer-events-none rounded-full" />
 
       {/* Hero Content (Staggered Load Animation) */}
       <motion.div
@@ -60,9 +62,9 @@ export const HeroSection: React.FC = () => {
         className="relative z-10 flex-1 flex flex-col items-center justify-center px-4 md:px-6 text-center max-w-4xl mx-auto my-auto"
       >
         {/* Subtle pill tag */}
-        <motion.div variants={itemVariants} className="liquid-glass rounded-full px-4 py-1.5 mb-6 inline-flex items-center gap-2">
+        <motion.div variants={itemVariants} className="liquid-glass rounded-full px-4 py-1.5 mb-6 inline-flex items-center gap-2 shadow-lg shadow-black/40">
           <Sparkles className="w-3.5 h-3.5 text-gold-400" />
-          <span className="text-white/80 text-xs tracking-wide">
+          <span className="text-white/90 text-xs tracking-wide">
             کتاب صوتی کامل ۱۲ فصل • ۹ ساعت و ۳۶ دقیقه
           </span>
         </motion.div>
@@ -70,7 +72,7 @@ export const HeroSection: React.FC = () => {
         {/* Master Headline (Persian Minimalist Power) */}
         <motion.h1
           variants={itemVariants}
-          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-white font-extrabold tracking-tight mb-4 leading-tight"
+          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-white font-extrabold tracking-tight mb-4 leading-tight drop-shadow-[0_4px_30px_rgba(0,0,0,0.85)]"
         >
           معجزه‌گر خاموش
         </motion.h1>
@@ -78,7 +80,7 @@ export const HeroSection: React.FC = () => {
         {/* Short Punchy Sub-headline */}
         <motion.p
           variants={itemVariants}
-          className="text-lg sm:text-xl md:text-2xl text-gold-400/90 font-medium mb-5"
+          className="text-lg sm:text-xl md:text-2xl text-gold-400 font-semibold mb-5 drop-shadow-[0_2px_15px_rgba(0,0,0,0.85)]"
         >
           پاراگراف‌های زندگی‌ساز اثر سید رضا حیات‌الغیب
         </motion.p>
@@ -86,7 +88,7 @@ export const HeroSection: React.FC = () => {
         {/* Minimal Single-Sentence Quote (80% less text) */}
         <motion.p
           variants={itemVariants}
-          className="text-white/70 text-xs sm:text-sm max-w-md mx-auto mb-8 font-light leading-relaxed"
+          className="text-white/90 text-xs sm:text-sm max-w-md mx-auto mb-8 font-normal leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]"
         >
           «در خاموشی، معجزه رخ می‌دهد.» اثری ماندگار برای بیداری معنوی و کشف آرامش ناب درون.
         </motion.p>
